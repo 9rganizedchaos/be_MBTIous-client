@@ -5,6 +5,13 @@ import ArtistsPage from "./pages/ArtistsPage";
 import TestPage from "./pages/TestPage";
 import ResultPage from "./pages/ResultPage";
 
+const initialState = {
+  answers1: [0, 0, 0, 0, 0],
+  answers2: [0, 0, 0, 0, 0],
+  answers3: [0, 0, 0, 0, 0],
+  answers4: [0, 0, 0, 0, 0],
+}
+
 function App() {
   return (
     <div className="App">

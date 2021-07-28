@@ -177,14 +177,8 @@ function ArtistsPage() {
       const intersects = raycaster.intersectObjects(cubeArr)
 
       if(intersects.length){
-        if(!currentIntersect){
-          console.log("mouse enter")
-        }
         currentIntersect = intersects[0]
       } else {
-        if(currentIntersect){
-          console.log("mouse leave")
-        }
         currentIntersect = null;
       }
 
