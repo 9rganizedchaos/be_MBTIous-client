@@ -12,12 +12,22 @@ interface Edge {
 }
 
 const Title = styled.h1`
+font-family: 'Roboto', sans-serif;
+font-weight: 800;
+font-style: italic;
+font-size: 8rem;
 position: absolute;
 left: 50%;
-top: 45%;
+top: 30%;
 transform: translate(-50%, -50%);
-background-color: rgba(225, 225, 225, 1);
 z-index: 10;
+-webkit-text-fill-color: #1b1b1b;
+-webkit-text-stroke-width: 2px;
+-webkit-text-stroke-color: #705DF2;
+strong {
+  -webkit-text-fill-color: #705DF2;
+  color: #705DF2;
+}
 `;
 
 const SideEdge = styled.div<Edge>`
@@ -25,10 +35,10 @@ position: absolute;
 left: ${(props) => props.left ? 100 : 0};
 right: ${(props) => props.right ? 100 : 0};
 top: 0;
-width: 0.5rem;
+width: 0.7rem;
 height: 100vh;
-background-color: rgba(225, 225, 225, 1);
-z-index: 10;
+background-color: #705DF2;
+z-index: 11;
 `;
 
 const StartButton = styled.button`
@@ -39,6 +49,14 @@ top: 50%;
 left: 50%;
 transform: translateX(-50%);
 cursor: pointer;
+width: 40rem;
+height: 3.25rem;
+border: 2px solid #705DF2;
+background-color: #1b1b1b;
+font-family: 'Roboto', sans-serif;
+font-weight: 800;
+font-size: 1.75rem;
+color: #705DF2;
 `;
 
 function LandingPage(props: any) {
@@ -63,7 +81,7 @@ function LandingPage(props: any) {
     for(let i = 0; i < 200; i++){
       const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
       const cubeMaterial = new THREE.MeshBasicMaterial({
-          color: '#887700'
+          color: '#FFFFFF'
       })
       const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
       cube.position.x = (Math.random() - 0.5) * 20
@@ -80,6 +98,7 @@ function LandingPage(props: any) {
     // Renderer
     const renderer = new THREE.WebGLRenderer()
     renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setClearColor(0x1B1B1B);
 
     if(landingPageContainer.current){
       landingPageContainer.current.appendChild(renderer.domElement)
@@ -126,8 +145,8 @@ function LandingPage(props: any) {
     <Fragment>
       <div ref={landingPageContainer}></div>
       <Nav/>
-      <Title>Be MBTIous</Title>
-      <StartButton onClick={handleClick}>S T A R T</StartButton>
+      <Title>Be <strong>MBTI</strong>ous</Title>
+      <StartButton onClick={handleClick}>CLICK TO START</StartButton>
       <SideEdge left={100} right={0}/>
       <SideEdge left={0} right={100}/>
       <Footer/>

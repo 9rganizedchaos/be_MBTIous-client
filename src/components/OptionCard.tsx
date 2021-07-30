@@ -13,6 +13,11 @@ const ImageBox = styled.div`
 width: 100%;
 height: 50%;
 background-color: aliceblue;
+div {
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
 `;
 
 const DescriptionBox = styled.div`
@@ -20,13 +25,26 @@ width: 100%;
 border-radius: 10px;
 height: 50%;
 background-color: yellow;
+div {
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
 `
 
-function OptionCard() {
+interface OptionCardProps {
+  id: number;
+  onClick: (e: any) => any;
+  option: string;
+  image: string;
+  goToNextQuestion: (e: any) => any;
+}
+
+function OptionCard(props: OptionCardProps): JSX.Element {
   return (
-    <OptionCardContainer>
-      <ImageBox/>
-      <DescriptionBox/>
+    <OptionCardContainer onClick={props.goToNextQuestion}>
+      <ImageBox><div className={props.id.toString()}/></ImageBox>
+      <DescriptionBox><div className={props.id.toString()}>{props.option}</div></DescriptionBox>
     </OptionCardContainer>
   )
 }

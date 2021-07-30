@@ -1,7 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import styled from "styled-components";
 import OptionCard from './OptionCard';
-import { motion } from "framer-motion"; 
+import { AnimatePresence, motion } from "framer-motion"; 
+import { useSelector } from 'react-redux';
 
 const TestContainer = styled(motion.div)`
 position: absolute;
@@ -29,7 +30,7 @@ const containerVariants: any = {
   },
   visible: {
     opacity: 1,
-    transition: { delay: 1.5, duration: 1.5 },
+    transition: { delay: 0.25, duration: 1 },
   },
   exit: {
     x: "-100vw",
@@ -37,12 +38,17 @@ const containerVariants: any = {
   },
 }
 
-function Test(props: any) {
+interface TestProps {
+  question: any;
+  goToNextQuestion: (e: any) => any;
+}
+
+function Test({question, goToNextQuestion}: TestProps) {
   return (
     <TestContainer variants={containerVariants} initial="hidden" animate="visible" exit="exit">
-      <Question>누군가를 처음 만나면 나는!?</Question>
-      <OptionCard/>
-      <OptionCard/>
+      <Question onClick={() => {console.log("clicked!")}}>{question.question}</Question>
+      <OptionCard id={0} onClick={goToNextQuestion} goToNextQuestion={goToNextQuestion} option={question.option1} image={question.pic1}/>
+      <OptionCard id={1} onClick={goToNextQuestion} goToNextQuestion={goToNextQuestion} option={question.option2} image={question.pic2}/>
     </TestContainer>
   )
 }

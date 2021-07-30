@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Switch, Route} from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import ArtistsPage from "./pages/ArtistsPage";
 import TestPage from "./pages/TestPage";
 import ResultPage from "./pages/ResultPage";
-
-const initialState = {
-  answers1: [0, 0, 0, 0, 0],
-  answers2: [0, 0, 0, 0, 0],
-  answers3: [0, 0, 0, 0, 0],
-  answers4: [0, 0, 0, 0, 0],
-}
+import { createContext } from 'react';
+import { useReducer } from 'react';
+import { useCallback } from 'react';
 
 function App() {
+
   return (
-    <div className="App">
+      <div className="App">
       <Switch>
         <Route exact path="/">
           <LandingPage />

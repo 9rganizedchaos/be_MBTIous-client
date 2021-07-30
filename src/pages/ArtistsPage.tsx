@@ -148,7 +148,8 @@ function ArtistsPage() {
 
     // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
-    camera.position.z = 0.2;
+    camera.position.z = 2;
+    camera.position.y = 1;
     scene.add(camera)
     
     // Renderer

@@ -1,61 +1,67 @@
 const question1 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "첫번째 질문",
+  option1: "먼저 말을 건다1",
+  option2: "먼저 말을 걸어올 때까지 기다린다1",
+  pic1: "../static/images/blackpink.jpeg",
+  pic2: "../static/images/blackpink.jpeg",
+}
+
+const question2 = {
+  question: "두번째 질문",
+  option1: "먼저 말을 건다2",
+  option2: "먼저 말을 걸어올 때까지 기다린다2",
+  pic1: "../static/images/blackpink.jpeg",
+  pic2: "../static/images/blackpink.jpeg",
+}
+
+const question3 = {
+  question: "세번째 질문",
+  option1: "먼저 말을 건다3",
+  option2: "먼저 말을 걸어올 때까지 기다린다3",
+  pic1: "../static/images/blackpink.jpeg",
+  pic2: "../static/images/blackpink.jpeg",
+}
+
+const question4 = {
+  question: "네 번째 질문",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다",
   pic1: "../static/images/blackpink.jpeg",
   pic2: "../static/images/blackpink.jpeg",
 }
 
-const question2 = {
-  question: "처음보는 사람을 만났을 때 나는",
-  option1: "먼저 말을 건다",
-  option2: "먼저 말을 걸어올 때까지 기다린다"
-}
-
-const question3 = {
-  question: "처음보는 사람을 만났을 때 나는",
-  option1: "먼저 말을 건다",
-  option2: "먼저 말을 걸어올 때까지 기다린다"
-}
-
-const question4 = {
-  question: "처음보는 사람을 만났을 때 나는",
-  option1: "먼저 말을 건다",
-  option2: "먼저 말을 걸어올 때까지 기다린다"
-}
-
 const question5 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "처음보는 사람을5 만났을 때 나는",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다"
 }
 
 const question6 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "처음보는 사람을 6만났을 때 나는",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다"
 }
 
 const question7 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "처음보는 사람을 7만났을 때 나는",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다"
 }
 
 const question8 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "처음보는 사8람을 만났을 때 나는",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다"
 }
 
 const question9 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "처음보는 사9람을 만났을 때 나는",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다"
 }
 
 const question10 = {
-  question: "처음보는 사람을 만났을 때 나는",
+  question: "처음보는 사람을 만10났을 때 나는",
   option1: "먼저 말을 건다",
   option2: "먼저 말을 걸어올 때까지 기다린다"
 }
