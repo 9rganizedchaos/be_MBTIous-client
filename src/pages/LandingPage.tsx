@@ -62,28 +62,23 @@ color: #705DF2;
 function LandingPage(props: any) {
   const landingPageContainer = useRef<HTMLDivElement | null>(null);
 
-  const handleClick = () => {
+  const handleStartClick = () => {
     props.history.push("/artists");
   }
 
   useEffect(() => {
     //loader
-    const loader = new THREE.CubeTextureLoader();
-    loader.setPath("../static/");
-    const textureCube = loader.load([
-      '4.png', '4.png', '4.png', '4.png', '4.png', '4.png'
-    ]);
-
+    const loader = new THREE.TextureLoader();
+    const material = new THREE.MeshBasicMaterial({
+      map: loader.load('https://i.imgur.com/1eHg1CG.jpg'),
+    }); 
     // Scene
     const scene = new THREE.Scene()
 
     // Object 
     for(let i = 0; i < 200; i++){
       const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
-      const cubeMaterial = new THREE.MeshBasicMaterial({
-          color: '#FFFFFF'
-      })
-      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+      const cube = new THREE.Mesh(cubeGeometry, material)
       cube.position.x = (Math.random() - 0.5) * 20
       cube.position.y = (Math.random() - 0.5) * 20
       cube.position.z = (Math.random() - 0.5) * 20
@@ -115,11 +110,10 @@ function LandingPage(props: any) {
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
 
-      controls.update();
+      // controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
-      // camera.rotation.x += 0.004;
-      // camera.rotation.y += 0.004;
+      camera.rotation.y += 0.004;
     }
 
     // 윈도우 창 리사이즈 핸들 함수
@@ -146,7 +140,7 @@ function LandingPage(props: any) {
       <div ref={landingPageContainer}></div>
       <Nav/>
       <Title>Be <strong>MBTI</strong>ous</Title>
-      <StartButton onClick={handleClick}>CLICK TO START</StartButton>
+      <StartButton onClick={handleStartClick}>CLICK TO START</StartButton>
       <SideEdge left={100} right={0}/>
       <SideEdge left={0} right={100}/>
       <Footer/>

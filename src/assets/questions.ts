@@ -1,17 +1,19 @@
 const question1 = {
-  question: "첫번째 질문",
-  option1: "먼저 말을 건다1",
-  option2: "먼저 말을 걸어올 때까지 기다린다1",
-  pic1: "../static/images/blackpink.jpeg",
-  pic2: "../static/images/blackpink.jpeg",
+  question: "처음 만난 사람과 함께 있을 때, 나는...",
+  option1: "먼저 다가가 말을 건다",
+  option2: "먼저 말을 걸어올 때까지 기다린다",
+  pic1: "https://i.imgur.com/1eHg1CG.jpg",
+  pic2: "https://i.imgur.com/1eHg1CG.jpg",
+  number: 1,
 }
 
 const question2 = {
-  question: "두번째 질문",
-  option1: "먼저 말을 건다2",
-  option2: "먼저 말을 걸어올 때까지 기다린다2",
-  pic1: "../static/images/blackpink.jpeg",
-  pic2: "../static/images/blackpink.jpeg",
+  question: "나는 가끔",
+  option1: "미래를 생각하며, 공상에 잠기곤 한다.",
+  option2: "현실적인 문제에 대해 고민하며 답을 찾는다",
+  pic1: "https://i.imgur.com/1eHg1CG.jpg",
+  pic2: "https://i.imgur.com/1eHg1CG.jpg",
+  number: 2,
 }
 
 const question3 = {

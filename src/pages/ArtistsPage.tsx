@@ -1,39 +1,138 @@
-import { useEffect, Fragment, useRef } from 'react';
+import { useEffect, Fragment, useRef, useState } from 'react';
 import {withRouter} from "react-router";
 import * as THREE from "three";
+import styled from "styled-components";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { AnimatePresence, motion } from "framer-motion";
+import TutorialCircle from '../components/TutorialCircle';
+import ArtistCurator from '../components/ArtistCurator';
 
+interface Edge {
+  left: number;
+  right: number;
+}
 
-function ArtistsPage() {
+interface ArtistEdge {
+  top: number;
+  bottom: number;
+}
+
+const Logo = styled.div`
+position: absolute;
+color: #705DF2;
+font-family: 'Roboto', sans-serif;
+font-weight: 800;
+font-style: italic;
+font-size: 2rem;
+margin: 1rem;
+`;
+
+const ArtistSideEdge = styled.div<Edge>`
+position: absolute;
+left: ${(props) => props.left ? 100 : 0};
+right: ${(props) => props.right ? 100 : 0};
+top: 0;
+width: 0.25rem;
+height: 100vh;
+background-color: #705DF2;
+z-index: 11;
+`;
+
+const ArtistEdge = styled.div<ArtistEdge>`
+position: absolute;
+top: ${(props) => props.top ? 100 : 0};
+bottom: ${(props) => props.bottom ? 100 : 0};
+left: 0;
+width: 100vw;
+height: 0.25rem;
+background-color: #705DF2;
+z-index: 11;
+`;
+
+const TutorialBox = styled(motion.div)`
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: #705DF2;
+z-index: 10;
+font-family: 'Roboto', sans-serif;
+.title {
+  margin: auto;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 5rem;
+  strong {
+    -webkit-text-fill-color: #1b1b1b;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #705DF2;
+  }
+}
+.description {
+  margin-top: 0.25rem;
+  width: 90%;
+  line-height: 160%;
+}
+`;
+
+const tutorialBoxVariants: any = {
+  exit: {
+    opacity: 0
+  },
+}
+
+function ArtistsPage(props: any) {
+  const [isTutorialOn, setTutorial] = useState(true);
+  const [isTurotrialCircleOn, setCircle] = useState(true);
+  const [favoriteArtist, setArtist] = useState("");
+
   const artistsPageContainer = useRef<HTMLDivElement | null>(null);
 
+  const handleNextClick = () => {
+    props.history.push("/test");
+  }
+
   useEffect(() => {
+    setTimeout(() => {
+      setTutorial(false);
+    }, 5000)
+
+    setTimeout(() => {
+      setCircle(false);
+    }, 10000)
+
+    //loader
+    const loader = new THREE.TextureLoader();
+    const cubeMaterial1 = new THREE.MeshBasicMaterial({
+      map: loader.load('https://i.imgur.com/1eHg1CG.jpg'),
+    }); 
+    const cubeMaterial2 = new THREE.MeshBasicMaterial({
+      map: loader.load('https://i.imgur.com/x2ye6jP.jpg'),
+    }); 
+
     // Scene
     const scene = new THREE.Scene()
 
     // Object 
     const r = 4;
     const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
-    const cubeMaterial = new THREE.MeshBasicMaterial({
-        color: '#887700'
-    })
 
-    const cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube5 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube6 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube7 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube8 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube9 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube10 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube11 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube12 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube13 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube14 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube15 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    const cube16 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    const cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube5 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube6 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube7 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube8 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube9 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube10 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube11 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube12 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube13 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube14 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube15 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
+    const cube16 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
 
     const cubeArr = [cube1, cube2, cube3, cube4, cube5, cube6, cube7, cube8, cube9, cube10, cube11, cube12, cube13, cube14, cube15, cube16];
 
@@ -79,67 +178,67 @@ function ArtistsPage() {
             switch(currentIntersect.object)
             {
                 case cube1:
-                    console.log('click on cube 1')
+                    setArtist("#Black_Pink")
                     break
     
                 case cube2:
-                    console.log('click on cube 2')
+                    setArtist("#Red_Velvet")
                     break
     
                 case cube3:
-                    console.log('click on cube 3')
+                    setArtist("#Oh_My_Girl")
                     break
 
                 case cube4:
-                    console.log('click on cube 4')
+                    setArtist("#ITZY")
                     break
 
                 case cube5:
-                    console.log('click on cube 5')
+                    setArtist("#TWICE")
                     break
                     
                 case cube6:
-                    console.log('click on cube 6')
+                  setArtist("#(G)I-DLE")
                     break                    
 
                 case cube7:
-                    console.log('click on cube 7')
+                  setArtist("#IZ*ONE")
                     break
 
                 case cube8:
-                    console.log('click on cube 8')
+                  setArtist("#MAMAMOO")
                     break
 
                 case cube9:
-                    console.log('click on cube 9')
+                  setArtist("#AOA")
                     break
 
                 case cube10:
-                    console.log('click on cube 10')
+                  setArtist("#MISS_A")
                     break
 
                 case cube11:
-                    console.log('click on cube 11')
+                  setArtist("#F(x)")
                     break
 
                 case cube12:
-                    console.log('click on cube 12')
+                  setArtist("#2NE1")
                     break
 
                 case cube13:
-                    console.log('click on cube 13')
+                  setArtist("#SISTAR")
                     break
 
                 case cube14:
-                    console.log('click on cube 14')
+                  setArtist("#G_FRIEND")
                     break
 
                 case cube15:
-                    console.log('click on cube 15')
+                  setArtist("#AESPA")
                     break
 
                 case cube16:
-                    console.log('click on cube 16')
+                  setArtist("#WJSN")
                     break
             }
         }
@@ -155,6 +254,7 @@ function ArtistsPage() {
     // Renderer
     const renderer = new THREE.WebGLRenderer()
     renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setClearColor(0x1B1B1B);
 
     if(artistsPageContainer.current){
       artistsPageContainer.current.appendChild(renderer.domElement)
@@ -210,7 +310,16 @@ function ArtistsPage() {
   }, [])
   return (
     <Fragment>
+    <Logo>Be_MBTIous</Logo>
     <div ref={artistsPageContainer}></div>
+    <AnimatePresence>
+    {isTutorialOn ? <TutorialBox variants={tutorialBoxVariants} exit="exit">
+      <motion.div className="title"><strong>FIRST, CHOOSE</strong><br/> YOUR FAVORITE<br/> KPOP ARTIST!!</motion.div>
+    </TutorialBox> : isTurotrialCircleOn ? <TutorialCircle/> : <ArtistCurator handleNextClick={handleNextClick} favoriteArtist={favoriteArtist}/>}</AnimatePresence>
+    <ArtistSideEdge left={100} right={0}/>
+    <ArtistSideEdge left={0} right={100}/>
+    <ArtistEdge top={100} bottom={0}/>
+    <ArtistEdge top={0} bottom={100}/>
     </Fragment>
   )
 }

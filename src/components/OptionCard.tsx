@@ -1,51 +1,63 @@
-import { Fragment } from "react";
+import { Fragment, useRef, Ref, FunctionComponent, useEffect } from "react";
 import styled from "styled-components";
 
-const OptionCardContainer = styled.div`
+const OptionCardBox = styled.div`
 width: 100%;
-height: 100%;
-background-color: gray;
-display: flex;
-flex-direction: column;
+height: calc(100% - 5rem);
+background-color: red;
 `;
 
 const ImageBox = styled.div`
 width: 100%;
-height: 50%;
-background-color: aliceblue;
-div {
-  width: 100%;
-  height: 100%;
-  background-color: red;
-}
+height: 268px;
+border-bottom: 0.25rem solid #705DF2;
+background-size: cover;
 `;
 
 const DescriptionBox = styled.div`
 width: 100%;
-border-radius: 10px;
-height: 50%;
-background-color: yellow;
-div {
-  width: 100%;
-  height: 100%;
-  background-color: red;
+height: calc(100% - 268px);
+background-color: #1b1b1b;
+color: #705DF2;
+-webkit-text-decoration: underline;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+span {
+  width: 90%;
+  padding: 0.25rem;
+  font-size: 1.125rem;
+  background-color: #705DF2;
+  text-align: center;
+  color: #1b1b1b;
+}
+.optionTitle{
+  width: 35%;
+  margin-bottom: 0.5rem;
+}
 }
 `
 
-interface OptionCardProps {
-  id: number;
-  onClick: (e: any) => any;
-  option: string;
-  image: string;
-  goToNextQuestion: (e: any) => any;
-}
+const OptionCard = function(props: any) {
 
-function OptionCard(props: OptionCardProps): JSX.Element {
+  const imageBox = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if(imageBox.current){
+      console.log(props.pic);
+      imageBox.current.style.backgroundImage = `url(${props.pic})`;
+    }
+  }, [])
+
   return (
-    <OptionCardContainer onClick={props.goToNextQuestion}>
-      <ImageBox><div className={props.id.toString()}/></ImageBox>
-      <DescriptionBox><div className={props.id.toString()}>{props.option}</div></DescriptionBox>
-    </OptionCardContainer>
+    <OptionCardBox>
+      <ImageBox ref={imageBox}></ImageBox>
+      <DescriptionBox>
+        <span className="optionTitle">{`option${props.num}`}</span>        
+        <span>{props.option}</span>
+      </DescriptionBox>
+    </OptionCardBox>
   )
 }
 
