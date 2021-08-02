@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion"; 
 import { useSelector } from 'react-redux';
 import OptionCard from './OptionCard';
+import { isPropertySignature } from 'typescript';
 
 
 interface OptionContainer {
@@ -66,7 +67,7 @@ display: flex;
 height: 5rem;
 border-bottom: 0.25rem solid #705DF2;
 .test__question-number {
-  width: 6.5rem;
+  width: 10rem;
   background-color: #705DF2;
   color: #1b1b1b;
   font-size: 3.5rem;
@@ -132,10 +133,22 @@ background-color: #1b1b1b;
 display: flex;
 justify-content: center;
 align-items: center;
-margin-top: 0.07rem;
 div {
   font-size: 1.5rem;
   color: #705DF2;
+}
+`;
+
+const SideCounterContainerChecked = styled.div`
+width: 34px;
+height: 2rem;
+background-color: #705DF2;
+display: flex;
+justify-content: center;
+align-items: center;
+div {
+  font-size: 1.5rem;
+  color: #1b1b1b;
 }
 `;
 
@@ -157,7 +170,10 @@ const containerVariants: any = {
 
 interface TestProps {
   question: any;
-  goToNextQuestion: (e: any) => any;
+  handleOptionClick: (e: any) => any;
+  handlePreviousButtonClick: (e: any) => any;
+  handleSubmitButtonClick: (e: any) => any;
+  currentTest: number;
 }
 
 function SidebarCounter() {
@@ -168,8 +184,17 @@ function SidebarCounter() {
   )
 }
 
-function Test({question, goToNextQuestion}: TestProps) {
-  let arrForCounter = new Array(20).fill(0); 
+function SidebarCounterChecked() {
+  return (
+    <SideCounterContainerChecked>
+      <div>▼</div>
+    </SideCounterContainerChecked>
+  )
+}
+
+function Test({question, currentTest, handleOptionClick, handlePreviousButtonClick, handleSubmitButtonClick}: TestProps) {
+  let arrForCounter = new Array(20 - currentTest).fill(0); 
+  let arrForCounterChecked = new Array(currentTest).fill(0);
 
   return (
     <TestContainer variants={containerVariants} initial="hidden" animate="visible" exit="exit">
@@ -184,20 +209,21 @@ function Test({question, goToNextQuestion}: TestProps) {
       </Question>
       <div className="option-flex-container">
         <OptionCardContainer optionId={0}>
-        <div className="backBtn">
+        <div className="backBtn" onClick={handlePreviousButtonClick}>
           <div>◀ Previous Question</div>
           </div>
-          <OptionCard num={1} pic={question.pic1} option={question.option1}/>
+          <OptionCard num={1} pic={question.pic1} option={question.option1} handleOptionClick={handleOptionClick}/>
         </OptionCardContainer>
         <OptionCardContainer optionId={1}>
-          <OptionCard num={2} pic={question.pic2} option={question.option2}/>
-          <div className="submitBtn">
+          <OptionCard num={2} pic={question.pic2} option={question.option2} handleOptionClick={handleOptionClick}/>
+          <div className="submitBtn" onClick={handleSubmitButtonClick}>
             <div>▶ SUBMIT</div>
           </div>
         </OptionCardContainer>
       </div>
       </div>
       <div className="test__sidebar">
+        {arrForCounterChecked.map((item) => <SidebarCounterChecked/>)}
         {arrForCounter.map((item) => <SidebarCounter/>)}
       </div>
     </TestContainer>

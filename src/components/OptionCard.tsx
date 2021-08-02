@@ -45,7 +45,6 @@ const OptionCard = function(props: any) {
 
   useEffect(() => {
     if(imageBox.current){
-      console.log(props.pic);
       imageBox.current.style.backgroundImage = `url(${props.pic})`;
     }
   }, [])
@@ -53,9 +52,9 @@ const OptionCard = function(props: any) {
   return (
     <OptionCardBox>
       <ImageBox ref={imageBox}></ImageBox>
-      <DescriptionBox>
-        <span className="optionTitle">{`option${props.num}`}</span>        
-        <span>{props.option}</span>
+      <DescriptionBox className={`${props.num -1}`} onClick={props.handleOptionClick}>
+        <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>        
+        <span className={`${props.num -1}`}>{props.option}</span>
       </DescriptionBox>
     </OptionCardBox>
   )

@@ -1,11 +1,8 @@
-import { Fragment } from 'react';
 import {withRouter} from "react-router";
 import Test from "../components/Test";
 import styled from "styled-components";
 import questionArr from "../assets/questions"
-import { useContext } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 interface Edge {
@@ -71,10 +68,6 @@ border: 0.25rem solid #705DF2;
 }
 `;
 
-const Mybutton = styled.button`
-height: 100vh;
-`;
-
 const containerVariants: any = {
   hidden: {
     opacity: 0,
@@ -89,23 +82,27 @@ const containerVariants: any = {
   },
 }
 
-function TestPage() {
+function TestPage(props: any) {
   const [currentTest, setCurrentTest] = useState(1);
   const [answers, setAnswers] = useState(
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   )
 
+  const handlePreviousButtonClick = () => {
+    setCurrentTest (currentTest - 1);
+  }
+
   const handleOptionClick = (e: any) => {
     console.log(answers);
-    console.log(currentTest);
-    console.log(e.target.className);
+    let classNameArr = e.target.className.split(" ")
+    let lastClassName = classNameArr[classNameArr.length - 1];
     let newAnswers = answers.slice();
-    newAnswers.splice(currentTest - 1, 1, Number(e.target.className))
+    newAnswers.splice(currentTest - 1, 1, Number(lastClassName))
     setAnswers(newAnswers)
     setCurrentTest(currentTest + 1);
   }
 
-  const handleMyButtonClick = () => {
+  const handleSubmitButtonClick = () => {
     let result = ""
     let EI = answers.filter((item, index) => index % 4 === 0).reduce((acc, cur) => {return acc + cur}, 0)
     let NS = answers.filter((item, index) => index % 4 === 1).reduce((acc, cur) => {return acc + cur}, 0)
@@ -131,7 +128,7 @@ function TestPage() {
     } else {
       result = result + "P"
     }
-    alert(result)
+    props.history.push("/result");
   }
 
   return (
@@ -142,9 +139,10 @@ function TestPage() {
       <ArtistEdge top={100} bottom={0}/>
       <ArtistEdge top={0} bottom={100}/>
       <div className="test__border-box">
+        <AnimatePresence>
       {currentTest > 20 ? null : questionArr.filter((item, index) => index === currentTest - 1).map((question) => 
-      <Test question={question} goToNextQuestion={handleOptionClick} key={question.question}/>
-      )}
+      <Test currentTest={currentTest} question={question} handleOptionClick={handleOptionClick} handlePreviousButtonClick={handlePreviousButtonClick} handleSubmitButtonClick={handleSubmitButtonClick} key={question.question}/>
+      )}</AnimatePresence>
       </div>
     </TestpageContainer>
   )
