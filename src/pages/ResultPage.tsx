@@ -8,6 +8,9 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import ResultAlbumCover from '../components/ResultAlbumCover';
+import ResultAlphabet from '../components/ResultAlphabet';
+import ResultGirlGroup from '../components/ResultGirlGroup';
+import ResultFitMe from '../components/ResultFitMe';
 
 const ResultPageContainer = styled.div`
 width: 100vw;
@@ -133,7 +136,13 @@ function ResultPage() {
         </ButtonBox>
       </ResultSidebar>
       <ResultDragArea ref={constraintsRef}/>
-      <ResultAlbumCover constraintsRef={constraintsRef}></ResultAlbumCover>
+      
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/qA2fWVp.png"}></ResultAlbumCover>
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IoheE2j.jpg"}></ResultAlbumCover>
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IK7k6ch.jpg"}></ResultAlbumCover>
+      <ResultFitMe constraintsRef={constraintsRef}/>
+      <ResultGirlGroup constraintsRef={constraintsRef}/>
+      <ResultAlphabet constraintsRef={constraintsRef}></ResultAlphabet>
     </ResultPageContainer>
   )
 }
