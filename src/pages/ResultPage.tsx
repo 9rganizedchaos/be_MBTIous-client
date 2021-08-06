@@ -11,6 +11,8 @@ import ResultAlbumCover from '../components/ResultAlbumCover';
 import ResultAlphabet from '../components/ResultAlphabet';
 import ResultGirlGroup from '../components/ResultGirlGroup';
 import ResultFitMe from '../components/ResultFitMe';
+import ResultMemberMbti from '../components/ResultMemberMbti';
+import ResultPercent from '../components/ResultPercent';
 
 const ResultPageContainer = styled.div`
 width: 100vw;
@@ -74,7 +76,7 @@ background: #705DF2;
 opacity: 0.2;
 background: #705DF2;
 position: absolute;
-width: calc(100% - 20rem);
+width: calc(100% - 20.5rem);
 height: calc(100% - 0.5rem);
 top: 0.25rem;
 left: 20.25rem;
@@ -135,14 +137,20 @@ function ResultPage() {
           </button>
         </ButtonBox>
       </ResultSidebar>
-      <ResultDragArea ref={constraintsRef}/>
-      
+      <ResultDragArea ref={constraintsRef}>
+      </ResultDragArea>
       <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/qA2fWVp.png"}></ResultAlbumCover>
       <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IoheE2j.jpg"}></ResultAlbumCover>
       <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IK7k6ch.jpg"}></ResultAlbumCover>
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IqBqx6k.jpg"}></ResultAlbumCover>
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/tZ579P9.jpg"}></ResultAlbumCover>
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/HvMID6Y.jpg"}></ResultAlbumCover>
+      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/vd4w1ak.jpg"}></ResultAlbumCover>
       <ResultFitMe constraintsRef={constraintsRef}/>
       <ResultGirlGroup constraintsRef={constraintsRef}/>
       <ResultAlphabet constraintsRef={constraintsRef}></ResultAlphabet>
+      <ResultMemberMbti constraintsRef={constraintsRef}></ResultMemberMbti>
+      <ResultPercent constraintsRef={constraintsRef}></ResultPercent>
     </ResultPageContainer>
   )
 }

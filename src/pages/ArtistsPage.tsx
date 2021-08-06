@@ -95,11 +95,12 @@ function ArtistsPage(props: any) {
   useEffect(() => {
     setTimeout(() => {
       setTutorial(false);
-    }, 5000)
+    }, 2500)
 
     setTimeout(() => {
       setCircle(false);
-    }, 10000)
+      camera.position.z = 3;
+    }, 6000)
 
     //loader
     const loader = new THREE.TextureLoader();
@@ -247,8 +248,7 @@ function ArtistsPage(props: any) {
 
     // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
-    camera.position.z = 2;
-    camera.position.y = 1;
+    camera.position.y = 3;
     scene.add(camera)
     
     // Renderer
