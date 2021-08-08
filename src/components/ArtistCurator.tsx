@@ -61,7 +61,7 @@ const artistCuratorVariants: any = {
   },
   visible: {
     y: 0,
-    transition: { delay: 0.25, duration: 1 },
+    transition: { delay: 0.01, duration: 1 },
   },
 } 
 

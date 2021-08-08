@@ -1,5 +1,11 @@
-import { Fragment, useRef, Ref, FunctionComponent, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import styled from "styled-components";
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+
+
+interface DescriptionBoxProps {
+  descriptionBoxObj: any;
+}
 
 const OptionCardBox = styled.div`
 width: 100%;
@@ -14,10 +20,35 @@ border-bottom: 0.25rem solid #705DF2;
 background-size: cover;
 `;
 
-const DescriptionBox = styled.div`
+const DescriptionBox1 = styled.div<DescriptionBoxProps>`
 width: 100%;
 height: calc(100% - 268px);
-background-color: #1b1b1b;
+background-color: ${props => props.descriptionBoxObj.answered && props.descriptionBoxObj.answer === 0 ? "#705DF2" : "#1b1b1b"};
+color: #705DF2;
+-webkit-text-decoration: underline;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+span {
+  width: 90%;
+  padding: 0.25rem;
+  font-size: 1.125rem;
+  background-color: #705DF2;
+  text-align: center;
+  color: #1b1b1b;
+}
+.optionTitle{
+  width: 35%;
+  margin-bottom: 0.5rem;
+}
+}
+`
+
+const DescriptionBox2 = styled.div<DescriptionBoxProps>`
+width: 100%;
+height: calc(100% - 268px);
+background-color: ${props => props.descriptionBoxObj.answered && props.descriptionBoxObj.answer === 1 ? "#705DF2" : "#1b1b1b"};
 color: #705DF2;
 -webkit-text-decoration: underline;
 display: flex;
@@ -52,10 +83,15 @@ const OptionCard = function(props: any) {
   return (
     <OptionCardBox>
       <ImageBox ref={imageBox}></ImageBox>
-      <DescriptionBox className={`${props.num -1}`} onClick={props.handleOptionClick}>
+      { props.num === 1 ? <DescriptionBox1 descriptionBoxObj={props.answers[props.currentTest - 1]} className={`${props.num -1}`} onClick={props.handleOptionClick}>
         <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>        
         <span className={`${props.num -1}`}>{props.option}</span>
-      </DescriptionBox>
+      </DescriptionBox1> : <DescriptionBox2 descriptionBoxObj={props.answers[props.currentTest - 1]} className={`${props.num -1}`} onClick={props.handleOptionClick}>
+        <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>        
+        <span className={`${props.num -1}`}>{props.option}</span>
+      </DescriptionBox2>
+
+      }
     </OptionCardBox>
   )
 }

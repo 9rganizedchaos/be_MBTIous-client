@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {withRouter} from "react-router";
 import styled from "styled-components";
 import { motion } from 'framer-motion';
@@ -13,6 +13,10 @@ import ResultGirlGroup from '../components/ResultGirlGroup';
 import ResultFitMe from '../components/ResultFitMe';
 import ResultMemberMbti from '../components/ResultMemberMbti';
 import ResultPercent from '../components/ResultPercent';
+import ResultMatching from '../components/ResultMatching';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
+import groupsArr from '../assets/groups';
 
 const ResultPageContainer = styled.div`
 width: 100vw;
@@ -93,7 +97,31 @@ left: calc(50% - 150px / 2);
 `
 
 function ResultPage() {
+  const testState = useSelector((state: RootState) => state.testReducer);
+  const { favoriteArtist, result } = testState;
+  let myMBTI = result.mbti;
+  let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist)[0];
+
   const constraintsRef = useRef(null);
+
+  const [componentIndex, setComponentIndex] = useState(["alphabet", "fitMe", "girlGroup", "matching", "member", "percent"]);
+
+  const handleResultComponentClick = (e: any) => {
+    let clickedClassName;
+    if(typeof e.target.className !== "string"){
+      clickedClassName = "matching";
+    } else {
+      let classNameArr = e.target.className.split(" ");
+      let lastIndex = classNameArr.length - 1;
+      clickedClassName = classNameArr[lastIndex];
+    }
+
+    let newComponentIndex = componentIndex.slice();
+    let index = componentIndex.indexOf(clickedClassName);
+    newComponentIndex.splice(index, 1); 
+    newComponentIndex.push(clickedClassName);
+    setComponentIndex(newComponentIndex);
+  }
 
   const handleCaptureBtnClick = () => {
     html2canvas(document.body).then((canvas) => {
@@ -132,25 +160,22 @@ function ResultPage() {
           <button>
             <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>
           </button>
-          <button>
+          <button onClick={handleCaptureBtnClick}>
             <FontAwesomeIcon icon={faCamera}></FontAwesomeIcon>
           </button>
         </ButtonBox>
       </ResultSidebar>
       <ResultDragArea ref={constraintsRef}>
       </ResultDragArea>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/qA2fWVp.png"}></ResultAlbumCover>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IoheE2j.jpg"}></ResultAlbumCover>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IK7k6ch.jpg"}></ResultAlbumCover>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/IqBqx6k.jpg"}></ResultAlbumCover>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/tZ579P9.jpg"}></ResultAlbumCover>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/HvMID6Y.jpg"}></ResultAlbumCover>
-      <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={"https://i.imgur.com/vd4w1ak.jpg"}></ResultAlbumCover>
-      <ResultFitMe constraintsRef={constraintsRef}/>
-      <ResultGirlGroup constraintsRef={constraintsRef}/>
-      <ResultAlphabet constraintsRef={constraintsRef}></ResultAlphabet>
-      <ResultMemberMbti constraintsRef={constraintsRef}></ResultMemberMbti>
-      <ResultPercent constraintsRef={constraintsRef}></ResultPercent>
+      {myKpopGroup.albumCover.map((item: any) => {
+        return <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={item}></ResultAlbumCover>
+      })}
+      <ResultFitMe handleResultComponentClick={handleResultComponentClick} fitMeIndex={componentIndex.indexOf("fitMe")} constraintsRef={constraintsRef}/>
+      <ResultMatching handleResultComponentClick={handleResultComponentClick} matchingIndex={componentIndex.indexOf("matching")} constraintsRef={constraintsRef}></ResultMatching>
+      <ResultGirlGroup handleResultComponentClick={handleResultComponentClick} girlGroupIndex={componentIndex.indexOf("girlGroup")} constraintsRef={constraintsRef}/>
+      <ResultAlphabet handleResultComponentClick={handleResultComponentClick} alphabetIndex={componentIndex.indexOf("alphabet")} constraintsRef={constraintsRef}></ResultAlphabet>
+      <ResultMemberMbti handleResultComponentClick={handleResultComponentClick} memberIndex={componentIndex.indexOf("member")} constraintsRef={constraintsRef}></ResultMemberMbti>
+      <ResultPercent handleResultComponentClick={handleResultComponentClick} percentIndex={componentIndex.indexOf("percent")} constraintsRef={constraintsRef}></ResultPercent>
     </ResultPageContainer>
   )
 }

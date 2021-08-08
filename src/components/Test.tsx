@@ -1,9 +1,6 @@
-import { Fragment, useContext } from "react";
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion"; 
-import { useSelector } from 'react-redux';
+import { motion } from "framer-motion"; 
 import OptionCard from './OptionCard';
-import { isPropertySignature } from 'typescript';
 
 
 interface OptionContainer {
@@ -174,6 +171,7 @@ interface TestProps {
   handlePreviousButtonClick: (e: any) => any;
   handleSubmitButtonClick: (e: any) => any;
   currentTest: number;
+  answers: any;
 }
 
 function SidebarCounter() {
@@ -192,7 +190,7 @@ function SidebarCounterChecked() {
   )
 }
 
-function Test({question, currentTest, handleOptionClick, handlePreviousButtonClick, handleSubmitButtonClick}: TestProps) {
+function Test({answers, question, currentTest, handleOptionClick, handlePreviousButtonClick, handleSubmitButtonClick}: TestProps) {
   let arrForCounter = new Array(20 - currentTest).fill(0); 
   let arrForCounterChecked = new Array(currentTest).fill(0);
 
@@ -212,12 +210,12 @@ function Test({question, currentTest, handleOptionClick, handlePreviousButtonCli
         <div className="backBtn" onClick={handlePreviousButtonClick}>
           <div>◀ Previous Question</div>
           </div>
-          <OptionCard num={1} pic={question.pic1} option={question.option1} handleOptionClick={handleOptionClick}/>
+          <OptionCard currentTest={currentTest} answers={answers} num={1} pic={question.pic1} option={question.option1} handleOptionClick={handleOptionClick}/>
         </OptionCardContainer>
         <OptionCardContainer optionId={1}>
-          <OptionCard num={2} pic={question.pic2} option={question.option2} handleOptionClick={handleOptionClick}/>
+          <OptionCard currentTest={currentTest} answers={answers} num={2} pic={question.pic2} option={question.option2} handleOptionClick={handleOptionClick}/>
           <div className="submitBtn" onClick={handleSubmitButtonClick}>
-            <div>▶ SUBMIT</div>
+            <div>{currentTest === 20 ? "▶ SUBMIT" : "▶ NEXT"}</div>
           </div>
         </OptionCardContainer>
       </div>

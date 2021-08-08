@@ -1,12 +1,18 @@
 import { initialState } from "./initialState";
-import { SELECT_ARTIST } from "../action/testAction"
+import { UPDATE_ARTIST, UPDATE_RESULT } from "../action/testAction"
 
-const testReducer = (state = initialState, action: any) => {
+const testReducer = (state: any = initialState, action: any) => {
   switch (action.type) {
-    case SELECT_ARTIST:
+    case UPDATE_ARTIST:
     return Object.assign({}, state, {
-      favoriteArtist: action.payload.index
+      favoriteArtist: action.payload.groupName,
     });
+
+    case UPDATE_RESULT:
+      return Object.assign({}, state, {
+        result: action.payload.testResult,
+      });
+  
     default:
       return state
   }

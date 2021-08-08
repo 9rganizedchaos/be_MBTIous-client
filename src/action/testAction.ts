@@ -1,10 +1,20 @@
-export const SELECT_ARTIST = "SELECT_ARTIST";
+export const UPDATE_ARTIST = "UPDATE_ARTIST";
+export const UPDATE_RESULT = "UPDATE_RESULT";
 
-export const selectArtist = (index: number) => {
+export const updateArtist = (groupName: string) => {
   return {
-    type: SELECT_ARTIST,
+    type: UPDATE_ARTIST,
     payload: {
-      index
+      groupName
+    }
+  }
+}
+
+export const updateResult = (testResult: any) => {
+  return {
+    type: UPDATE_RESULT,
+    payload: {
+      testResult
     }
   }
 }

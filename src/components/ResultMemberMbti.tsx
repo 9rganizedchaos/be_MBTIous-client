@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 import { motion } from "framer-motion";
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
+import groupsArr from '../assets/groups';
+
+interface MemberContainerProps {
+  memberIndex: any;
+}
 
 let girlGroupMemberArr = [
   {name: "Yeri", mbti: "INFP"},
@@ -9,7 +16,8 @@ let girlGroupMemberArr = [
   {name: "Joy", mbti: "INFP"},
 ];
 
-const GroupMemberWholeContainer = styled(motion.div)`
+const GroupMemberWholeContainer = styled(motion.div)<MemberContainerProps>`
+z-index: ${props => props.memberIndex};
 background: #1b1b1b;
 width: 600px;
 height: 210px;
@@ -102,29 +110,36 @@ border-right: 3px solid #705DF2;
 
 const MemberCard = function(props: any): any {
   return (
-    <MemberCardContainer>
-      <div className="memberCardName">
-        <span>{props.name}</span>
+    <MemberCardContainer className="member">
+      <div className="memberCardName member">
+        <span className="member">{props.name}</span>
       </div>
-      <div className="memberCardMBTI">
-        <span>{props.mbti}</span>
+      <div className="memberCardMBTI member">
+        <span className="member">{props.mbti}</span>
       </div>
     </MemberCardContainer>
   )
 }
 
 const ResultMemberMbti = function(props: any){
+  const testState = useSelector((state: RootState) => state.testReducer);
+  const { favoriteArtist, result } = testState;
+
+  let myMBTI = result.mbti;
+  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI);
+  let myMembers = myKpopGroup[0].member
+
   return (
-    <GroupMemberWholeContainer drag dragConstraints={props.constraintsRef}>
-    <div className="memberTitle">
-      <span>RedVelvet<br/> 멤버들의 MBTI</span>
+    <GroupMemberWholeContainer className="member" onClick={props.handleResultComponentClick} memberIndex={props.memberIndex} drag dragConstraints={props.constraintsRef}>
+    <div className="memberTitle member">
+      <span className="member">{myKpopGroup[0].name}<br/> 멤버들의 MBTI</span>
     </div>
-    <ResultMemberMbtiContainer>
-      {girlGroupMemberArr.map((item: any, index: number) => 
-        <MemberCard key={index} name={item.name} url={item.url} mbti={item.mbti}/>
+    <ResultMemberMbtiContainer className="member">
+      {myMembers.map((item: any, index: number) => 
+        <MemberCard className="member" key={index} name={item.name} mbti={item.mbti}/>
       )}
-      <div className="sourceInformation">
-        <div><strong>※</strong><br/>포털사이트에서<br/> 검색된 결과로<br/> 부정확한 정보가<br/> 있을 수 있습니다.</div>
+      <div className="sourceInformation member">
+        <div className="member"><strong className="member">※</strong><br/>포털사이트에서<br/> 검색된 결과로<br/> 부정확한 정보가<br/> 있을 수 있습니다.</div>
       </div>
     </ResultMemberMbtiContainer>    
     </GroupMemberWholeContainer>

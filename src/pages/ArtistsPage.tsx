@@ -6,6 +6,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { AnimatePresence, motion } from "framer-motion";
 import TutorialCircle from '../components/TutorialCircle';
 import ArtistCurator from '../components/ArtistCurator';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from "../reducers";
+import { updateArtist } from '../action/testAction';
 
 interface Edge {
   left: number;
@@ -82,6 +85,10 @@ const tutorialBoxVariants: any = {
 }
 
 function ArtistsPage(props: any) {
+  const dispatch = useDispatch();
+  const testState = useSelector((state: RootState) => state.testReducer);
+
+
   const [isTutorialOn, setTutorial] = useState(true);
   const [isTurotrialCircleOn, setCircle] = useState(true);
   const [favoriteArtist, setArtist] = useState("");
@@ -95,12 +102,11 @@ function ArtistsPage(props: any) {
   useEffect(() => {
     setTimeout(() => {
       setTutorial(false);
-    }, 2500)
+    }, 3500)
 
     setTimeout(() => {
       setCircle(false);
-      camera.position.z = 3;
-    }, 6000)
+    }, 9200)
 
     //loader
     const loader = new THREE.TextureLoader();
@@ -179,67 +185,83 @@ function ArtistsPage(props: any) {
             switch(currentIntersect.object)
             {
                 case cube1:
-                    setArtist("#Black_Pink")
+                    setArtist("#Black_Pink");
+                    dispatch(updateArtist("BlackPink"));
                     break
     
                 case cube2:
-                    setArtist("#Red_Velvet")
+                    setArtist("#Red_Velvet");
+                    dispatch(updateArtist("RedVelVet"));
                     break
     
                 case cube3:
-                    setArtist("#Oh_My_Girl")
+                    setArtist("#TWICE")
+                    dispatch(updateArtist("TWICE"));
                     break
 
                 case cube4:
-                    setArtist("#ITZY")
+                    setArtist("#MOMOLAND")
+                    dispatch(updateArtist("MOMOLAND"));
                     break
 
                 case cube5:
-                    setArtist("#TWICE")
+                    setArtist("#(G)I-DLE");
+                    dispatch(updateArtist("(G)I-DLE"));
                     break
                     
                 case cube6:
-                  setArtist("#(G)I-DLE")
+                  setArtist("#OhMyGirl")
+                  dispatch(updateArtist("OhMyGirl"));
                     break                    
 
                 case cube7:
-                  setArtist("#IZ*ONE")
+                  setArtist("#ITZY")
+                  dispatch(updateArtist("ITZY"));
                     break
 
                 case cube8:
-                  setArtist("#MAMAMOO")
+                  setArtist("#AESPA")
+                  dispatch(updateArtist("AESPA"));
                     break
 
                 case cube9:
-                  setArtist("#AOA")
+                  setArtist("#IZ*ONE")
+                  dispatch(updateArtist("IZ*ONE"));
                     break
 
                 case cube10:
-                  setArtist("#MISS_A")
+                  setArtist("#GFRIEND")
+                  dispatch(updateArtist("GFRIEND"));
                     break
 
                 case cube11:
-                  setArtist("#F(x)")
+                  setArtist("#WekiMeki")
+                  dispatch(updateArtist("WekiMeki"));
                     break
 
                 case cube12:
-                  setArtist("#2NE1")
+                  setArtist("#Lovelyz")
+                  dispatch(updateArtist("Lovelyz"));
                     break
 
                 case cube13:
-                  setArtist("#SISTAR")
+                  setArtist("#StayC")
+                  dispatch(updateArtist("StayC"));
                     break
 
                 case cube14:
-                  setArtist("#G_FRIEND")
+                  setArtist("#WJSN");
+                  dispatch(updateArtist("WJSN"));
                     break
 
                 case cube15:
-                  setArtist("#AESPA")
+                  setArtist("#LOONA")
+                  dispatch(updateArtist("LOONA"));
                     break
 
                 case cube16:
-                  setArtist("#WJSN")
+                  setArtist("#MAMAMOO")
+                  dispatch(updateArtist("MAMAMOO"));
                     break
             }
         }
@@ -285,6 +307,12 @@ function ArtistsPage(props: any) {
 
       controls.update();
       renderer.render(scene, camera);
+      if(elapsedTime > 1 && elapsedTime < 2.95){
+        camera.position.y += 0.01;
+      } else if (elapsedTime > 4 && elapsedTime < 8.75){
+        camera.position.y -= 0.01;
+        camera.position.z += 0.009;
+      }
       requestAnimationFrame(animate);
       // camera.rotation.x += 0.004;
       // camera.rotation.y += 0.004;

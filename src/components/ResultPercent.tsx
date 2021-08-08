@@ -3,9 +3,15 @@ import { useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import { useEffect } from 'react';
 import { Pie } from "react-chartjs-2";
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
+import groupsArr from '../assets/groups';
 
+interface PercentContainerProps {
+  percentIndex: any;
+}
 
-const ResultPercentContainer = styled(motion.div)`
+const ResultPercentContainer = styled(motion.div)<PercentContainerProps>`
 background: #1b1b1b;
 border: 3px solid #705DF2;
 width: 400px;
@@ -26,9 +32,16 @@ div {
   color: #1b1b1b;
   padding: 0.25rem;
 }
+z-index: ${props => props.percentIndex}
 `;
 
 const ResultPercent = function(props: any){
+  const testState = useSelector((state: RootState) => state.testReducer);
+  const { favoriteArtist, result } = testState;
+
+  let myMBTI = result.mbti;
+  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
+
   const resultPieChart = useRef(null);
 
   const data = {
@@ -63,9 +76,9 @@ const ResultPercent = function(props: any){
   }, [])
 
   return (
-    <ResultPercentContainer drag dragConstraints={props.constraintsRef}>
-      <div>아래 유형의 사람들이 레드벨벳 유형을 좋아합니다</div>
-      <Pie data={data}></Pie>
+    <ResultPercentContainer className="percent" onClick={props.handleResultComponentClick} percentIndex={props.percentIndex} drag dragConstraints={props.constraintsRef}>
+      <div className="percent">{myKpopGroup.name}를 최애그룹으로 꼽은 유형</div>
+      <Pie className="percent" data={data}></Pie>
     </ResultPercentContainer>
   )
 }

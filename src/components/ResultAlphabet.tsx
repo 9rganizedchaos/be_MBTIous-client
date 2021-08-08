@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 import { motion } from "framer-motion";
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
 
 interface AlphabetContainerProps {
   animationNum: number;
 }
 
-const WholeContainer = styled(motion.div)`
+interface WholeContainerProps {
+  alphabetIndex: any;
+}
+
+const WholeContainer = styled(motion.div)<WholeContainerProps>`
+z-index: ${props => props.alphabetIndex};
 background: #1b1b1b;
 width: 300px;
 height: 170px;
@@ -42,7 +49,7 @@ h2{
 .back-alphabet {
   color: #705DF2;
   opacity: 0.75;
-  animation: ${(props => props.animationNum > 4 ? "animate1 2s ease-in-out infinite" : "animate2 2s ease-in-out infinite")};
+  animation: ${(props => props.animationNum > 4 ? "animate1 2s ease-in-out infinite" : props.animationNum > 3 ? "animate2 2s ease-in-out infinite" : "animate3 2s ease-in-out infinite")};
 }
 @keyframes animate1 {
   0%, 100% {
@@ -79,25 +86,32 @@ padding: 0 1rem;
 `;
 
 const ResultAlphabet = function(props: any){
+  const testState = useSelector((state: RootState) => state.testReducer);
+  const { favoriteArtist, result } = testState;
+  let firstLetter = result.mbti[0];
+  let secondLetter = result.mbti[1];
+  let thirdLetter = result.mbti[2];
+  let fourthLetter = result.mbti[3];
+
   return (
-    <WholeContainer drag dragConstraints={props.constraintsRef}>
-      <div>Your MBTI Type is...!</div>
-    <ResultAlphabetContainer>
-      <AlphabetContainer animationNum={3}>
-        <h2 className="front-alphabet">E</h2>
-        <h2 className="back-alphabet">E</h2>
+    <WholeContainer className="alphabet" onClick={props.handleResultComponentClick} alphabetIndex={props.alphabetIndex} drag dragConstraints={props.constraintsRef}>
+      <div className="alphabet">Your MBTI Type is...!</div>
+    <ResultAlphabetContainer className="alphabet">
+      <AlphabetContainer className="alphabet" animationNum={result[firstLetter]}>
+        <h2 className="front-alphabet alphabet">{firstLetter}</h2>
+        <h2 className="back-alphabet alphabet">{firstLetter}</h2>
       </AlphabetContainer>    
-        <AlphabetContainer animationNum={4}>
-        <h2 className="front-alphabet">N</h2>
-        <h2 className="back-alphabet">N</h2>
+        <AlphabetContainer className="alphabet" animationNum={result[secondLetter]}>
+        <h2 className="front-alphabet alphabet">{secondLetter}</h2>
+        <h2 className="back-alphabet alphabet">{secondLetter}</h2>
       </AlphabetContainer>  
-      <AlphabetContainer animationNum={5}>
-        <h2 className="front-alphabet">F</h2>
-        <h2 className="back-alphabet">F</h2>
+      <AlphabetContainer className="alphabet" animationNum={result[thirdLetter]}>
+        <h2 className="front-alphabet alphabet">{thirdLetter}</h2>
+        <h2 className="back-alphabet alphabet">{thirdLetter}</h2>
       </AlphabetContainer>  
-      <AlphabetContainer animationNum={3}>
-        <h2 className="front-alphabet">J</h2>
-        <h2 className="back-alphabet">J</h2>
+      <AlphabetContainer className="alphabet" animationNum={result[fourthLetter]}>
+        <h2 className="front-alphabet alphabet">{fourthLetter}</h2>
+        <h2 className="back-alphabet alphabet">{fourthLetter}</h2>
       </AlphabetContainer>  
     </ResultAlphabetContainer>
     </WholeContainer>
