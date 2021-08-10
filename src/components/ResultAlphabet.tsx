@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
@@ -12,14 +12,15 @@ interface WholeContainerProps {
 }
 
 const WholeContainer = styled(motion.div)<WholeContainerProps>`
-z-index: ${props => props.alphabetIndex};
-background: #1b1b1b;
+${( { theme, alphabetIndex } ) => {
+  return css`
+z-index: ${alphabetIndex};
+background: ${theme.color.sub};
 width: 300px;
 height: 170px;
 position: absolute;
 top: 120px;
 left: 500px;
-font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
 display: flex;
@@ -27,14 +28,18 @@ flex-direction: column;
 align-items: center;
 justify-content: space-between;
 padding: 1rem 0 0.25rem;
-border: 3px solid #705DF2;
+border: 3px solid ${theme.color.main};
 div {
-  color: #705DF2;
+  color: ${theme.color.main};
   font-size: 1.25rem;
 }
+`
+}}
 `;
 
 const AlphabetContainer = styled(motion.div)<AlphabetContainerProps>`
+${( { theme, animationNum } ) => {
+  return css`
 display: flex;
 justify-content: center;
 align-items: center;
@@ -44,12 +49,12 @@ h2{
 }
 .front-alphabet{
   color: transparent;
-  -webkit-text-stroke: 2px #705DF2;
+  -webkit-text-stroke: 2px ${theme.color.main};
 }
 .back-alphabet {
-  color: #705DF2;
+  color: ${theme.color.main};
   opacity: 0.75;
-  animation: ${(props => props.animationNum > 4 ? "animate1 2s ease-in-out infinite" : props.animationNum > 3 ? "animate2 2s ease-in-out infinite" : "animate3 2s ease-in-out infinite")};
+  animation: ${animationNum > 4 ? "animate1 2s ease-in-out infinite" : animationNum > 3 ? "animate2 2s ease-in-out infinite" : "animate3 2s ease-in-out infinite"};
 }
 @keyframes animate1 {
   0%, 100% {
@@ -72,9 +77,13 @@ h2{
     clip-path: polygon(0 64%, 120% 64%, 120% 100%, 0% 100%);
   }
 }
+`
+}}
 `;
 
 const ResultAlphabetContainer = styled(motion.div) `
+${( { theme } ) => {
+  return css`
 width: 100%;
 height: 100%;
 display: flex;
@@ -83,6 +92,8 @@ align-items: center;
 flex-direction: row;
 postion: relative;
 padding: 0 1rem;
+`
+}}
 `;
 
 const ResultAlphabet = function(props: any){

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
@@ -17,8 +17,10 @@ let girlGroupMemberArr = [
 ];
 
 const GroupMemberWholeContainer = styled(motion.div)<MemberContainerProps>`
-z-index: ${props => props.memberIndex};
-background: #1b1b1b;
+${( { theme, memberIndex } ) => {
+  return css`
+z-index: ${memberIndex};
+background: ${theme.color.sub};
 width: 600px;
 height: 210px;
 position: absolute;
@@ -27,49 +29,53 @@ left: calc(50% - 150px / 2);
 font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
-border: 3px solid #705DF2;
+border: 3px solid ${theme.color.main};
 display: flex;
 flex-direction: row;
 .memberTitle{
-  background-color: #1b1b1b;
-  color: #705DF2;
+  background-color: ${theme.color.sub};
+  color: ${theme.color.main};
   writing-mode: vertical-rl;
   text-orientation: mixed;
   padding: 1rem;
   width: 150px;
-  border-right: 3px solid #705DF2;
+  border-right: 3px solid ${theme.color.main};
   font-size: 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 `
+}}
+`
 
 const ResultMemberMbtiContainer = styled(motion.div)`
+${( { theme } ) => {
+  return css`
 display: flex;
 overflow-x: scroll;
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #1b1b1b;
-  border: 2px solid #705DF2;
+  background-color: ${theme.color.sub};
+  border: 2px solid ${theme.color.main};
   border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #705DF2;
+  background-color: ${theme.color.main};
   width: 100px;
 }
 .sourceInformation{
   width: 200px;
-  background-color: #1b1b1b;
+  background-color: ${theme.color.sub};
   display: flex; 
   justify-content: center;
   align-items: center;
   div {
-    background-color: #705DF2;
+    background-color: ${theme.color.main};
     width: 100px;
-    color: #1b1b1b;
+    color: ${theme.color.sub};
     padding: 0.5rem;
     margin: 1rem;
     text-align: center;
@@ -79,12 +85,16 @@ overflow-x: scroll;
     }
   }
 }
+`
+}}
 `;
 
 const MemberCardContainer = styled.div`
+${( { theme } ) => {
+  return css`
 display: flex;
 flex-direction: column;
-border-right: 3px solid #705DF2;
+border-right: 3px solid ${theme.color.main};
 .memberCardName {
   height: 150px;
   width: 190px;
@@ -93,19 +103,21 @@ border-right: 3px solid #705DF2;
   align-items: center;
   span {
     font-size: 3rem;
-    color: #705DF2;
+    color: ${theme.color.main};
   }
 }
 .memberCardMBTI {
-  border-top: 3px solid #705DF2;
-  background-color: #705DF2;
-  color: #1b1b1b;
+  border-top: 3px solid ${theme.color.main};
+  background-color: ${theme.color.main};
+  color: ${theme.color.sub};
   height: 40px;
   font-size: 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+`
+}}
 `;
 
 const MemberCard = function(props: any): any {

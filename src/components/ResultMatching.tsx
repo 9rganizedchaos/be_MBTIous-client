@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBomb, faCrown, faFlushed, faGhost, faMugHot, faViruses } from '@fortawesome/free-solid-svg-icons';
@@ -13,21 +13,22 @@ interface MatchingContainerProps {
 }
 
 const ResultMatchingContainer = styled(motion.div)<MatchingContainerProps>`
-z-index: ${props => props.matchingIndex};
-background: #1b1b1b;
-border: 3px solid #705DF2;
+${( { theme, matchingIndex } ) => {
+  return css`
+z-index: ${matchingIndex};
+background: ${theme.color.sub};
+border: 3px solid ${theme.color.main};
 width: 300px;
 height: 300px;
 position: absolute;
 top: calc(50% - 150px / 2);
 left: calc(50% - 150px / 2);
-font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
 svg {
   position: absolute;
   font-size: 12rem;
-  color: #705DF2;
+  color: ${theme.color.main};
   top: 48%;
   left: 50%;
   transform: translate(-50%, -55%);
@@ -38,8 +39,8 @@ div {
   top: 87%;
   left: 55%;
   transform: translateX(-50%);
-  background-color: #705DF2;
-  color: #1b1b1b;
+  background-color: ${theme.color.main};
+  color: ${theme.color.sub};
   padding: 0.2rem;
 }
 span {
@@ -48,10 +49,12 @@ span {
   top: 30%;
   left: 10%;
   transform: rotate(-20deg);
-  -webkit-text-fill-color: #1b1b1b;
+  -webkit-text-fill-color: ${theme.color.sub};
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #705DF2;
+  -webkit-text-stroke-color: ${theme.color.main};
 }
+`
+}}
 `;
 
 const compabilityArr = [

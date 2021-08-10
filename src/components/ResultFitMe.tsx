@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
 import groupsArr from "../assets/groups"
 import { useSelector } from 'react-redux';
@@ -14,41 +14,46 @@ interface fitMeProps {
 }
 
 const ResultFitMeContainer = styled(motion.div)<fitMeContainerProps>`
-background: #1b1b1b;
+${( { theme, fitMeIndex } ) => {
+  return css`
+background: ${theme.color.sub};
 width: 500px;
 height: 300px;
 position: absolute;
 top: calc(50% - 150px / 2);
 left: calc(50% - 150px / 2);
-font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
 display: grid;
 grid-template-columns: repeat(2, 250px);
 grid-template-rows: 50px 200px 50px;
-z-index: ${props => props.fitMeIndex};
+z-index: ${fitMeIndex};
 div{
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #705DF2;
+  color: ${theme.color.main};
 }
 .fitMeTitle{
-  border: 3px solid #705DF2;
+  border: 3px solid ${theme.color.main};
   border-top: none;
 }
 .notFitMeTitle{
-  border: 3px solid #705DF2;
+  border: 3px solid ${theme.color.main};
   border-bottom: none;
   border-left: none;
 }
+`
+}}
 `;
 
 const FitMeArtistPic1 = styled.div<fitMeProps>`
+${( { theme, pic } ) => {
+  return css`
   grid-column: 1 / 2;
   grid-row: 1 / 3;
-  border: 3px solid #705DF2;
+  border: 3px solid ${theme.color.main};
   span {
     font-size: 2.5rem;
     position: absolute;
@@ -56,17 +61,21 @@ const FitMeArtistPic1 = styled.div<fitMeProps>`
   div {
     width: calc(250px - 0.25rem);
     height: calc(250px - 0.3rem);
-    background-image: url(${(props => props.pic)});
+    background-image: url(${pic});
     background-position: center;
     background-size: cover;
     opacity: 0.25;
   }
+`
+}}
 `;
 
 const FitMeArtistPic2 = styled.div<fitMeProps>`
+${( { theme, pic } ) => {
+  return css`
   grid-column: 2 / 3;
   grid-row: 2 / 4;
-  border: 3px solid #705DF2;
+  border: 3px solid ${theme.color.main};
   border-left: none;
   span {
     font-size: 2.5rem;
@@ -75,11 +84,13 @@ const FitMeArtistPic2 = styled.div<fitMeProps>`
   div {
     width: calc(250px);
     height: calc(250px - 0.3rem);
-    background-image: url(${(props => props.pic)});
+    background-image: url(${pic});
     background-position: center;
     background-size: cover;
     opacity: 0.25;
   }
+`
+}}
 `;
 
 const ResultFitMe = function(props: any){

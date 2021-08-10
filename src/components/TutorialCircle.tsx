@@ -1,14 +1,16 @@
 import { faMouse, faMousePointer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Fragment } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const CircleContainer = styled.div`
+${( { theme } ) => {
+  return css`
 position: absolute;
 width: 20rem;
 height: 20rem;
 border-radius: 50%;
-background-color: #705DF2;
+background-color: ${theme.color.main};
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%); 
@@ -23,10 +25,11 @@ justify-content: center;
   margin: 1rem;
   text-align: center;
   font-size: 1.25rem;
-  font-family: 'Roboto', sans-serif;
   font-weight: 800;
   font-style: italic;
 }
+`
+}}
 `
 
 function TutorialCircle() {

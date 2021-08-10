@@ -1,6 +1,5 @@
 import { useRef, useEffect } from "react";
-import styled from "styled-components";
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+import styled, { css } from "styled-components";
 
 
 interface DescriptionBoxProps {
@@ -8,23 +7,32 @@ interface DescriptionBoxProps {
 }
 
 const OptionCardBox = styled.div`
+${( { theme } ) => {
+  return css`
 width: 100%;
 height: calc(100% - 5rem);
-background-color: red;
+background-color: ${theme.color.sub};
+`
+}}
 `;
 
 const ImageBox = styled.div`
+${( { theme } ) => {
+  return css`
 width: 100%;
 height: 268px;
-border-bottom: 0.25rem solid #705DF2;
+border-bottom: 0.25rem solid ${theme.color.main};
 background-size: cover;
+`}}
 `;
 
 const DescriptionBox1 = styled.div<DescriptionBoxProps>`
+${( { theme,  descriptionBoxObj} ) => {
+  return css`
 width: 100%;
 height: calc(100% - 268px);
-background-color: ${props => props.descriptionBoxObj.answered && props.descriptionBoxObj.answer === 0 ? "#705DF2" : "#1b1b1b"};
-color: #705DF2;
+background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.main : theme.color.sub};
+color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.sub : theme.color.main};
 -webkit-text-decoration: underline;
 display: flex;
 flex-direction: column;
@@ -34,9 +42,9 @@ span {
   width: 90%;
   padding: 0.25rem;
   font-size: 1.125rem;
-  background-color: #705DF2;
+  background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.sub : theme.color.main};
   text-align: center;
-  color: #1b1b1b;
+  color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.main : theme.color.sub};
 }
 .optionTitle{
   width: 35%;
@@ -44,12 +52,16 @@ span {
 }
 }
 `
+}}
+`
 
 const DescriptionBox2 = styled.div<DescriptionBoxProps>`
+${( { theme,  descriptionBoxObj} ) => {
+  return css`
 width: 100%;
 height: calc(100% - 268px);
-background-color: ${props => props.descriptionBoxObj.answered && props.descriptionBoxObj.answer === 1 ? "#705DF2" : "#1b1b1b"};
-color: #705DF2;
+background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.main : theme.color.sub};
+color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.sub : theme.color.main};
 -webkit-text-decoration: underline;
 display: flex;
 flex-direction: column;
@@ -59,15 +71,17 @@ span {
   width: 90%;
   padding: 0.25rem;
   font-size: 1.125rem;
-  background-color: #705DF2;
+  background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.sub : theme.color.main};
   text-align: center;
-  color: #1b1b1b;
+  color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.main : theme.color.sub};
 }
 .optionTitle{
   width: 35%;
   margin-bottom: 0.5rem;
 }
 }
+`
+}}
 `
 
 const OptionCard = function(props: any) {

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { motion } from "framer-motion"; 
 import OptionCard from './OptionCard';
 
@@ -8,16 +8,18 @@ interface OptionContainer {
 }
 
 const TestContainer = styled(motion.div)`
+${( { theme } ) => {
+  return css`
 position: absolute;
 width: 100%;
 height: 750px;
 background-color: #000000;
 margin: auto;
-border-top: 0.25rem solid #705DF2;
-border-bottom: 0.25rem solid #705DF2;
+border-top: 0.25rem solid ${theme.color.main};
+border-bottom: 0.25rem solid ${theme.color.main};
 display: flex;
 .test__sidebar{
-  border-left: 0.25rem solid #705DF2;
+  border-left: 0.25rem solid ${theme.color.main};
 }
 .option-flex-container{
   width: 100%;
@@ -29,124 +31,144 @@ display: flex;
 .test__sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #1b1b1b;
+  background-color: ${theme.color.sub};
 }
+`
+}}
 `;
 
 const TestMainGuide = styled.div`
+${( { theme } ) => {
+  return css`
 width: 574px;
-background-color: #705DF2;
-color: #1b1b1b;
-font-family: 'Roboto', sans-serif;
+background-color: ${theme.color.main};
+color: ${theme.color.sub};
 font-weight: 800;
 font-style: italic;
 font-size: 1.75rem;
 padding: 0.25rem 1rem;
 height: 5rem;
+`
+}}
 `;
 
 const TestGuide = styled.div`
-background-color: #1b1b1b;
-color: #705DF2;
-font-family: 'Roboto', sans-serif;
+${( { theme } ) => {
+  return css`
+background-color: ${theme.color.sub};
+color: ${theme.color.main};
 font-weight: 400;
 font-size: 1.5rem;
 font-style: italic;
 padding: 0.25rem 0;
-border-bottom: 0.25rem solid #705DF2;
+border-bottom: 0.25rem solid ${theme.color.main};
 height: 4rem;
 text-align: center;
 padding-top: 1rem;
+`
+}}
 `;
 
 const Question = styled.div`
+${( { theme } ) => {
+  return css`
 display: flex;
 height: 5rem;
-border-bottom: 0.25rem solid #705DF2;
+border-bottom: 0.25rem solid ${theme.color.main};
 .test__question-number {
   width: 10rem;
-  background-color: #705DF2;
-  color: #1b1b1b;
+  background-color: ${theme.color.main};
+  color: ${theme.color.sub};
   font-size: 3.5rem;
-  font-family: 'Roboto', sans-serif;
   font-weight: 800;
   text-align: center;
 }
 .test__question{
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   width: calc(100%);
-  background-color: #1b1b1b;
-  color: #705DF2;
+  background-color: ${theme.color.sub};
+  color: ${theme.color.main};
   font-size: 1.5rem;
   div {
     margin-left: 1rem;
   }
 }
+`
+}}
 `;
 
 const OptionCardContainer = styled.div<OptionContainer>`
-border-left: ${(props) => props.optionId === 1 ?  "0.25rem solid #705DF2": 0};
+${( { theme, optionId } ) => {
+  return css`
+border-left: ${optionId === 1 ?  `0.25rem solid ${theme.color.main}`: 0};
 flex: 1 1 auto;
 height: 100%;
 width: 50%;
 .submitBtn {
-  background-color: #705DF2;
+  background-color: ${theme.color.main};
   display: flex;
   justify-content: center;
   align-items: center;
   height: 5rem;
   div{
-    color: #1b1b1b;
-    font-family: 'Roboto', sans-serif;
+    color: ${theme.color.sub};
     font-weight: 800;
     font-style: italic;
     font-size: 3rem;
   }
 }
 .backBtn {
-  background-color: #1b1b1b;
+  background-color: ${theme.color.sub};
   display: flex;
   justify-content: center;
   align-items: center;
   height: 5rem;
-  border-bottom: 0.25rem solid #705DF2;
+  border-bottom: 0.25rem solid ${theme.color.main};
   div{
-    color: #705DF2;
-    font-family: 'Roboto', sans-serif;
+    color: ${theme.color.main};
     font-weight: 800;
     font-style: italic;
     font-size: 1.75rem;
   }
 }
+`
+}}
 `;
 
 const SideCounterContainer = styled.div`
+${( { theme } ) => {
+  return css`
 width: 34px;
 height: 2rem;
-background-color: #1b1b1b;
+background-color: ${theme.color.sub};
 display: flex;
 justify-content: center;
 align-items: center;
 div {
   font-size: 1.5rem;
-  color: #705DF2;
+  color: ${theme.color.main};
 }
+`
+}}
 `;
 
 const SideCounterContainerChecked = styled.div`
+${( { theme } ) => {
+  return css`
 width: 34px;
 height: 2rem;
-background-color: #705DF2;
+background-color: ${theme.color.main};
 display: flex;
 justify-content: center;
 align-items: center;
 div {
   font-size: 1.5rem;
-  color: #1b1b1b;
+  color: ${theme.color.sub};
 }
+`
+}}
 `;
 
 const containerVariants: any = {

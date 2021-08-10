@@ -1,6 +1,6 @@
 import {withRouter} from "react-router";
 import Test from "../components/Test";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import questionArr from "../assets/questions"
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -19,56 +19,71 @@ interface ArtistEdge {
 }
 
 const Logo = styled.div`
+${( { theme } ) => {
+  return css`
 position: absolute;
 left: 0;
-color: #705DF2;
-font-family: 'Roboto', sans-serif;
+color: ${theme.color.main};
 font-weight: 800;
 font-style: italic;
 font-size: 2rem;
 margin: 1rem;
+`
+}}
 `;
 
 const ArtistSideEdge = styled.div<Edge>`
+${( { theme, left, right } ) => {
+  return css`
 position: absolute;
-left: ${(props) => props.left ? 100 : 0};
-right: ${(props) => props.right ? 100 : 0};
+left: ${left ? 100 : 0};
+right: ${right ? 100 : 0};
 top: 0;
 width: 0.25rem;
 height: 100vh;
-background-color: #705DF2;
+background-color: ${theme.color.main};
 z-index: 11;
+`
+}}
 `;
 
-const ArtistEdge = styled.div<ArtistEdge>`
+const ArtistEdgeTop = styled.div<ArtistEdge>`
+${( { theme, top, bottom } ) => {
+  return css`
 position: absolute;
-top: ${(props) => props.top ? 100 : 0};
-bottom: ${(props) => props.bottom ? 100 : 0};
+top: ${top ? 100 : 0};
+bottom: ${bottom ? 100 : 0};
 left: 0;
 width: 100vw;
 height: 0.25rem;
-background-color: #705DF2;
+background-color: ${theme.color.main};
 z-index: 11;
+`
+}}
 `;
 
 const TestpageContainer = styled(motion.div)`
+${( { theme } ) => {
+  return css`
 width: 100vw;
 height: 100vh;
 display: flex;
 justify-content: center;
 align-itmes: center;
-background-color: #1b1b1b;
-border: 0.25rem solid #705DF2;
+background-color: ${theme.color.sub};
+border: 0.25rem solid ${theme.color.main};
 .test__border-box{
   position: absolute;
   width: 620px;
   height: calc(100vh - 0.5rem);
-  background-color: #1b1b1b;
+  background-color: ${theme.color.sub};
   display: flex;
   align-items: center;
-  border-left: 0.25rem solid #705DF2;
-  border-right: 0.25rem solid #705DF2;
+  border-left: 0.25rem solid ${theme.color.main};
+  border-right: 0.25rem solid ${theme.color.main};
 }
+`
+}}
 `;
 
 const containerVariants: any = {
@@ -268,8 +283,8 @@ function TestPage(props: any) {
       <Logo>Be_MBTIous</Logo>
       <ArtistSideEdge left={100} right={0}/>
       <ArtistSideEdge left={0} right={100}/>
-      <ArtistEdge top={100} bottom={0}/>
-      <ArtistEdge top={0} bottom={100}/>
+      <ArtistEdgeTop top={100} bottom={0}/>
+      <ArtistEdgeTop top={0} bottom={100}/>
       <div className="test__border-box">
         <AnimatePresence>
       {currentTest > 20 ? null : questionArr.filter((item, index) => index === currentTest - 1).map((question) => 

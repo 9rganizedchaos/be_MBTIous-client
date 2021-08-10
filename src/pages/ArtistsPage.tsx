@@ -1,7 +1,7 @@
 import { useEffect, Fragment, useRef, useState } from 'react';
 import {withRouter} from "react-router";
 import * as THREE from "three";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { AnimatePresence, motion } from "framer-motion";
 import TutorialCircle from '../components/TutorialCircle';
@@ -21,13 +21,16 @@ interface ArtistEdge {
 }
 
 const Logo = styled.div`
+${( { theme } ) => {
+  return css`
 position: absolute;
-color: #705DF2;
-font-family: 'Roboto', sans-serif;
+color: ${theme.color.main};
 font-weight: 800;
 font-style: italic;
 font-size: 2rem;
 margin: 1rem;
+`
+}}
 `;
 
 const ArtistSideEdge = styled.div<Edge>`
@@ -37,7 +40,10 @@ right: ${(props) => props.right ? 100 : 0};
 top: 0;
 width: 0.25rem;
 height: 100vh;
-background-color: #705DF2;
+${( { theme } ) => {
+  return css`
+background-color: ${theme.color.main};
+`}}
 z-index: 11;
 `;
 
@@ -48,27 +54,31 @@ bottom: ${(props) => props.bottom ? 100 : 0};
 left: 0;
 width: 100vw;
 height: 0.25rem;
-background-color: #705DF2;
+${( { theme } ) => {
+  return css`
+background-color: ${theme.color.main};
+`}}
 z-index: 11;
 `;
 
 const TutorialBox = styled(motion.div)`
+${( { theme } ) => {
+  return css`
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-color: #705DF2;
+color: ${theme.color.main};
 z-index: 10;
-font-family: 'Roboto', sans-serif;
 .title {
   margin: auto;
   font-weight: 800;
   font-style: italic;
   font-size: 5rem;
   strong {
-    -webkit-text-fill-color: #1b1b1b;
+    -webkit-text-fill-color: ${theme.color.sub};
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #705DF2;
+    -webkit-text-stroke-color: ${theme.color.main};
   }
 }
 .description {
@@ -76,6 +86,8 @@ font-family: 'Roboto', sans-serif;
   width: 90%;
   line-height: 160%;
 }
+`
+}}
 `;
 
 const tutorialBoxVariants: any = {

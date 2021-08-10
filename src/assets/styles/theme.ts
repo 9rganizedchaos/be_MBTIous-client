@@ -2,22 +2,20 @@
 
 import { DefaultTheme } from "styled-components";
 
-const theme: DefaultTheme = {
-  basicWidth: "320px",
-
+const violetTheme: DefaultTheme = {
   color: {
-    main: "#1c1f25",
-    sub: "#fff"
+    main: "#705DF2",
+    sub: "#1b1b1b",
+    sub2: "white"
   }
 };
 
-const nextTheme: DefaultTheme = {
-  basicWidth: "320px",
-
+const pinkTheme: DefaultTheme = {
   color: {
-    main: "#1c1f25",
-    sub: "#fff"
+    main: "#ebbcc2",
+    sub: "#ebebeb",
+    sub2: "white"
   }
 };
 
-export { theme, nextTheme };
+export { pinkTheme, violetTheme };

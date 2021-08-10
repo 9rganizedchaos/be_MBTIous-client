@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import {withRouter} from "react-router";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { motion } from 'framer-motion';
 import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,44 +19,60 @@ import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
 
 const ResultPageContainer = styled.div`
+${( { theme } ) => {
+  return css`
 width: 100vw;
 height: 100vh;
-background-color: #1b1b1b;
-border: 0.25rem solid #705DF2;
+background-color: ${theme.color.sub};
+border: 0.25rem solid ${theme.color.main};
+`
+}}
 `;
 
 const ResultSidebar = styled.div`
+${( { theme } ) => {
+  return css`
 width: 20rem;
 height: 100%;
-background-color: #1b1b1b;
-border-right: 0.25rem solid #705DF2;
+background-color: ${theme.color.sub};
+border-right: 0.25rem solid ${theme.color.main};
+`
+}}
 `;
 
 const Logo = styled.div`
+${( { theme } ) => {
+  return css`
 position: absolute;
 left: 0;
-color: #705DF2;
-font-family: 'Roboto', sans-serif;
+color: ${theme.color.main};
 font-weight: 800;
 font-style: italic;
 font-size: 2rem;
 margin: 1rem;
+`
+}}
 `;
 
 const Title = styled.div`
+${( { theme } ) => {
+  return css`
 position: absolute;
 width: 40rem;
 bottom: 19rem;
 left: -1.2rem;
-color: #705DF2;
-font-family: 'Roboto', sans-serif;
+color: ${theme.color.main};
 font-weight: 800;
 font-style: italic;
 transform: rotate(270deg);
 font-size: 4rem;
 `
+}}
+`
 
 const ButtonBox = styled.div`
+${( { theme } ) => {
+  return css`
 position: absolute;
 bottom: 1.25rem;
 display: flex;
@@ -67,33 +83,43 @@ button{
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-color: #705DF2;
+  background-color: ${theme.color.main};
   margin-top: 0.6rem;
   svg {
     font-size: 1.4rem;
   }
 }
+`
+}}
 `;
 
 const ResultDragArea = styled(motion.div)`
-background: #705DF2;
+${( { theme } ) => {
+  return css`
+background: ${theme.color.main};
 opacity: 0.2;
-background: #705DF2;
+background: ${theme.color.main};
 position: absolute;
 width: calc(100% - 20.5rem);
 height: calc(100% - 0.5rem);
 top: 0.25rem;
 left: 20.25rem;
+`
+}}
 `;
 
 const DragComponent = styled(motion.div)`
-background: #1b1b1b;
+${( { theme } ) => {
+  return css`
+background: ${theme.color.sub};
 border-radius: 30px;
 width: 150px;
 height: 150px;
 position: absolute;
 top: calc(50% - 150px / 2);
 left: calc(50% - 150px / 2);
+`
+}}
 `
 
 function ResultPage() {

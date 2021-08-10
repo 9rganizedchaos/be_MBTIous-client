@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   html,
   body {
     overflow: hidden;
+    font-family: 'Roboto', sans-serif;
   }
 
   * {

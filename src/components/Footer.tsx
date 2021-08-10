@@ -1,12 +1,14 @@
 import { Fragment } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { motion } from "framer-motion"
 
 const FooterContainer = styled.div`
+${( { theme } ) => {
+  return css`
 position: fixed;
 width: 100vw;
 height: 10rem;
-background-color: #705DF2;
+background-color: ${theme.color.main};
 z-index: 10;
 bottom: 0;
 padding: 0.7rem;
@@ -18,25 +20,24 @@ display: flex;
     position: relative;
     height: 4.75rem;
     width: 100%;
-    background-color: #1b1b1b;
+    background-color: ${theme.color.sub};
     overflow-x: hidden;
     padding-top: 0.3rem;
     .track {
       position: absolute;
       white-space: nowrap;
       span {
-        font-family: 'Roboto', sans-serif;
         font-weight: 800;
         font-style: italic;
         margin: 20px 0;
         font-size: 3.5rem;
-        color: #705DF2;
+        color: ${theme.color.main};
         text-transform: uppercase;
         strong {
           margin: 0 1.5rem;
-          -webkit-text-fill-color: #1b1b1b;
+          -webkit-text-fill-color: ${theme.color.sub};
           -webkit-text-stroke-width: 1px;
-          -webkit-text-stroke-color: #705DF2;
+          -webkit-text-stroke-color: ${theme.color.main};
         }
       }
     }
@@ -48,8 +49,7 @@ display: flex;
     display: flex;
     justify-content: space-between;
     .footer__toGit {
-      color: white;
-      font-family: 'Roboto', sans-serif;
+      color: ${theme.color.sub2};
       font-weight: 800;
       font-style: italic;
       font-size: 2.5rem;
@@ -59,8 +59,7 @@ display: flex;
       flex-direction: row;
       margin-right: 1rem;
       .shareLetter{
-        color: white;
-        font-family: 'Roboto', sans-serif;
+        color: ${theme.color.sub2};
         font-weight: 800;
         font-style: italic;
         font-size: 2.5rem;
@@ -72,8 +71,7 @@ display: flex;
         flex-direction: row;
         .address{
           width: 20rem;
-          font-family: 'Roboto', sans-serif;
-          background-color: #705DF2;
+          background-color: ${theme.color.main};
           display: flex;
           justify-content: left;
           align-items: center;
@@ -86,15 +84,14 @@ display: flex;
         }
         .copy {
           width: 5rem;
-          background-color: white;
+          background-color: ${theme.color.sub2};
           display: flex;
           justify-content: center;
           align-items: center;
           span {
-            font-family: 'Roboto', sans-serif;
             font-weight: 800;
             font-style: italic;
-            color: #705DF2;
+            color: ${theme.color.main};
             font-size: 1.5rem;
           }
         }
@@ -105,8 +102,10 @@ display: flex;
 .footer__qrcode {
   height: 100%;
   width: 10rem;
-  background-color: #1b1b1b;
+  background-color: ${theme.color.sub};
 }
+`
+}}
 `;
 
 const marqueeVariants = {

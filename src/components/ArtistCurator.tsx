@@ -1,22 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CuratorContainer = styled(motion.div)`
+${( { theme } ) => {
+  return css`
 position: absolute;
 width: 100vw;
 height: 10rem;
-background-color: #705DF2;
+background-color: ${theme.color.main};
 bottom: 0;
 display: flex;
 padding: 0.25rem;
-font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-size: 3rem;
 align-items: center;
 justify-content: space-between;
-color: #1b1b1b;
+color: ${theme.color.sub};
 .curator__sentence-box{
   display: flex;
   .curator__sentence1 {
@@ -25,7 +26,7 @@ color: #1b1b1b;
     margin-left: 2rem;
   }
   .curator__sentence2 {
-    border-bottom: 2px solid #1b1b1b;
+    border-bottom: 2px solid ${theme.color.sub};;
     width: 27rem;
     height: 4rem;
     font-style: italic;
@@ -43,16 +44,18 @@ color: #1b1b1b;
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: #1b1b1b;
+  background-color: ${theme.color.sub};;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 3rem;
   .fa-play {
-    color: #705DF2;
+    color: ${theme.color.main};
     transform: translateX(4px);
   }
 }
+`
+}}
 `
 
 const artistCuratorVariants: any = {

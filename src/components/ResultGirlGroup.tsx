@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
 
 interface GirlGroupContainerProps {
@@ -6,31 +6,35 @@ interface GirlGroupContainerProps {
 }
 
 const ResultGirlGroupContainer = styled(motion.div)<GirlGroupContainerProps>`
-background: #1b1b1b;
-border: 3px solid #705DF2;
+${( { theme, girlGroupIndex } ) => {
+  return css`
+background: ${theme.color.sub};
+border: 3px solid ${theme.color.main};
 border-right: none;
 width: 400px;
 height: 500px;
 position: absolute;
 top: calc(50% - 150px / 2);
 left: calc(50% - 150px / 2);
-font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
 overflow-y: scroll;
+color: ${theme.color.main};
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #1b1b1b;
-  border: 2px solid #705DF2;
+  background-color: ${theme.color.sub};
+  border: 2px solid ${theme.color.main};
   border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #705DF2;
+  background-color: ${theme.color.main};
   width: 100px;
 }
-z-index: ${props => props.girlGroupIndex}
+z-index: ${girlGroupIndex}
+`
+}}
 `;
 
 const ResultGirlGroup = function(props: any){

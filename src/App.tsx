@@ -7,14 +7,21 @@ import ResultPage from "./pages/ResultPage";
 import { createContext } from 'react';
 import { useReducer } from 'react';
 import { useCallback } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { pinkTheme, violetTheme } from "./assets/styles/theme";
 
 function App() {
+  const [theme, setTheme] = useState(violetTheme);
+  const handleThemeChange = () => {
+    setTheme(theme === violetTheme ? pinkTheme : violetTheme);
+  }
 
   return (
+    <ThemeProvider theme={theme}>
       <div className="App">
       <Switch>
         <Route exact path="/">
-          <LandingPage />
+          <LandingPage handleThemeChange={handleThemeChange}/>
         </Route>
         <Route exact path="/artists">
           <ArtistsPage />
@@ -27,6 +34,7 @@ function App() {
         </Route>
       </Switch>
     </div>
+    </ThemeProvider>
   );
 }
 

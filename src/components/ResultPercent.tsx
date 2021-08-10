@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import { useEffect } from 'react';
@@ -12,14 +12,15 @@ interface PercentContainerProps {
 }
 
 const ResultPercentContainer = styled(motion.div)<PercentContainerProps>`
-background: #1b1b1b;
-border: 3px solid #705DF2;
+${( { theme, percentIndex } ) => {
+  return css`
+background: ${theme.color.sub};
+border: 3px solid ${theme.color.main};
 width: 400px;
 height: 500px;
 position: absolute;
 top: 400px;
 left: 440px;
-font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
 display: flex;
@@ -27,12 +28,14 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 div {
-  background-color: #705DF2;
+  background-color: ${theme.color.main};
   margin-bottom: 1rem;
-  color: #1b1b1b;
+  color: ${theme.color.sub};
   padding: 0.25rem;
 }
-z-index: ${props => props.percentIndex}
+z-index: ${percentIndex}
+`
+}}
 `;
 
 const ResultPercent = function(props: any){
