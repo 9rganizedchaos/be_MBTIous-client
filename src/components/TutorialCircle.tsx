@@ -1,6 +1,5 @@
-import { faMouse, faMousePointer } from '@fortawesome/free-solid-svg-icons';
+import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Fragment } from "react";
 import styled, { css } from "styled-components";
 
 const CircleContainer = styled.div`

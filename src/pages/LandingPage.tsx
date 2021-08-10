@@ -29,6 +29,12 @@ ${( { theme } ) => {
       -webkit-text-fill-color: ${theme.color.main};
       color: ${theme.color.main};
     }
+    @media (${theme.size.tablet}) {
+      font-size: 6rem;
+    }
+    @media (${theme.size.mobile}) {
+      font-size: 2rem;
+    }
   `
 }}
 `;

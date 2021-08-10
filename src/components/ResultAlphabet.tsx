@@ -98,7 +98,7 @@ padding: 0 1rem;
 
 const ResultAlphabet = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { result } = testState;
   let firstLetter = result.mbti[0];
   let secondLetter = result.mbti[1];
   let thirdLetter = result.mbti[2];

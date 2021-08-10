@@ -7,6 +7,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import { updateResult } from '../action/testAction';
+import { Link } from 'react-router-dom';
+import TestAlert from '../components/TestAlert';
+import PreviousAlert from '../components/PreviousAlert';
+import SettingBar from '../components/SettingBar';
 
 interface Edge {
   left: number;
@@ -42,7 +46,7 @@ top: 0;
 width: 0.25rem;
 height: 100vh;
 background-color: ${theme.color.main};
-z-index: 11;
+z-index: 5;
 `
 }}
 `;
@@ -57,7 +61,7 @@ left: 0;
 width: 100vw;
 height: 0.25rem;
 background-color: ${theme.color.main};
-z-index: 11;
+z-index: 5;
 `
 }}
 `;
@@ -86,26 +90,15 @@ border: 0.25rem solid ${theme.color.main};
 }}
 `;
 
-const containerVariants: any = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: { delay: 0.25, duration: 1 },
-  },
-  exit: {
-    x: "-100vw",
-    transition: { ease: "easeInOut" },
-  },
-}
-
 function TestPage(props: any) {
   const dispatch = useDispatch();
-  const testState = useSelector((state: RootState) => state.testReducer);
-
-  console.log(testState);
   
+  const [isAlertMessageOpen, setAlertOpen] = useState(false);
+  const [isPreAlertMessageOpen, setPreAlertOpen] = useState(false);
+  const [alertPageX, setPageX] = useState(0);
+  const [alertPageY, setPageY] = useState(0);
+
+
   const [currentTest, setCurrentTest] = useState(1);
   const [answers, setAnswers] = useState([
     {
@@ -190,7 +183,15 @@ function TestPage(props: any) {
     },
   ])
 
-  const handlePreviousButtonClick = () => {
+  const handlePreviousButtonClick = (e: any) => {
+    if(currentTest === 1){
+      setPreAlertOpen(true);
+      setTimeout(() => {
+        setPreAlertOpen(false);
+      }, 1500);
+      setPageX(e.pageX);
+      setPageY(e.pageY);
+    }
     if(currentTest > 1) {
       setCurrentTest (currentTest - 1);
     }
@@ -219,9 +220,14 @@ function TestPage(props: any) {
     }
   }
 
-  const handleSubmitButtonClick = () => {
+  const handleSubmitButtonClick = (e: any) => {
     if(!answers[currentTest - 1].answered) {
-      alert("두 옵션 중 조금 더 자신에게 가깝다고 생각하는 쪽을 선택해주세요!")
+      setAlertOpen(true);
+      setTimeout(() => {
+        setAlertOpen(false);
+      }, 4000);
+      setPageX(e.pageX);
+      setPageY(e.pageY);
     } else {
       if(currentTest < 20){
         setCurrentTest(currentTest + 1);
@@ -280,7 +286,14 @@ function TestPage(props: any) {
 
   return (
     <TestpageContainer>
-      <Logo>Be_MBTIous</Logo>
+      <SettingBar handleThemeChange={props.handleThemeChange}/>
+      <AnimatePresence>
+      {isPreAlertMessageOpen ? <PreviousAlert alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
+      {isAlertMessageOpen ? <TestAlert alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
+      </AnimatePresence>
+      <Link to="/">
+        <Logo>Be_MBTIous</Logo>
+      </Link>
       <ArtistSideEdge left={100} right={0}/>
       <ArtistSideEdge left={0} right={100}/>
       <ArtistEdgeTop top={100} bottom={0}/>

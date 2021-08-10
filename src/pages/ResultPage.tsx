@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import {withRouter} from "react-router";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { motion } from 'framer-motion';
 import html2canvas from "html2canvas";
@@ -17,6 +18,7 @@ import ResultMatching from '../components/ResultMatching';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
+import SettingBar from '../components/SettingBar';
 
 const ResultPageContainer = styled.div`
 ${( { theme } ) => {
@@ -83,6 +85,7 @@ button{
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
+  color: ${theme.color.sub};
   background-color: ${theme.color.main};
   margin-top: 0.6rem;
   svg {
@@ -108,24 +111,9 @@ left: 20.25rem;
 }}
 `;
 
-const DragComponent = styled(motion.div)`
-${( { theme } ) => {
-  return css`
-background: ${theme.color.sub};
-border-radius: 30px;
-width: 150px;
-height: 150px;
-position: absolute;
-top: calc(50% - 150px / 2);
-left: calc(50% - 150px / 2);
-`
-}}
-`
-
-function ResultPage() {
+function ResultPage(props: any) {
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
-  let myMBTI = result.mbti;
+  const { favoriteArtist } = testState;
   let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist)[0];
 
   const constraintsRef = useRef(null);
@@ -170,8 +158,11 @@ function ResultPage() {
 
   return (
     <ResultPageContainer>
+      <SettingBar handleThemeChange={props.handleThemeChange}/>
       <ResultSidebar>
+        <Link to="/">
         <Logo>Be_MBTIous</Logo>
+        </Link>
         <Title>Your Test Result!</Title>
         <ButtonBox>
           <button>

@@ -7,6 +7,10 @@ const violetTheme: DefaultTheme = {
     main: "#705DF2",
     sub: "#1b1b1b",
     sub2: "white"
+  },
+  size: {
+    mobile: "max-width: 768px",
+    tablet: "max-width: 1024px"
   }
 };
 
@@ -15,6 +19,10 @@ const pinkTheme: DefaultTheme = {
     main: "#ebbcc2",
     sub: "#ebebeb",
     sub2: "white"
+  },
+  size: {
+    mobile: "max-width: 768px",
+    tablet: "max-width: 1024px"
   }
 };
 

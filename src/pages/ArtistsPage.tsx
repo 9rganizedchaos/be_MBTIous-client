@@ -6,9 +6,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { AnimatePresence, motion } from "framer-motion";
 import TutorialCircle from '../components/TutorialCircle';
 import ArtistCurator from '../components/ArtistCurator';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from "../reducers";
+import { useDispatch } from 'react-redux';
 import { updateArtist } from '../action/testAction';
+import { Link } from 'react-router-dom';
 
 interface Edge {
   left: number;
@@ -98,8 +98,6 @@ const tutorialBoxVariants: any = {
 
 function ArtistsPage(props: any) {
   const dispatch = useDispatch();
-  const testState = useSelector((state: RootState) => state.testReducer);
-
 
   const [isTutorialOn, setTutorial] = useState(true);
   const [isTurotrialCircleOn, setCircle] = useState(true);
@@ -167,7 +165,7 @@ function ArtistsPage(props: any) {
      */
     const raycaster = new THREE.Raycaster()
     let currentIntersect: any = null
-    const rayOrigin = new THREE.Vector3(- 3, 0, 0)
+    // const rayOrigin = new THREE.Vector3(- 3, 0, 0)
     const rayDirection = new THREE.Vector3(10, 0, 0)
     rayDirection.normalize()
 
@@ -350,7 +348,9 @@ function ArtistsPage(props: any) {
   }, [])
   return (
     <Fragment>
-    <Logo>Be_MBTIous</Logo>
+      <Link to="/">
+        <Logo>Be_MBTIous</Logo>
+      </Link>
     <div ref={artistsPageContainer}></div>
     <AnimatePresence>
     {isTutorialOn ? <TutorialBox variants={tutorialBoxVariants} exit="exit">

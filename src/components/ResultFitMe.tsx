@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import groupsArr from "../assets/groups"
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import { useEffect, useState } from 'react';
 
 interface fitMeContainerProps {
   fitMeIndex: any
@@ -95,7 +94,7 @@ ${( { theme, pic } ) => {
 
 const ResultFitMe = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { result } = testState;
   let fitMeGroups: any = [];
   let notFitMeGroups: any = [];
 

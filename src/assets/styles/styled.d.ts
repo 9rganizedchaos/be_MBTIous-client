@@ -9,5 +9,9 @@ declare module "styled-components" {
       sub: string;
       sub2: string;
     };
+    size: {
+      mobile: string;
+      tablet: string;
+    }
   }
 }

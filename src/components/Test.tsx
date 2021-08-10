@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion"; 
 import OptionCard from './OptionCard';
+import TestAlert from './TestAlert';
 
 
 interface OptionContainer {
@@ -141,7 +142,7 @@ const SideCounterContainer = styled.div`
 ${( { theme } ) => {
   return css`
 width: 34px;
-height: 2rem;
+height: 3rem;
 background-color: ${theme.color.sub};
 display: flex;
 justify-content: center;
@@ -158,13 +159,13 @@ const SideCounterContainerChecked = styled.div`
 ${( { theme } ) => {
   return css`
 width: 34px;
-height: 2rem;
+height: 3rem;
 background-color: ${theme.color.main};
 display: flex;
 justify-content: center;
 align-items: center;
 div {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: ${theme.color.sub};
 }
 `

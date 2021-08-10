@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBomb, faCrown, faFlushed, faGhost, faMugHot, faViruses } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { faBomb, faCrown, faGhost, faMugHot, faViruses } from '@fortawesome/free-solid-svg-icons';
 import { RootState } from '../reducers';
 import { useSelector } from 'react-redux';
 import groupsArr from '../assets/groups';

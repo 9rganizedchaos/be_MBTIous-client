@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import { useEffect } from 'react';
 import { Pie } from "react-chartjs-2";
@@ -40,12 +39,10 @@ z-index: ${percentIndex}
 
 const ResultPercent = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { result } = testState;
 
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
-
-  const resultPieChart = useRef(null);
 
   const data = {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

@@ -1,8 +1,7 @@
 import { Fragment } from "react";
 import styled, { css } from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon } from '@fortawesome/free-regular-svg-icons';
-import { faLanguage } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
 
 const NavContainer = styled.div`
 ${( { theme } ) => {
@@ -47,13 +46,16 @@ ${( { theme } ) => {
 `;
 
 function Nav(props: any) {
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { color } = viewState;
+
   return (
     <Fragment>
       <NavContainer>
         <div className="nav__slogan">FIND YOUR KPOP GIRL GROUP EGO AND ...!</div>
         <div className="nav__setting">
           <div onClick={props.handleThemeChange} className="settingBox">
-            <span>DarkMode</span>
+            <span>{color === "violet" ? "PINK MODE" : "VIOLET MODE"}</span>
           </div>
           <div className="settingBox">
             <span>Language</span>

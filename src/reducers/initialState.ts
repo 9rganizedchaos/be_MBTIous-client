@@ -1,6 +1,7 @@
 export const initialState = {
-  darkMode: true,
-  mobileView: true,
+  color: "violet",
+  view: "PC",
+  settingBar: false,
   favoriteArtist: "",
   result: {
     answers: [

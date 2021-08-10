@@ -8,14 +8,6 @@ interface MemberContainerProps {
   memberIndex: any;
 }
 
-let girlGroupMemberArr = [
-  {name: "Yeri", mbti: "INFP"},
-  {name: "Wendy", mbti: "ISFP"},
-  {name: "Seulgi", mbti: "ISFP"},
-  {name: "Irene", mbti: "ENTJ"},
-  {name: "Joy", mbti: "INFP"},
-];
-
 const GroupMemberWholeContainer = styled(motion.div)<MemberContainerProps>`
 ${( { theme, memberIndex } ) => {
   return css`
@@ -135,7 +127,7 @@ const MemberCard = function(props: any): any {
 
 const ResultMemberMbti = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { result } = testState;
 
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI);
