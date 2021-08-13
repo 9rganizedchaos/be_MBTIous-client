@@ -8,13 +8,14 @@ import { ThemeProvider } from 'styled-components';
 import { pinkTheme, violetTheme } from "./assets/styles/theme";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './reducers';
-import { updateColor } from './action/viewAction';
+import { updateColor, updateSize } from './action/actions';
+import { useEffect } from 'react';
 
 function App() {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color, view } = viewState;
-  console.log(color, view);
   const dispatch = useDispatch();
+  console.log(view)
 
   const [theme, setTheme] = useState(violetTheme);
   const handleThemeChange = () => {
@@ -25,6 +26,21 @@ function App() {
       dispatch(updateColor("violet"));
     }
   }
+
+  const handleSizeChange = () => {
+    if(window.innerWidth > 1024){
+      dispatch(updateSize("PC"));
+    } else if (window.innerWidth > 768){
+      dispatch(updateSize("tablet"));
+    } else {
+      dispatch(updateSize("mobile"));
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("load", handleSizeChange);
+    window.addEventListener("resize", handleSizeChange);
+  })
 
   return (
     <ThemeProvider theme={theme}>

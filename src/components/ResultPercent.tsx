@@ -5,6 +5,8 @@ import { Pie } from "react-chartjs-2";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
+import ResultCloseBtn from "./ResultCloseBtn";
+import { useState } from 'react';
 
 interface PercentContainerProps {
   percentIndex: any;
@@ -40,6 +42,7 @@ z-index: ${percentIndex}
 const ResultPercent = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
+  const [mouseIn, setMouseIn] = useState(false);
 
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
@@ -76,7 +79,8 @@ const ResultPercent = function(props: any){
   }, [])
 
   return (
-    <ResultPercentContainer className="percent" onClick={props.handleResultComponentClick} percentIndex={props.percentIndex} drag dragConstraints={props.constraintsRef}>
+    <ResultPercentContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="percent" onClick={props.handleResultComponentClick} percentIndex={props.percentIndex} drag dragConstraints={props.constraintsRef}>
+      {mouseIn ? <ResultCloseBtn closeId={"percent"} handleCloseBtn={props.handleCloseBtn}/> : null}
       <div className="percent">{myKpopGroup.name}를 최애그룹으로 꼽은 유형</div>
       <Pie className="percent" data={data}></Pie>
     </ResultPercentContainer>

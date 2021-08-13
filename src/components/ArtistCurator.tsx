@@ -2,6 +2,8 @@ import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
 
 const CuratorContainer = styled(motion.div)`
 ${( { theme } ) => {
@@ -54,6 +56,25 @@ color: ${theme.color.sub};
     transform: translateX(4px);
   }
 }
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  .curator__sentence-box{
+    flex-direction: column;
+    width: calc(100% - 7rem);
+    .curator__sentence1 {
+      margin-left: 0.75rem;
+      font-size: 2.1rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .curator__icon-box{
+    width: 5rem;
+    height: 5rem;
+    margin-right: 0.75rem;
+  }
+}
 `
 }}
 `
@@ -69,13 +90,15 @@ const artistCuratorVariants: any = {
 } 
 
 function ArtistCurator(props: any) {
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { color, view } = viewState;
 
   return (
     <CuratorContainer variants={artistCuratorVariants} initial="hidden" animate="visible">
       <div className="curator__sentence-box">
-      <div className="curator__sentence1">Your Favorite Kpop Girl Group is</div>
-      <div className="curator__sentence2">{props.favoriteArtist}</div>
-      <div className="curator__sentence3">!</div>
+      <div className="curator__sentence1">{`Your Favorite Kpop Girl Group is ${props.favoriteArtist}`}</div>
+      {view === "mobile" ? null : <div className="curator__sentence2">{props.favoriteArtist}</div>}
+      {view === "mobile" ? null : <div className="curator__sentence3">!</div>}
       </div>
       <div className="curator__icon-box" onClick={props.handleNextClick}>
       <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>

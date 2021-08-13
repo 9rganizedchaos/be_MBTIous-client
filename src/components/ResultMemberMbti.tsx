@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
+import ResultCloseBtn from './ResultCloseBtn';
+import { useState } from 'react';
 
 interface MemberContainerProps {
   memberIndex: any;
@@ -128,13 +130,15 @@ const MemberCard = function(props: any): any {
 const ResultMemberMbti = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
+  const [mouseIn, setMouseIn] = useState(false);
 
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI);
   let myMembers = myKpopGroup[0].member
 
   return (
-    <GroupMemberWholeContainer className="member" onClick={props.handleResultComponentClick} memberIndex={props.memberIndex} drag dragConstraints={props.constraintsRef}>
+    <GroupMemberWholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="member" onClick={props.handleResultComponentClick} memberIndex={props.memberIndex} drag dragConstraints={props.constraintsRef}>
+    {mouseIn ? <ResultCloseBtn closeId={"member"} handleCloseBtn={props.handleCloseBtn}/> : null}
     <div className="memberTitle member">
       <span className="member">{myKpopGroup[0].name}<br/> 멤버들의 MBTI</span>
     </div>

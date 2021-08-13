@@ -5,7 +5,8 @@ import { faBomb, faCrown, faGhost, faMugHot, faViruses } from '@fortawesome/free
 import { RootState } from '../reducers';
 import { useSelector } from 'react-redux';
 import groupsArr from '../assets/groups';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import ResultCloseBtn from './ResultCloseBtn';
 
 interface MatchingContainerProps {
   matchingIndex: any;
@@ -14,17 +15,16 @@ interface MatchingContainerProps {
 const ResultMatchingContainer = styled(motion.div)<MatchingContainerProps>`
 ${( { theme, matchingIndex } ) => {
   return css`
-z-index: ${matchingIndex};
 background: ${theme.color.sub};
 border: 3px solid ${theme.color.main};
 width: 300px;
 height: 300px;
 position: absolute;
-top: calc(50% - 150px / 2);
-left: calc(50% - 150px / 2);
+top: 400px;
+left: 440px;
 font-weight: 800;
 font-style: italic;
-svg {
+.matching-svg {
   position: absolute;
   font-size: 12rem;
   color: ${theme.color.main};
@@ -32,7 +32,7 @@ svg {
   left: 50%;
   transform: translate(-50%, -55%);
 }
-div {
+.matching-div {
   width: 90%;
   position: absolute;
   top: 87%;
@@ -52,6 +52,7 @@ span {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: ${theme.color.main};
 }
+z-index: ${matchingIndex};
 `
 }}
 `;
@@ -81,19 +82,19 @@ const compabilityArr = [
 
 const ResultMatching = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { result, favoriteArtist } = testState;
+  const [mouseIn, setMouseIn] = useState(false);
 
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist);
   let index = myKpopGroup[0].fitMe[myMBTI] - 1
 
-  useEffect(() => {}, [])
-
   return (
-    <ResultMatchingContainer className="matching" onClick={props.handleResultComponentClick} matchingIndex={props.matchingIndex} drag dragConstraints={props.constraintsRef}>
-      <FontAwesomeIcon className="matching" icon={compabilityArr[index].icon}></FontAwesomeIcon>
+    <ResultMatchingContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="matching" onClick={props.handleResultComponentClick} matchingIndex={props.matchingIndex} drag dragConstraints={props.constraintsRef}>
+      {mouseIn ? <ResultCloseBtn closeId={"matching"} handleCloseBtn={props.handleCloseBtn}/> : null}
+      <FontAwesomeIcon className="matching-svg matching" icon={compabilityArr[index].icon}></FontAwesomeIcon>
       <span className="matching">{compabilityArr[index].title}</span>
-      <div className="matching">최애 그룹({favoriteArtist})과의 궁합은 !</div>
+      <div className="matching-div matching">최애 그룹({favoriteArtist})과의 궁합은 !</div>
     </ResultMatchingContainer>    
   )
 }

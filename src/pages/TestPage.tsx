@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import { updateResult } from '../action/testAction';
+import { updateResult } from "../action/actions";
 import { Link } from 'react-router-dom';
 import TestAlert from '../components/TestAlert';
 import PreviousAlert from '../components/PreviousAlert';
@@ -91,6 +91,9 @@ border: 0.25rem solid ${theme.color.main};
 `;
 
 function TestPage(props: any) {
+  const testState = useSelector((state: RootState) => state.testReducer);
+  const { favoriteArtist } = testState;
+
   const dispatch = useDispatch();
   
   const [isAlertMessageOpen, setAlertOpen] = useState(false);
@@ -277,7 +280,7 @@ function TestPage(props: any) {
         resultObj.answers = answers;
         resultObj.mbti = result;
 
-        dispatch(updateResult(resultObj));
+        dispatch(updateResult(resultObj, favoriteArtist));
       
         props.history.push("/result");
       }

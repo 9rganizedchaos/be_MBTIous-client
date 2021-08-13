@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
 import SettingBar from '../components/SettingBar';
+import ResultAlert from '../components/ResultAlert';
 
 const ResultPageContainer = styled.div`
 ${( { theme } ) => {
@@ -42,6 +43,37 @@ border-right: 0.25rem solid ${theme.color.main};
 }}
 `;
 
+const ComponentBox = styled.div`
+${( { theme } ) => {
+  return css`
+  position: absolute;
+  top: 4.5rem;
+  left: 1.5rem;
+  width: 17rem;
+  padding: 0.25rem;
+  display: flex;
+  flex-flow: wrap;
+  `
+}}
+`
+
+const ComponentTag = styled.div`
+${( { theme } ) => {
+  return css`
+  color: ${theme.color.main};
+  border: 2px solid ${theme.color.main};
+  height: 2rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem; 
+  margin: 0.25rem;
+  cursor: pointer;
+  `
+}}
+`;
+
 const Logo = styled.div`
 ${( { theme } ) => {
   return css`
@@ -52,6 +84,7 @@ font-weight: 800;
 font-style: italic;
 font-size: 2rem;
 margin: 1rem;
+cursor: pointer;
 `
 }}
 `;
@@ -111,14 +144,19 @@ left: 20.25rem;
 }}
 `;
 
-function ResultPage(props: any) {
+function ResultPage({handleThemeChange}: any) {
   const testState = useSelector((state: RootState) => state.testReducer);
   const { favoriteArtist } = testState;
   let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist)[0];
 
   const constraintsRef = useRef(null);
 
-  const [componentIndex, setComponentIndex] = useState(["alphabet", "fitMe", "girlGroup", "matching", "member", "percent"]);
+  const [componentIndex, setComponentIndex] = useState(["alphabet", "girlGroup", "matching", "fitMe", "member", "percent"]);
+  const [albumCoverNum, setAlbumCoverNum] = useState(3);
+  const [isAlertMessageOpen, setAlertOpen] = useState(false);
+  const [alertPageX, setPageX] = useState(0);
+  const [alertPageY, setPageY] = useState(0);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleResultComponentClick = (e: any) => {
     let clickedClassName;
@@ -156,13 +194,76 @@ function ResultPage(props: any) {
     }
   }
 
+  const handleCloseBtn = (closeId: any, e: any) => {
+    e.stopPropagation();
+    let index = componentIndex.indexOf(closeId);
+    let tempArr = componentIndex.slice();
+    tempArr.splice(index, 1);
+    console.log(tempArr);
+    setComponentIndex(tempArr);
+  }
+
+  const handleTagClick = (openId: any) => {
+    if(componentIndex.includes(openId)){
+      return;
+    }
+    let tempArr = componentIndex.slice();
+    tempArr.push(openId);
+    setComponentIndex(tempArr);
+  }
+
+  const handlePlusTag = (e: any) => {
+    if(myKpopGroup.albumCover.length === albumCoverNum){
+      setPageX(e.pageX);
+      setPageY(e.pageY);
+      setAlertMessage("더 이상 추가할 앨범커버가 없습니다.");
+      setAlertOpen(true);
+      setTimeout(() => {
+        setAlertOpen(false);
+      }, 2500);
+    } else {
+      setAlbumCoverNum(albumCoverNum + 1);
+    }
+  }
+
+  const handleMinusTag = (e: any) => {
+    if(albumCoverNum  === 0){
+      setPageX(e.pageX);
+      setPageY(e.pageY);
+      setAlertMessage("더 이상 삭제할 앨범커버가 없습니다.");
+      setAlertOpen(true);
+      setTimeout(() => {
+        setAlertOpen(false);
+      }, 2500);
+    } else {
+      setAlbumCoverNum(albumCoverNum - 1);
+    }
+  }
+
   return (
     <ResultPageContainer>
-      <SettingBar handleThemeChange={props.handleThemeChange}/>
+      {isAlertMessageOpen ? <ResultAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage}/> : null}
+      <SettingBar handleThemeChange={handleThemeChange}/>
       <ResultSidebar>
         <Link to="/">
         <Logo>Be_MBTIous</Logo>
         </Link>
+        <ComponentBox>
+          <ComponentTag>
+            <span onClick={() => handleTagClick("member")}>멤버들의 MBTI</span>              
+          </ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("girlGroup")}>나의 걸그룹 자아</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("alphabet")}>나의 MBTI</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("matching")}>최애그룹과의 궁합</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("fitMe")}>나와 맞는 그룹 & 안 맞는 그룹</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("percent")}>어떤 유형이 내 유형을 좋아할까?</ComponentTag>
+          <ComponentTag>
+            <span onClick={handlePlusTag}>앨범커버 추가</span>
+          </ComponentTag>
+          <ComponentTag>
+            <span onClick={handleMinusTag}>앨범커버 삭제</span>
+          </ComponentTag>
+        </ComponentBox>
         <Title>Your Test Result!</Title>
         <ButtonBox>
           <button>
@@ -184,15 +285,18 @@ function ResultPage(props: any) {
       </ResultSidebar>
       <ResultDragArea ref={constraintsRef}>
       </ResultDragArea>
-      {myKpopGroup.albumCover.map((item: any) => {
+      {myKpopGroup.albumCover.map((item: any, index: number) => {
+        if(index > albumCoverNum - 1){
+          return;
+        }
         return <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={item}></ResultAlbumCover>
       })}
-      <ResultFitMe handleResultComponentClick={handleResultComponentClick} fitMeIndex={componentIndex.indexOf("fitMe")} constraintsRef={constraintsRef}/>
-      <ResultMatching handleResultComponentClick={handleResultComponentClick} matchingIndex={componentIndex.indexOf("matching")} constraintsRef={constraintsRef}></ResultMatching>
-      <ResultGirlGroup handleResultComponentClick={handleResultComponentClick} girlGroupIndex={componentIndex.indexOf("girlGroup")} constraintsRef={constraintsRef}/>
-      <ResultAlphabet handleResultComponentClick={handleResultComponentClick} alphabetIndex={componentIndex.indexOf("alphabet")} constraintsRef={constraintsRef}></ResultAlphabet>
-      <ResultMemberMbti handleResultComponentClick={handleResultComponentClick} memberIndex={componentIndex.indexOf("member")} constraintsRef={constraintsRef}></ResultMemberMbti>
-      <ResultPercent handleResultComponentClick={handleResultComponentClick} percentIndex={componentIndex.indexOf("percent")} constraintsRef={constraintsRef}></ResultPercent>
+      {componentIndex.includes("fitMe") ? <ResultFitMe handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} fitMeIndex={componentIndex.indexOf("fitMe")} constraintsRef={constraintsRef}/> : null}
+      {componentIndex.includes("matching") ? <ResultMatching handleCloseBtn={handleCloseBtn} favoriteArtist={favoriteArtist} handleResultComponentClick={handleResultComponentClick} matchingIndex={componentIndex.indexOf("matching")} constraintsRef={constraintsRef}></ResultMatching> : null}
+      {componentIndex.includes("girlGroup") ? <ResultGirlGroup handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} girlGroupIndex={componentIndex.indexOf("girlGroup")} constraintsRef={constraintsRef}/> : null}
+      {componentIndex.includes("alphabet") ? <ResultAlphabet handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} alphabetIndex={componentIndex.indexOf("alphabet")} constraintsRef={constraintsRef}></ResultAlphabet> : null }
+      {componentIndex.includes("member") ? <ResultMemberMbti handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} memberIndex={componentIndex.indexOf("member")} constraintsRef={constraintsRef}></ResultMemberMbti> : null }
+      {componentIndex.includes("percent") ? <ResultPercent handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} percentIndex={componentIndex.indexOf("percent")} constraintsRef={constraintsRef}></ResultPercent> : null }
     </ResultPageContainer>
   )
 }

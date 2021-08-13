@@ -27,6 +27,15 @@ justify-content: center;
   font-weight: 800;
   font-style: italic;
 }
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  width: 18rem;
+  height: 18rem;
+}
+.fa-mouse-pointer {
+  font-size: 3.5rem;
+}
 `
 }}
 `

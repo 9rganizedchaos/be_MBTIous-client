@@ -1,5 +1,5 @@
 import { initialState } from "./initialState";
-import { UPDATE_COLOR, UPDATE_SETTING_BAR, UPDATE_SIZE } from "../action/viewAction"
+import { UPDATE_COLOR, UPDATE_SETTING_BAR, UPDATE_SIZE } from "../action/actions"
 
 const testReducer = (state = initialState, action: any) => {
   switch (action.type) {

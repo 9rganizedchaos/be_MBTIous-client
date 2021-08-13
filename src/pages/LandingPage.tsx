@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import styled, { css } from "styled-components";
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
+import { motion } from "framer-motion";
 
 interface Edge {
   left: number;
@@ -14,6 +15,8 @@ interface Edge {
 const Title = styled.h1`
 ${( { theme } ) => {
   return css`
+    width: 100%;
+    text-align: center;
     font-weight: 800;
     font-style: italic;
     font-size: 8rem;
@@ -33,7 +36,8 @@ ${( { theme } ) => {
       font-size: 6rem;
     }
     @media (${theme.size.mobile}) {
-      font-size: 2rem;
+      font-size: 3.5rem;
+      top: 32%;
     }
   `
 }}
@@ -53,7 +57,9 @@ ${( { theme } ) => {
 z-index: 11;
 `;
 
-const StartButton = styled.button`
+const StartButton = styled(motion.button)`
+${( { theme } ) => {
+  return css`
 position: absolute;
 z-index: 10;
 top: 50%;
@@ -62,14 +68,30 @@ transform: translateX(-50%);
 cursor: pointer;
 width: 40rem;
 height: 3.25rem;
-${( { theme } ) => {
-  return css`
-  border: 2px solid ${theme.color.main};
-  background-color: ${theme.color.sub};
-  color: ${theme.color.main};
-  `}}
+border: 2px solid ${theme.color.main};
+background-color: ${theme.color.sub};
+color: ${theme.color.main};
 font-weight: 800;
 font-size: 1.75rem;
+transition: all .35s;
+&:hover {
+  background-color: ${theme.color.main};
+  color: ${theme.color.sub};
+}
+&:before {
+  opacity: .5;
+}
+&:hover:before {
+  top: 0;
+}
+@media (${theme.size.tablet}) {
+width: 80%;
+}
+@media (${theme.size.mobile}) {
+top: 43%;
+font-size: 1.5rem;
+}
+`}}
 `;
 
 function LandingPage(props: any) {

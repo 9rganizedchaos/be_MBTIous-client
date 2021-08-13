@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion"
+import { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
 
 const FooterContainer = styled.div`
 ${( { theme } ) => {
@@ -49,6 +52,7 @@ display: flex;
     display: flex;
     justify-content: space-between;
     .footer__toGit {
+      cursor: pointer;
       color: ${theme.color.sub2};
       font-weight: 800;
       font-style: italic;
@@ -83,6 +87,7 @@ display: flex;
           }
         }
         .copy {
+          cursor: pointer;
           width: 5rem;
           background-color: ${theme.color.sub2};
           display: flex;
@@ -104,6 +109,44 @@ display: flex;
   width: 10rem;
   background-color: ${theme.color.sub};
 }
+@media (${theme.size.tablet}) {
+  }
+  @media (${theme.size.mobile}) {
+    .footer__main {
+      .footer__top {
+        height: 3.5rem;
+        .track {
+          span {
+            font-size: 2.5rem;
+          }
+        }
+      }
+      .footer__bottom {
+        margin-top: 1rem;
+        .footer__toGit {
+          display: none;
+        }
+        .footer__share {
+          flex-direction: column;
+          height: 11rem;
+          width: 100vw;
+          .shareLetter{
+            text-align: right;
+            width: 92%;
+            margin-top: 1rem;
+            font-size: 2rem;
+          }
+          .shareSearchBox{
+            height: 3.5rem;
+            width: 95%;
+          }
+        }
+      }
+    }
+    .footer__qrcode {
+      display: none;
+    }
+  }
 `
 }}
 `;
@@ -123,6 +166,13 @@ const marqueeVariants = {
 };
 
 function Footer() {
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { color, view } = viewState;
+  const textInput = useRef(null);
+  const copyToClipBoard = () => {
+    document.execCommand("copy");
+  }
+
   return (
     <Fragment>
       <FooterContainer>
@@ -133,11 +183,14 @@ function Footer() {
             </motion.div>
           </div>
           <div className="footer__bottom">
-            <div className="footer__toGit"> ▶ ▶ to GIT ◀ ◀ ◀ ◀ ◀ ◀</div>
+            <div className="footer__toGit">{view === "PC" ? "▶ ▶ to GIT ◀ ◀ ◀ ◀ ◀ ◀" : "▶ to GIT"}</div>
             <div className="footer__share">
               <div className="shareSearchBox">
                 <div className="address"><span>https://be.mbtious.test</span></div>
-                <div className="copy"><span>Copy</span></div>
+                <div className="copy" onClick={() => {
+                    console.log("clicked")
+                    copyToClipBoard()
+                  }}><span>Copy</span></div>
               </div>
               <div className="shareLetter">& SHARE!</div>
             </div>

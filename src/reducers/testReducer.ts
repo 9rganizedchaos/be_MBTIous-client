@@ -1,5 +1,5 @@
 import { initialState } from "./initialState";
-import { UPDATE_ARTIST, UPDATE_RESULT } from "../action/testAction"
+import { UPDATE_ARTIST, UPDATE_RESULT } from "../action/actions"
 
 const testReducer = (state: any = initialState, action: any) => {
   switch (action.type) {
@@ -11,6 +11,7 @@ const testReducer = (state: any = initialState, action: any) => {
     case UPDATE_RESULT:
       return Object.assign({}, state, {
         result: action.payload.testResult,
+        favoriteArtist: action.payload.groupName,
       });
   
     default:

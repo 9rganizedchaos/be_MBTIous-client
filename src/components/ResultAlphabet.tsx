@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
+import ResultCloseBtn from './ResultCloseBtn';
+import { useState } from 'react';
 
 interface AlphabetContainerProps {
   animationNum: number;
@@ -103,9 +105,11 @@ const ResultAlphabet = function(props: any){
   let secondLetter = result.mbti[1];
   let thirdLetter = result.mbti[2];
   let fourthLetter = result.mbti[3];
+  const [mouseIn, setMouseIn] = useState(false);
 
   return (
-    <WholeContainer className="alphabet" onClick={props.handleResultComponentClick} alphabetIndex={props.alphabetIndex} drag dragConstraints={props.constraintsRef}>
+    <WholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="alphabet" onClick={props.handleResultComponentClick} alphabetIndex={props.alphabetIndex} drag dragConstraints={props.constraintsRef}>
+      {mouseIn ? <ResultCloseBtn handleCloseBtn={props.handleCloseBtn} closeId={"alphabet"} /> : null}
       <div className="alphabet">Your MBTI Type is...!</div>
     <ResultAlphabetContainer className="alphabet">
       <AlphabetContainer className="alphabet" animationNum={result[firstLetter]}>

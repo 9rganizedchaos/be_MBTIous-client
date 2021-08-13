@@ -6,7 +6,11 @@ import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  whitelist: [
+    "testReducer",
+    "viewReducer"
+  ]
 }
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
@@ -16,7 +20,4 @@ const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   : compose;
 const store = createStore(enhancedReducer, composeEnhancers(applyMiddleware(thunk)));
 
-store.subscribe(() => {
-  console.log("state changed!")
-})
 export default store;

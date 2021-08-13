@@ -26,6 +26,7 @@ ${( { theme } ) => {
       display: flex;
       flex-direction: row;
       .settingBox {
+        cursor: pointer;
         margin-right: 1rem;
         padding: 0 0.7rem;
         background-color: ${theme.color.sub2};
@@ -34,12 +35,28 @@ ${( { theme } ) => {
         justify-content: center;
         align-items: center;
         span{
+          cursor: pointer;
           font-weight: 800;
           font-style: italic;
           color: ${theme.color.main};
           font-size: 1.5rem;
         }
       }
+    }
+    @media (${theme.size.tablet}) {
+    }
+    @media (${theme.size.mobile}) {
+      justify-content: flex-end;
+      .nav__slogan {
+        display: none;
+      }
+      .nav__setting{
+      .settingBox {
+        span{
+          font-size: 1.25rem;
+        }
+      }
+    }
     }
   `
 }}

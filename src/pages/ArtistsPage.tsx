@@ -6,9 +6,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { AnimatePresence, motion } from "framer-motion";
 import TutorialCircle from '../components/TutorialCircle';
 import ArtistCurator from '../components/ArtistCurator';
-import { useDispatch } from 'react-redux';
-import { updateArtist } from '../action/testAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateArtist } from "../action/actions";
 import { Link } from 'react-router-dom';
+import { RootState } from '../reducers';
 
 interface Edge {
   left: number;
@@ -86,6 +87,13 @@ z-index: 10;
   width: 90%;
   line-height: 160%;
 }
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  .title{
+    font-size: 2.75rem;
+  }
+}
 `
 }}
 `;
@@ -96,17 +104,20 @@ const tutorialBoxVariants: any = {
   },
 }
 
-function ArtistsPage(props: any) {
+function ArtistsPage({ history }: any) {
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { color, view } = viewState;
+
   const dispatch = useDispatch();
 
+  const [favoriteArtist, setArtist] = useState("");
   const [isTutorialOn, setTutorial] = useState(true);
   const [isTurotrialCircleOn, setCircle] = useState(true);
-  const [favoriteArtist, setArtist] = useState("");
 
   const artistsPageContainer = useRef<HTMLDivElement | null>(null);
 
   const handleNextClick = () => {
-    props.history.push("/test");
+    history.push("/test");
   }
 
   useEffect(() => {
@@ -188,95 +199,97 @@ function ArtistsPage(props: any) {
         mouse.y = - (event.clientY / sizes.height) * 2 + 1
     })
     
-    window.addEventListener('click', () =>
+    const handleBoxClick = () =>
     {
         if(currentIntersect)
         {
+          console.log(currentIntersect.object)
             switch(currentIntersect.object)
             {
                 case cube1:
-                    setArtist("#Black_Pink");
+                    setArtist("BlackPink");
                     dispatch(updateArtist("BlackPink"));
                     break
     
                 case cube2:
-                    setArtist("#Red_Velvet");
+                    setArtist("RedVelVet");
                     dispatch(updateArtist("RedVelVet"));
                     break
     
                 case cube3:
-                    setArtist("#TWICE")
+                    setArtist("TWICE")
                     dispatch(updateArtist("TWICE"));
                     break
 
                 case cube4:
-                    setArtist("#MOMOLAND")
+                    setArtist("MOMOLAND")
                     dispatch(updateArtist("MOMOLAND"));
                     break
 
                 case cube5:
-                    setArtist("#(G)I-DLE");
+                    setArtist("(G)I-DLE");
                     dispatch(updateArtist("(G)I-DLE"));
                     break
                     
                 case cube6:
-                  setArtist("#OhMyGirl")
+                  setArtist("OhMyGirl")
                   dispatch(updateArtist("OhMyGirl"));
                     break                    
 
                 case cube7:
-                  setArtist("#ITZY")
+                  setArtist("ITZY")
                   dispatch(updateArtist("ITZY"));
                     break
 
                 case cube8:
-                  setArtist("#AESPA")
+                  setArtist("AESPA")
                   dispatch(updateArtist("AESPA"));
                     break
 
                 case cube9:
-                  setArtist("#IZ*ONE")
+                  setArtist("IZ*ONE")
                   dispatch(updateArtist("IZ*ONE"));
                     break
 
                 case cube10:
-                  setArtist("#GFRIEND")
+                  setArtist("GFRIEND")
                   dispatch(updateArtist("GFRIEND"));
                     break
 
                 case cube11:
-                  setArtist("#WekiMeki")
+                  setArtist("WekiMeki")
                   dispatch(updateArtist("WekiMeki"));
                     break
 
                 case cube12:
-                  setArtist("#Lovelyz")
+                  setArtist("Lovelyz")
                   dispatch(updateArtist("Lovelyz"));
                     break
 
                 case cube13:
-                  setArtist("#StayC")
+                  setArtist("StayC")
                   dispatch(updateArtist("StayC"));
                     break
 
                 case cube14:
-                  setArtist("#WJSN");
+                  setArtist("WJSN");
                   dispatch(updateArtist("WJSN"));
                     break
 
                 case cube15:
-                  setArtist("#LOONA")
+                  setArtist("LOONA")
                   dispatch(updateArtist("LOONA"));
                     break
 
                 case cube16:
-                  setArtist("#MAMAMOO")
+                  setArtist("MAMAMOO")
                   dispatch(updateArtist("MAMAMOO"));
                     break
             }
         }
-    })
-        
+    }
+
+    window.addEventListener('click', handleBoxClick);     
 
     // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
@@ -318,10 +331,24 @@ function ArtistsPage(props: any) {
       controls.update();
       renderer.render(scene, camera);
       if(elapsedTime > 1 && elapsedTime < 2.95){
-        camera.position.y += 0.01;
+        if(view === "mobile"){
+          camera.position.y += 0.03;
+        } else {
+          camera.position.y += 0.01;
+        }
       } else if (elapsedTime > 4 && elapsedTime < 8.75){
-        camera.position.y -= 0.01;
-        camera.position.z += 0.009;
+        if(view === "mobile"){
+          camera.position.y -= 0.008;
+          camera.position.z += 0.03;
+        } else {
+          camera.position.y -= 0.01;
+          camera.position.z += 0.009;
+        }
+      } else if (elapsedTime > 9.9 && elapsedTime < 11.9){
+        if(view === "mobile"){
+          camera.position.z -= 0.045;
+          camera.position.y -= 0.015;
+        } 
       }
       requestAnimationFrame(animate);
       // camera.rotation.x += 0.004;
@@ -341,6 +368,7 @@ function ArtistsPage(props: any) {
 
     // 클린업 함수
     return () => {
+      window.removeEventListener("click", handleBoxClick);
       if(artistsPageContainer.current){
         artistsPageContainer.current.removeChild(renderer.domElement)
       }

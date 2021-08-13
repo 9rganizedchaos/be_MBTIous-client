@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import { updateSettingBar } from '../action/viewAction';
+import { updateSettingBar } from '../action/actions';
 import { calculateBorderBoxPath } from 'html2canvas/dist/types/render/bound-curves';
 
 interface SettingBarContainerProps {
