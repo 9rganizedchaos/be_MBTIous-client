@@ -7,7 +7,7 @@ import ResultCloseBtn from './ResultCloseBtn';
 import { useState } from 'react';
 
 interface MemberContainerProps {
-  memberIndex: any;
+  memberIndex?: any;
 }
 
 const GroupMemberWholeContainer = styled(motion.div)<MemberContainerProps>`
@@ -18,8 +18,8 @@ background: ${theme.color.sub};
 width: 600px;
 height: 210px;
 position: absolute;
-top: calc(50% - 150px / 2);
-left: calc(50% - 150px / 2);
+top: 90px;
+left: 1000px;
 font-family: 'Roboto', sans-serif;
 font-weight: 800;
 font-style: italic;
@@ -38,6 +38,16 @@ flex-direction: row;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  border: none;
+  border-bottom: 3px solid ${theme.color.sub};
 }
 `
 }}
@@ -110,6 +120,11 @@ border-right: 3px solid ${theme.color.main};
   justify-content: center;
   align-items: center;
 }
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  border-bottom: 5px solid ${theme.color.main};
+}
 `
 }}
 `;
@@ -130,6 +145,8 @@ const MemberCard = function(props: any): any {
 const ResultMemberMbti = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { view } = viewState;
   const [mouseIn, setMouseIn] = useState(false);
 
   let myMBTI = result.mbti;
@@ -137,8 +154,8 @@ const ResultMemberMbti = function(props: any){
   let myMembers = myKpopGroup[0].member
 
   return (
-    <GroupMemberWholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="member" onClick={props.handleResultComponentClick} memberIndex={props.memberIndex} drag dragConstraints={props.constraintsRef}>
-    {mouseIn ? <ResultCloseBtn closeId={"member"} handleCloseBtn={props.handleCloseBtn}/> : null}
+    <>{view === "mobile" ?
+    <GroupMemberWholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="member" onClick={props.handleResultComponentClick}>
     <div className="memberTitle member">
       <span className="member">{myKpopGroup[0].name}<br/> 멤버들의 MBTI</span>
     </div>
@@ -150,7 +167,23 @@ const ResultMemberMbti = function(props: any){
         <div className="member"><strong className="member">※</strong><br/>포털사이트에서<br/> 검색된 결과로<br/> 부정확한 정보가<br/> 있을 수 있습니다.</div>
       </div>
     </ResultMemberMbtiContainer>    
-    </GroupMemberWholeContainer>
+    </GroupMemberWholeContainer> :
+        <GroupMemberWholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="member" onClick={props.handleResultComponentClick} memberIndex={props.memberIndex} drag dragConstraints={props.constraintsRef}>
+        {mouseIn ? <ResultCloseBtn closeId={"member"} handleCloseBtn={props.handleCloseBtn}/> : null}
+        <div className="memberTitle member">
+          <span className="member">{myKpopGroup[0].name}<br/> 멤버들의 MBTI</span>
+        </div>
+        <ResultMemberMbtiContainer className="member">
+          {myMembers.map((item: any, index: number) => 
+            <MemberCard className="member" key={index} name={item.name} mbti={item.mbti}/>
+          )}
+          <div className="sourceInformation member">
+            <div className="member"><strong className="member">※</strong><br/>포털사이트에서<br/> 검색된 결과로<br/> 부정확한 정보가<br/> 있을 수 있습니다.</div>
+          </div>
+        </ResultMemberMbtiContainer>    
+        </GroupMemberWholeContainer>
+        }
+    </>
   )
 }
 

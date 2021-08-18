@@ -24,6 +24,7 @@ ${( { theme, settingBar } ) => {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  transition: .5s;
   .settingBtn {
     width: 18rem;
     display: flex;

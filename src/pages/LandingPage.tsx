@@ -168,7 +168,7 @@ function LandingPage(props: any) {
         landingPageContainer.current.removeChild(renderer.domElement)
       }
     }
-  })
+  }, [])
 
   return (
     <Fragment>

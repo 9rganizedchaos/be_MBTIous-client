@@ -72,7 +72,7 @@ function Nav(props: any) {
         <div className="nav__slogan">FIND YOUR KPOP GIRL GROUP EGO AND ...!</div>
         <div className="nav__setting">
           <div onClick={props.handleThemeChange} className="settingBox">
-            <span>{color === "violet" ? "PINK MODE" : "VIOLET MODE"}</span>
+            <span>{color === "violet" ? "VIOLET MODE" : "PINK MODE"}</span>
           </div>
           <div className="settingBox">
             <span>Language</span>

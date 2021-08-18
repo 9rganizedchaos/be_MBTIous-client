@@ -44,10 +44,13 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
-    name: "RedVelVet",
+    name: "RedVelvet",
     mbti: "ENFP",
     fitMe: {
       INFP: 2,
@@ -91,7 +94,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "TWICE",
@@ -138,7 +144,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "MOMOLAND",
@@ -185,7 +194,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "MAMAMOO",
@@ -232,7 +244,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "(G)I-DLE",
@@ -279,7 +294,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "OhMyGirl",
@@ -326,7 +344,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "ITZY",
@@ -373,7 +394,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "AESPA",
@@ -420,7 +444,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "IZ*ONE",
@@ -467,7 +494,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
   {
     name: "GFRIEND",
@@ -514,7 +544,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },  
   {
     name: "WekiMeki",
@@ -561,7 +594,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },  
   {
     name: "Lovelyz",
@@ -608,7 +644,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },  
   {
     name: "StayC",
@@ -655,7 +694,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },  
   {
     name: "WJSN",
@@ -702,7 +744,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },  
   {
     name: "LOONA",
@@ -749,7 +794,10 @@ const groupsArr: any = [
       "https://i.imgur.com/jJVCnyq.jpg",
       "https://i.imgur.com/fGhlL2u.jpg",
       "https://i.imgur.com/a8nfuN9.png"
-    ]
+    ],
+    slogan: "사랑을 찾기 위해, 영원을 약속하는 순정파 걸그룹",
+    percent: 12,
+    description: `이것은 비트의 승리다. 이 음반, 적시해서 요약하면 "비트 예술이지?" 자랑하려고 만든 결과물이라고 보면 된다. 톤이 우선 절묘하고, 귀에 착착 감기는 맛이 굉장하다. 까놓고 말해볼까. 이 앨범을 무시하는 사람이 주위에 있다면 음악에 대한 그 사람의 안목, 앞으로는 걸러도 괜찮다고 확언할 수 있다. '피카부'와 '봐', 이렇게 딱 2곡만 감상해보라. 이 앨범의 비트가 굉장한 수준임을 어렵지 않게 파악할 수 있을 것이다. 레드 벨벳의 2집 [Perfect Velvet]은 적어도 비트에 있어 대갓띵반임에 분명하다.`
   },
 
 ];

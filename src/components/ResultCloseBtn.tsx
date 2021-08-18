@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 const CloseBtnContainer = styled.div`
 ${( { theme } ) => {
   return css`
+  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;

@@ -20,6 +20,12 @@ import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
 import SettingBar from '../components/SettingBar';
 import ResultAlert from '../components/ResultAlert';
+import ResultHeader from '../components/ResultHeader';
+import ResultFooter from '../components/ResultFooter';
+
+interface ComponentTagProps {
+  contain: any;
+}
 
 const ResultPageContainer = styled.div`
 ${( { theme } ) => {
@@ -28,6 +34,18 @@ width: 100vw;
 height: 100vh;
 background-color: ${theme.color.sub};
 border: 0.25rem solid ${theme.color.main};
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  display: flex;
+  flex-direction: column;
+  .scrollDiv{
+    overflow-y: scroll;
+  }
+  .scrollDiv::-webkit-scrollbar{
+    display: none;
+  }
+}
 `
 }}
 `;
@@ -57,11 +75,12 @@ ${( { theme } ) => {
 }}
 `
 
-const ComponentTag = styled.div`
-${( { theme } ) => {
+const ComponentTag = styled.div<ComponentTagProps>`
+${( { theme, contain } ) => {
   return css`
-  color: ${theme.color.main};
+  color: ${contain ? theme.color.sub : theme.color.main};
   border: 2px solid ${theme.color.main};
+  background-color: ${contain ? theme.color.main : theme.color.sub};
   height: 2rem;
   padding: 0.5rem;
   display: flex;
@@ -70,6 +89,10 @@ ${( { theme } ) => {
   border-radius: 1rem; 
   margin: 0.25rem;
   cursor: pointer;
+  transition: .1s;
+  &:hover {
+    font-size: 1.05rem;
+  }
   `
 }}
 `;
@@ -114,6 +137,7 @@ display: flex;
 flex-direction: column;
 left: 1.25rem;
 button{
+  cursor: pointer;
   border: none;
   width: 3rem;
   height: 3rem;
@@ -147,11 +171,13 @@ left: 20.25rem;
 function ResultPage({handleThemeChange}: any) {
   const testState = useSelector((state: RootState) => state.testReducer);
   const { favoriteArtist } = testState;
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { view } = viewState;
   let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist)[0];
 
   const constraintsRef = useRef(null);
 
-  const [componentIndex, setComponentIndex] = useState(["alphabet", "girlGroup", "matching", "fitMe", "member", "percent"]);
+  const [componentIndex, setComponentIndex] = useState(["alphabet", "fitMe", "member", "percent", "matching", "girlGroup"]);
   const [albumCoverNum, setAlbumCoverNum] = useState(3);
   const [isAlertMessageOpen, setAlertOpen] = useState(false);
   const [alertPageX, setPageX] = useState(0);
@@ -167,6 +193,7 @@ function ResultPage({handleThemeChange}: any) {
       let lastIndex = classNameArr.length - 1;
       clickedClassName = classNameArr[lastIndex];
     }
+  console.log(clickedClassName);
 
     let newComponentIndex = componentIndex.slice();
     let index = componentIndex.indexOf(clickedClassName);
@@ -241,26 +268,42 @@ function ResultPage({handleThemeChange}: any) {
   }
 
   return (
-    <ResultPageContainer>
+    <>
+    {view === "mobile" ? 
+        <ResultPageContainer>
+        <div className="scrollDiv">
+        {isAlertMessageOpen ? <ResultAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage}/> : null}
+        <SettingBar handleThemeChange={handleThemeChange}/>
+        <ResultHeader/>
+        <ResultGirlGroup handleResultComponentClick={handleResultComponentClick}/>
+        <ResultFitMe handleResultComponentClick={handleResultComponentClick}></ResultFitMe>
+        <ResultAlphabet handleResultComponentClick={handleResultComponentClick}></ResultAlphabet>
+        <ResultMatching favoriteArtist={favoriteArtist} handleResultComponentClick={handleResultComponentClick}></ResultMatching>
+        <ResultPercent handleResultComponentClick={handleResultComponentClick}></ResultPercent>
+        <ResultMemberMbti handleResultComponentClick={handleResultComponentClick}></ResultMemberMbti>
+        <ResultFooter></ResultFooter>
+        </div>
+      </ResultPageContainer> :
+      <ResultPageContainer>
       {isAlertMessageOpen ? <ResultAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage}/> : null}
       <SettingBar handleThemeChange={handleThemeChange}/>
-      <ResultSidebar>
+      {view === "mobile" ? null : <ResultSidebar>
         <Link to="/">
         <Logo>Be_MBTIous</Logo>
         </Link>
         <ComponentBox>
-          <ComponentTag>
+          <ComponentTag contain={componentIndex.includes("member")}>
             <span onClick={() => handleTagClick("member")}>멤버들의 MBTI</span>              
           </ComponentTag>
-          <ComponentTag onClick={() => handleTagClick("girlGroup")}>나의 걸그룹 자아</ComponentTag>
-          <ComponentTag onClick={() => handleTagClick("alphabet")}>나의 MBTI</ComponentTag>
-          <ComponentTag onClick={() => handleTagClick("matching")}>최애그룹과의 궁합</ComponentTag>
-          <ComponentTag onClick={() => handleTagClick("fitMe")}>나와 맞는 그룹 & 안 맞는 그룹</ComponentTag>
-          <ComponentTag onClick={() => handleTagClick("percent")}>어떤 유형이 내 유형을 좋아할까?</ComponentTag>
-          <ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("girlGroup")} contain={componentIndex.includes("girlGroup")}>나의 걸그룹 자아</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("alphabet")} contain={componentIndex.includes("alphabet")}>나의 MBTI</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("matching")} contain={componentIndex.includes("matching")}>최애그룹과의 궁합</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("fitMe")} contain={componentIndex.includes("fitMe")}>나와 맞는 그룹 & 안 맞는 그룹</ComponentTag>
+          <ComponentTag onClick={() => handleTagClick("percent")} contain={componentIndex.includes("percent")}>어떤 유형이 내 유형을 좋아할까?</ComponentTag>
+          <ComponentTag contain={false}>
             <span onClick={handlePlusTag}>앨범커버 추가</span>
           </ComponentTag>
-          <ComponentTag>
+          <ComponentTag contain={false}>
             <span onClick={handleMinusTag}>앨범커버 삭제</span>
           </ComponentTag>
         </ComponentBox>
@@ -282,7 +325,7 @@ function ResultPage({handleThemeChange}: any) {
             <FontAwesomeIcon icon={faCamera}></FontAwesomeIcon>
           </button>
         </ButtonBox>
-      </ResultSidebar>
+      </ResultSidebar> }
       <ResultDragArea ref={constraintsRef}>
       </ResultDragArea>
       {myKpopGroup.albumCover.map((item: any, index: number) => {
@@ -298,6 +341,8 @@ function ResultPage({handleThemeChange}: any) {
       {componentIndex.includes("member") ? <ResultMemberMbti handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} memberIndex={componentIndex.indexOf("member")} constraintsRef={constraintsRef}></ResultMemberMbti> : null }
       {componentIndex.includes("percent") ? <ResultPercent handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} percentIndex={componentIndex.indexOf("percent")} constraintsRef={constraintsRef}></ResultPercent> : null }
     </ResultPageContainer>
+  }
+    </>
   )
 }
 

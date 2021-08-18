@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import TestAlert from '../components/TestAlert';
 import PreviousAlert from '../components/PreviousAlert';
 import SettingBar from '../components/SettingBar';
+import axios from "axios";
+import groupsArr from '../assets/groups';
 
 interface Edge {
   left: number;
@@ -32,6 +34,11 @@ font-weight: 800;
 font-style: italic;
 font-size: 2rem;
 margin: 1rem;
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+
+}
 `
 }}
 `;
@@ -85,6 +92,13 @@ border: 0.25rem solid ${theme.color.main};
   align-items: center;
   border-left: 0.25rem solid ${theme.color.main};
   border-right: 0.25rem solid ${theme.color.main};
+}
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  .test__border-box{
+    width: 100%;
+  }
 }
 `
 }}
@@ -281,6 +295,21 @@ function TestPage(props: any) {
         resultObj.mbti = result;
 
         dispatch(updateResult(resultObj, favoriteArtist));
+
+        let kpopGroup = groupsArr.filter((item: any) => item.mbti === result)[0];
+
+
+        console.log(result, kpopGroup.name, favoriteArtist);
+
+        axios.post("http://localhost:3000/result", {
+          mbti: result,
+          girlGroupName: kpopGroup.name,
+          favoriteGroup: favoriteArtist
+        }).then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        })
       
         props.history.push("/result");
       }

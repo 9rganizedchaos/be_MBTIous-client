@@ -10,7 +10,7 @@ interface AlphabetContainerProps {
 }
 
 interface WholeContainerProps {
-  alphabetIndex: any;
+  alphabetIndex?: any;
 }
 
 const WholeContainer = styled(motion.div)<WholeContainerProps>`
@@ -21,8 +21,8 @@ background: ${theme.color.sub};
 width: 300px;
 height: 170px;
 position: absolute;
-top: 120px;
-left: 500px;
+top: 30px;
+left: 350px;
 font-weight: 800;
 font-style: italic;
 display: flex;
@@ -34,6 +34,16 @@ border: 3px solid ${theme.color.main};
 div {
   color: ${theme.color.main};
   font-size: 1.25rem;
+}
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid ${theme.color.main};
 }
 `
 }}
@@ -79,6 +89,10 @@ h2{
     clip-path: polygon(0 64%, 120% 64%, 120% 100%, 0% 100%);
   }
 }
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+}
 `
 }}
 `;
@@ -94,6 +108,11 @@ align-items: center;
 flex-direction: row;
 postion: relative;
 padding: 0 1rem;
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  width: 90%;
+}
 `
 }}
 `;
@@ -101,6 +120,8 @@ padding: 0 1rem;
 const ResultAlphabet = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { view } = viewState;
   let firstLetter = result.mbti[0];
   let secondLetter = result.mbti[1];
   let thirdLetter = result.mbti[2];
@@ -108,7 +129,29 @@ const ResultAlphabet = function(props: any){
   const [mouseIn, setMouseIn] = useState(false);
 
   return (
-    <WholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="alphabet" onClick={props.handleResultComponentClick} alphabetIndex={props.alphabetIndex} drag dragConstraints={props.constraintsRef}>
+    <>{view === "mobile" ? 
+    <WholeContainer className="alphabet">
+    <div className="alphabet">Your MBTI Type is...!</div>
+  <ResultAlphabetContainer className="alphabet">
+    <AlphabetContainer className="alphabet" animationNum={result[firstLetter]}>
+      <h2 className="front-alphabet alphabet">{firstLetter}</h2>
+      <h2 className="back-alphabet alphabet">{firstLetter}</h2>
+    </AlphabetContainer>    
+      <AlphabetContainer className="alphabet" animationNum={result[secondLetter]}>
+      <h2 className="front-alphabet alphabet">{secondLetter}</h2>
+      <h2 className="back-alphabet alphabet">{secondLetter}</h2>
+    </AlphabetContainer>  
+    <AlphabetContainer className="alphabet" animationNum={result[thirdLetter]}>
+      <h2 className="front-alphabet alphabet">{thirdLetter}</h2>
+      <h2 className="back-alphabet alphabet">{thirdLetter}</h2>
+    </AlphabetContainer>  
+    <AlphabetContainer className="alphabet" animationNum={result[fourthLetter]}>
+      <h2 className="front-alphabet alphabet">{fourthLetter}</h2>
+      <h2 className="back-alphabet alphabet">{fourthLetter}</h2>
+    </AlphabetContainer>  
+  </ResultAlphabetContainer>
+  </WholeContainer> :
+      <WholeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="alphabet" onClick={props.handleResultComponentClick} alphabetIndex={props.alphabetIndex} drag dragConstraints={props.constraintsRef}>
       {mouseIn ? <ResultCloseBtn handleCloseBtn={props.handleCloseBtn} closeId={"alphabet"} /> : null}
       <div className="alphabet">Your MBTI Type is...!</div>
     <ResultAlphabetContainer className="alphabet">
@@ -130,6 +173,8 @@ const ResultAlphabet = function(props: any){
       </AlphabetContainer>  
     </ResultAlphabetContainer>
     </WholeContainer>
+  }
+    </>
   )
 }
 

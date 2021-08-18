@@ -43,17 +43,28 @@ color: ${theme.color.sub};
   }
 }
 .curator__icon-box{
+  cursor: pointer;
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: ${theme.color.sub};;
+  background-color: ${theme.color.sub};
+  border: 3px solid ${theme.color.main}; 
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 3rem;
+  transition: .3s;
+  &:hover{
+    background-color: ${theme.color.main};
+    border: 3px solid ${theme.color.sub}; 
+  }
   .fa-play {
     color: ${theme.color.main};
     transform: translateX(4px);
+    transition: .3s;
+    &:hover {
+      color: ${theme.color.sub};
+    }
   }
 }
 @media (${theme.size.tablet}) {
@@ -96,7 +107,7 @@ function ArtistCurator(props: any) {
   return (
     <CuratorContainer variants={artistCuratorVariants} initial="hidden" animate="visible">
       <div className="curator__sentence-box">
-      <div className="curator__sentence1">{`Your Favorite Kpop Girl Group is ${props.favoriteArtist}`}</div>
+      <div className="curator__sentence1">{view === "mobile" ? `Your Favorite Kpop Girl Group is ${props.favoriteArtist}` :"Your Favorite Kpop Girl Group is"}</div>
       {view === "mobile" ? null : <div className="curator__sentence2">{props.favoriteArtist}</div>}
       {view === "mobile" ? null : <div className="curator__sentence3">!</div>}
       </div>

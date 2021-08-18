@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateArtist } from "../action/actions";
 import { Link } from 'react-router-dom';
 import { RootState } from '../reducers';
+import ArtistAlert from '../components/ArtistAlert';
 
 interface Edge {
   left: number;
@@ -113,11 +114,23 @@ function ArtistsPage({ history }: any) {
   const [favoriteArtist, setArtist] = useState("");
   const [isTutorialOn, setTutorial] = useState(true);
   const [isTurotrialCircleOn, setCircle] = useState(true);
+  const [isArtistAlertOpen, setArtistAlert] = useState(false);
+  const [alertPageX, setPageX] = useState(0);
+  const [alertPageY, setPageY] = useState(0);
 
   const artistsPageContainer = useRef<HTMLDivElement | null>(null);
 
-  const handleNextClick = () => {
-    history.push("/test");
+  const handleNextClick = (e: any) => {
+    if(favoriteArtist === ""){
+      setArtistAlert(true);
+      setTimeout(() => {
+        setArtistAlert(false);
+      }, 2000);
+      setPageX(e.pageX);
+      setPageY(e.pageY);
+    } else {
+      history.push("/test");
+    }
   }
 
   useEffect(() => {
@@ -203,7 +216,6 @@ function ArtistsPage({ history }: any) {
     {
         if(currentIntersect)
         {
-          console.log(currentIntersect.object)
             switch(currentIntersect.object)
             {
                 case cube1:
@@ -212,8 +224,8 @@ function ArtistsPage({ history }: any) {
                     break
     
                 case cube2:
-                    setArtist("RedVelVet");
-                    dispatch(updateArtist("RedVelVet"));
+                    setArtist("RedVelvet");
+                    dispatch(updateArtist("RedVelvet"));
                     break
     
                 case cube3:
@@ -374,8 +386,10 @@ function ArtistsPage({ history }: any) {
       }
     }    
   }, [])
+
   return (
     <Fragment>
+      {isArtistAlertOpen ? <ArtistAlert alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
       <Link to="/">
         <Logo>Be_MBTIous</Logo>
       </Link>

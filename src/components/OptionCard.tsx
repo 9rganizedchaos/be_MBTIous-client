@@ -12,6 +12,11 @@ ${( { theme } ) => {
 width: 100%;
 height: calc(100% - 5rem);
 background-color: ${theme.color.sub};
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  height: calc(100% - 4rem);
+}
 `
 }}
 `;
@@ -23,12 +28,18 @@ width: 100%;
 height: 268px;
 border-bottom: 0.25rem solid ${theme.color.main};
 background-size: cover;
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  height: 188px;
+}
 `}}
 `;
 
 const DescriptionBox1 = styled.div<DescriptionBoxProps>`
-${( { theme,  descriptionBoxObj} ) => {
+${( { theme,  descriptionBoxObj } ) => {
   return css`
+  cursor: pointer;
 width: 100%;
 height: calc(100% - 268px);
 background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.main : theme.color.sub};
@@ -38,10 +49,11 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+font-size: 1.125rem;
+transition: .1s;
 span {
   width: 90%;
   padding: 0.25rem;
-  font-size: 1.125rem;
   background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.sub : theme.color.main};
   text-align: center;
   color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.main : theme.color.sub};
@@ -50,6 +62,16 @@ span {
   width: 35%;
   margin-bottom: 0.5rem;
 }
+&:hover{
+  font-size: 1.175rem;
+}
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  height: calc(100% - 188px);
+  span {
+    font-size: 0.75rem;
+  }
 }
 `
 }}
@@ -58,6 +80,7 @@ span {
 const DescriptionBox2 = styled.div<DescriptionBoxProps>`
 ${( { theme,  descriptionBoxObj} ) => {
   return css`
+  cursor: pointer;
 width: 100%;
 height: calc(100% - 268px);
 background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.main : theme.color.sub};
@@ -67,10 +90,11 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+font-size: 1.125rem;
+transition: .1s;
 span {
   width: 90%;
   padding: 0.25rem;
-  font-size: 1.125rem;
   background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.sub : theme.color.main};
   text-align: center;
   color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.main : theme.color.sub};
@@ -79,6 +103,16 @@ span {
   width: 35%;
   margin-bottom: 0.5rem;
 }
+&:hover{
+  font-size: 1.175rem;
+}
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  height: calc(100% - 188px);
+  span {
+    font-size: 0.75rem;
+  }
 }
 `
 }}

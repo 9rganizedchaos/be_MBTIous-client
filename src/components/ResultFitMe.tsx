@@ -24,8 +24,8 @@ background: ${theme.color.sub};
 width: 500px;
 height: 300px;
 position: absolute;
-top: calc(50% - 150px / 2);
-left: calc(50% - 150px / 2);
+top: 50px;
+left: 680px;
 font-weight: 800;
 font-style: italic;
 display: grid;
@@ -48,6 +48,28 @@ div{
   border-bottom: none;
   border-left: none;
 }
+@media (${theme.size.tablet}) {
+}
+@media (${theme.size.mobile}) {
+  width: 100%;
+  height: calc(50vw + 50px);
+  border: none;
+  border-bottom: 3px solid ${theme.color.main};
+  position: relative;
+  top: 0;
+  left: 0;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 50px calc(50vw - 50px) 50px;
+  .fitMeTitle{
+    border: none;
+    border-right: 3px solid ${theme.color.main};
+  }
+  .notFitMeTitle{
+    border: none;
+    border-bottom: none;
+    border-left: none;
+  }
+}
 `
 }}
 `;
@@ -69,6 +91,20 @@ ${( { theme, pic } ) => {
     background-position: center;
     background-size: cover;
     opacity: 0.25;
+  }
+  @media (${theme.size.tablet}) {
+  }
+  @media (${theme.size.mobile}) {
+    border: none;
+    border-right: 3px solid ${theme.color.main};
+    border-bottom: 3px solid ${theme.color.main};
+    .pic1Div {
+      width: calc(100vw / 2 - 0.25rem);
+      height: calc(100vw / 2 - 0.25rem);
+    }
+    .pic1Span {
+      font-size: 1.5rem;
+    }
   }
 `
 }}
@@ -93,6 +129,19 @@ ${( { theme, pic } ) => {
     background-size: cover;
     opacity: 0.25;
   }
+  @media (${theme.size.tablet}) {
+  }
+  @media (${theme.size.mobile}) {
+    border: none;
+    border-top: 3px solid ${theme.color.main};
+    .pic2Div {
+      width: calc(100vw / 2 - 0.25rem);
+      height: calc(100vw / 2 - 0.25rem);
+    }
+    .pic2Span {
+      font-size: 1.5rem;
+    }
+  }
 `
 }}
 `;
@@ -106,7 +155,18 @@ ${( { theme } ) => {
   justify-content: space-between; 
   z-index: 10;
   svg{
+    &:hover{
+      cursor: pointer;
+    }
     font-size: 3rem;
+  }
+  @media (${theme.size.tablet}) {
+  }
+  @media (${theme.size.mobile}) {
+    width: 45vw;
+    svg{
+      font-size: 2.5rem;
+    }
   }
   `
 }}
@@ -116,6 +176,8 @@ ${( { theme } ) => {
 const ResultFitMe = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { view } = viewState;
   const [mouseIn, setMouseIn] = useState(false);
   const [fitMeNum, setFitMeNum] = useState(0);
   const [notFitMeNum, setNotFitMeNum] = useState(0);
@@ -163,8 +225,9 @@ const ResultFitMe = function(props: any){
     notFitMeGroup = groupsArr.filter((item: any) => item.mbti === notFitMeMbti)[0];
 
   return (
-    <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex} drag dragConstraints={props.constraintsRef}>
-      {mouseIn ? <ResultCloseBtn closeId={"fitMe"} handleCloseBtn={props.handleCloseBtn} /> : null}
+    <>{
+      view === "mobile" ?
+      <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex}>
       <FitMeArtistPic1 className="fitMe" pic={fitMeGroup.albumCover[0]}>
         <FitMeBtnBox>
           <span onClick={() => {
@@ -201,7 +264,49 @@ const ResultFitMe = function(props: any){
         <div className="pic2Div fitMe"></div>
         <span className="pic2Span fitMe">{notFitMeGroup.name}</span>
       </FitMeArtistPic2>
-    </ResultFitMeContainer>    
+    </ResultFitMeContainer> :
+        <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex} drag dragConstraints={props.constraintsRef}>
+        {mouseIn ? <ResultCloseBtn closeId={"fitMe"} handleCloseBtn={props.handleCloseBtn} /> : null}
+        <FitMeArtistPic1 className="fitMe" pic={fitMeGroup.albumCover[0]}>
+          <FitMeBtnBox>
+            <span onClick={() => {
+              if(fitMeNum === 0){
+                return;
+              }
+              setFitMeNum(fitMeNum - 1)}}>
+              <FontAwesomeIcon icon={faCaretLeft}/>
+            </span>
+            <span onClick={() => {setFitMeNum(fitMeNum + 1)}}>
+              <FontAwesomeIcon icon={faCaretRight}/>
+            </span>
+          </FitMeBtnBox>
+          <div className="pic1Div fitMe"></div>
+          <span className="pic1Span fitMe">{fitMeGroup.name}</span>
+        </FitMeArtistPic1>
+        <div className="notFitMeTitle fitMe">나와 잘 맞지 않는 유형</div>
+        <div className="fitMeTitle fitMe">나와 잘 맞는 유형</div>
+        <FitMeArtistPic2 className="fitMe" pic={notFitMeGroup.albumCover[0]}>
+          <FitMeBtnBox>
+            <span onClick={() => {
+              if(notFitMeNum === 0){
+                return;
+              }
+              setNotFitMeNum(notFitMeNum - 1)}}>
+              <FontAwesomeIcon icon={faCaretLeft}/>
+            </span>
+            <span onClick={() => {
+              setNotFitMeNum(notFitMeNum + 1)
+              }}>
+              <FontAwesomeIcon icon={faCaretRight}/>
+            </span>
+          </FitMeBtnBox>
+          <div className="pic2Div fitMe"></div>
+          <span className="pic2Span fitMe">{notFitMeGroup.name}</span>
+        </FitMeArtistPic2>
+      </ResultFitMeContainer>
+    }
+
+    </>
   )
 }
 
