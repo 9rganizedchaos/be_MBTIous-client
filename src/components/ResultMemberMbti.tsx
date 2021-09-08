@@ -106,7 +106,7 @@ border-right: 3px solid ${theme.color.main};
   justify-content: center;
   align-items: center;
   span {
-    font-size: 3rem;
+    font-size: 2.4rem;
     color: ${theme.color.main};
   }
 }

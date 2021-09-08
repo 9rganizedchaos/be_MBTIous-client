@@ -228,7 +228,7 @@ const ResultFitMe = function(props: any){
     <>{
       view === "mobile" ?
       <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex}>
-      <FitMeArtistPic1 className="fitMe" pic={fitMeGroup.albumCover[0]}>
+      <FitMeArtistPic1 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${fitMeGroup.code}1.jpg`}>
         <FitMeBtnBox>
           <span onClick={() => {
             if(fitMeNum === 0){
@@ -246,7 +246,7 @@ const ResultFitMe = function(props: any){
       </FitMeArtistPic1>
       <div className="notFitMeTitle fitMe">나와 잘 맞지 않는 유형</div>
       <div className="fitMeTitle fitMe">나와 잘 맞는 유형</div>
-      <FitMeArtistPic2 className="fitMe" pic={notFitMeGroup.albumCover[0]}>
+      <FitMeArtistPic2 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${notFitMeGroup.code}1.jpg`}>
         <FitMeBtnBox>
           <span onClick={() => {
             if(notFitMeNum === 0){
@@ -267,7 +267,7 @@ const ResultFitMe = function(props: any){
     </ResultFitMeContainer> :
         <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex} drag dragConstraints={props.constraintsRef}>
         {mouseIn ? <ResultCloseBtn closeId={"fitMe"} handleCloseBtn={props.handleCloseBtn} /> : null}
-        <FitMeArtistPic1 className="fitMe" pic={fitMeGroup.albumCover[0]}>
+        <FitMeArtistPic1 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${fitMeGroup.code}1.jpg`}>
           <FitMeBtnBox>
             <span onClick={() => {
               if(fitMeNum === 0){
@@ -285,7 +285,7 @@ const ResultFitMe = function(props: any){
         </FitMeArtistPic1>
         <div className="notFitMeTitle fitMe">나와 잘 맞지 않는 유형</div>
         <div className="fitMeTitle fitMe">나와 잘 맞는 유형</div>
-        <FitMeArtistPic2 className="fitMe" pic={notFitMeGroup.albumCover[0]}>
+        <FitMeArtistPic2 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${notFitMeGroup.code}1.jpg`}>
           <FitMeBtnBox>
             <span onClick={() => {
               if(notFitMeNum === 0){

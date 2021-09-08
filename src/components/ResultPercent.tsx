@@ -91,8 +91,9 @@ const ResultPercent = function(props: any){
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/result")
+    axios.get('https://server.mbtious.net/result')
     .then(res => {
+      console.log(res);
       let dataArr = [];
       let labels = [];
       let tempArr = [];
@@ -109,6 +110,8 @@ const ResultPercent = function(props: any){
         tempArr.push([key, mbtiObj[key]])
       }
       tempArr.sort((a, b) => a[1] - b[1]);
+
+      console.log(tempArr)
 
       for(let item of tempArr){
         dataArr.push(item[1]);

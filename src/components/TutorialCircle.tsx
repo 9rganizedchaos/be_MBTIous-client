@@ -1,6 +1,8 @@
 import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
 import styled, { css } from "styled-components";
+import { RootState } from '../reducers';
 
 const CircleContainer = styled.div`
 ${( { theme } ) => {
@@ -41,10 +43,13 @@ justify-content: center;
 `
 
 function TutorialCircle() {
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { view } = viewState;
+
   return (
     <CircleContainer>
       <FontAwesomeIcon icon={faMousePointer}></FontAwesomeIcon>
-      <div className="circle__description">You can control <br/> this background image<br/> by using mouse scrolling<br/> and drag&drop!</div>
+      <div className="circle__description">You can control <br/> this background image<br/> by using mouse scrolling<br/> or drag&drop!</div>
     </CircleContainer>
   )
 }

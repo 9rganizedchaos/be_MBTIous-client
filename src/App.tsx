@@ -15,9 +15,8 @@ function App() {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color, view } = viewState;
   const dispatch = useDispatch();
-  console.log(view)
-
   const [theme, setTheme] = useState(violetTheme);
+
   const handleThemeChange = () => {
     setTheme(theme === violetTheme ? pinkTheme : violetTheme);
     if(color === "violet"){
@@ -40,14 +39,15 @@ function App() {
   useEffect(() => {
     window.addEventListener("load", handleSizeChange);
     window.addEventListener("resize", handleSizeChange);
-  })
+    dispatch(updateColor("violet"));
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
       <Switch>
         <Route exact path="/">
-          <LandingPage handleThemeChange={handleThemeChange}/>
+          <LandingPage handleThemeChange={handleThemeChange} />
         </Route>
         <Route exact path="/artists">
           <ArtistsPage />

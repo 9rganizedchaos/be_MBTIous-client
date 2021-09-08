@@ -11,6 +11,7 @@ import { updateArtist } from "../action/actions";
 import { Link } from 'react-router-dom';
 import { RootState } from '../reducers';
 import ArtistAlert from '../components/ArtistAlert';
+import groupsArr from '../assets/groups';
 
 interface Edge {
   left: number;
@@ -145,10 +146,52 @@ function ArtistsPage({ history }: any) {
     //loader
     const loader = new THREE.TextureLoader();
     const cubeMaterial1 = new THREE.MeshBasicMaterial({
-      map: loader.load('https://i.imgur.com/1eHg1CG.jpg'),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[0].code}6.jpg`),
     }); 
     const cubeMaterial2 = new THREE.MeshBasicMaterial({
-      map: loader.load('https://i.imgur.com/x2ye6jP.jpg'),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[1].code}5.jpg`),
+    }); 
+    const cubeMaterial3 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[2].code}2.jpg`),
+    }); 
+    const cubeMaterial4 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[3].code}4.jpg`),
+    }); 
+    const cubeMaterial5 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[4].code}3.jpg`),
+    }); 
+    const cubeMaterial6 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[5].code}1.jpg`),
+    }); 
+    const cubeMaterial7 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[6].code}4.jpg`),
+    }); 
+    const cubeMaterial8 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[7].code}2.jpg`),
+    });
+    const cubeMaterial9 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[8].code}7.jpg`),
+    }); 
+    const cubeMaterial10 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[9].code}1.jpg`),
+    }); 
+    const cubeMaterial11 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[10].code}5.jpg`),
+    }); 
+    const cubeMaterial12 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[11].code}8.jpg`),
+    }); 
+    const cubeMaterial13 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[12].code}1.jpg`),
+    }); 
+    const cubeMaterial14 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[13].code}5.jpg`),
+    }); 
+    const cubeMaterial15 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[14].code}5.jpg`),
+    }); 
+    const cubeMaterial16 = new THREE.MeshBasicMaterial({
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[15].code}1.jpg`),
     }); 
 
     // Scene
@@ -160,20 +203,20 @@ function ArtistsPage({ history }: any) {
 
     const cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
     const cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube5 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube6 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube7 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube8 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube9 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube10 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube11 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube12 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube13 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube14 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
-    const cube15 = new THREE.Mesh(cubeGeometry, cubeMaterial1);
-    const cube16 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+    const cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial3);
+    const cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial4);
+    const cube5 = new THREE.Mesh(cubeGeometry, cubeMaterial5);
+    const cube6 = new THREE.Mesh(cubeGeometry, cubeMaterial6);
+    const cube7 = new THREE.Mesh(cubeGeometry, cubeMaterial7);
+    const cube8 = new THREE.Mesh(cubeGeometry, cubeMaterial8);
+    const cube9 = new THREE.Mesh(cubeGeometry, cubeMaterial9);
+    const cube10 = new THREE.Mesh(cubeGeometry, cubeMaterial10);
+    const cube11 = new THREE.Mesh(cubeGeometry, cubeMaterial11);
+    const cube12 = new THREE.Mesh(cubeGeometry, cubeMaterial12);
+    const cube13 = new THREE.Mesh(cubeGeometry, cubeMaterial13);
+    const cube14 = new THREE.Mesh(cubeGeometry, cubeMaterial14);
+    const cube15 = new THREE.Mesh(cubeGeometry, cubeMaterial15);
+    const cube16 = new THREE.Mesh(cubeGeometry, cubeMaterial16);
 
     const cubeArr = [cube1, cube2, cube3, cube4, cube5, cube6, cube7, cube8, cube9, cube10, cube11, cube12, cube13, cube14, cube15, cube16];
 
@@ -219,83 +262,83 @@ function ArtistsPage({ history }: any) {
             switch(currentIntersect.object)
             {
                 case cube1:
-                    setArtist("BlackPink");
-                    dispatch(updateArtist("BlackPink"));
+                    setArtist(groupsArr[0].name);
+                    dispatch(updateArtist(groupsArr[0].name));
                     break
     
                 case cube2:
-                    setArtist("RedVelvet");
-                    dispatch(updateArtist("RedVelvet"));
+                    setArtist(groupsArr[1].name);
+                    dispatch(updateArtist(groupsArr[1].name));
                     break
     
                 case cube3:
-                    setArtist("TWICE")
-                    dispatch(updateArtist("TWICE"));
+                    setArtist(groupsArr[2].name)
+                    dispatch(updateArtist(groupsArr[2].name));
                     break
 
                 case cube4:
-                    setArtist("MOMOLAND")
-                    dispatch(updateArtist("MOMOLAND"));
+                    setArtist(groupsArr[3].name)
+                    dispatch(updateArtist(groupsArr[3].name));
                     break
 
                 case cube5:
-                    setArtist("(G)I-DLE");
-                    dispatch(updateArtist("(G)I-DLE"));
+                    setArtist(groupsArr[4].name);
+                    dispatch(updateArtist(groupsArr[4].name));
                     break
                     
                 case cube6:
-                  setArtist("OhMyGirl")
-                  dispatch(updateArtist("OhMyGirl"));
+                  setArtist(groupsArr[5].name)
+                  dispatch(updateArtist(groupsArr[5].name));
                     break                    
 
                 case cube7:
-                  setArtist("ITZY")
-                  dispatch(updateArtist("ITZY"));
+                  setArtist(groupsArr[6].name)
+                  dispatch(updateArtist(groupsArr[6].name));
                     break
 
                 case cube8:
-                  setArtist("AESPA")
-                  dispatch(updateArtist("AESPA"));
+                  setArtist(groupsArr[7].name)
+                  dispatch(updateArtist(groupsArr[7].name));
                     break
 
                 case cube9:
-                  setArtist("IZ*ONE")
-                  dispatch(updateArtist("IZ*ONE"));
+                  setArtist(groupsArr[8].name)
+                  dispatch(updateArtist(groupsArr[8].name));
                     break
 
                 case cube10:
-                  setArtist("GFRIEND")
-                  dispatch(updateArtist("GFRIEND"));
+                  setArtist(groupsArr[9].name)
+                  dispatch(updateArtist(groupsArr[9].name));
                     break
 
                 case cube11:
-                  setArtist("WekiMeki")
-                  dispatch(updateArtist("WekiMeki"));
+                  setArtist(groupsArr[10].name)
+                  dispatch(updateArtist(groupsArr[10].name));
                     break
 
                 case cube12:
-                  setArtist("Lovelyz")
-                  dispatch(updateArtist("Lovelyz"));
+                  setArtist(groupsArr[11].name)
+                  dispatch(updateArtist(groupsArr[11].name));
                     break
 
                 case cube13:
-                  setArtist("StayC")
-                  dispatch(updateArtist("StayC"));
+                  setArtist(groupsArr[12].name)
+                  dispatch(updateArtist(groupsArr[12].name));
                     break
 
                 case cube14:
-                  setArtist("WJSN");
-                  dispatch(updateArtist("WJSN"));
+                  setArtist(groupsArr[13].name);
+                  dispatch(updateArtist(groupsArr[13].name));
                     break
 
                 case cube15:
-                  setArtist("LOONA")
-                  dispatch(updateArtist("LOONA"));
+                  setArtist(groupsArr[14].name)
+                  dispatch(updateArtist(groupsArr[14].name));
                     break
 
                 case cube16:
-                  setArtist("MAMAMOO")
-                  dispatch(updateArtist("MAMAMOO"));
+                  setArtist(groupsArr[15].name)
+                  dispatch(updateArtist(groupsArr[15].name));
                     break
             }
         }

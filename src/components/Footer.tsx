@@ -4,9 +4,11 @@ import { motion } from "framer-motion"
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useEffect } from 'react';
 
 const FooterContainer = styled.div`
-${( { theme } ) => {
+${( { theme, color } ) => {
   return css`
 position: fixed;
 width: 100vw;
@@ -39,7 +41,7 @@ display: flex;
         strong {
           margin: 0 1.5rem;
           -webkit-text-fill-color: ${theme.color.sub};
-          -webkit-text-stroke-width: 1px;
+          -webkit-text-stroke-width: 2px;
           -webkit-text-stroke-color: ${theme.color.main};
         }
       }
@@ -52,6 +54,10 @@ display: flex;
     display: flex;
     justify-content: space-between;
     .footer__toGit {
+      a {
+        text-decoration: none;
+        color: ${theme.color.sub2};
+      }
       cursor: pointer;
       color: ${theme.color.sub2};
       font-weight: 800;
@@ -106,8 +112,12 @@ display: flex;
 }
 .footer__qrcode {
   height: 100%;
-  width: 10rem;
+  width: 8.75rem;
   background-color: ${theme.color.sub};
+  background-image: ${color === "violet" ? `url("https://s3.ap-northeast-2.amazonaws.com/mbtious.net/qrcode/qrcode_violet.jpg")`: `url("https://s3.ap-northeast-2.amazonaws.com/mbtious.net/qrcode/qrcode_pink.jpg")`};
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 @media (${theme.size.tablet}) {
   }
@@ -153,44 +163,48 @@ display: flex;
 
 const marqueeVariants = {
   animate: {
-    x: [0, -1000],
+    x: [0, -3500],
     transition: {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 4,
+        duration: 12,
         ease: "linear",
       },
     },
   },
 };
 
-function Footer() {
+function Footer(props: any) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color, view } = viewState;
   const textInput = useRef(null);
-  const copyToClipBoard = () => {
-    document.execCommand("copy");
-  }
+
+  useEffect(() => {
+    console.log(color);
+  }, [])
 
   return (
     <Fragment>
-      <FooterContainer>
+      <FooterContainer color={color}>
         <div className="footer__main">
           <div className="footer__top">
             <motion.div className="track" variants={marqueeVariants} animate="animate">
-              <span>#BLACKPINK  <strong>#ITZY</strong>  #TWICE  <strong>#REDVELVET</strong>  #AESPA  <strong>#IZ*ONE</strong>  #2NE1  <strong>#Fx</strong>  #OHMYGIRL</span>
+              <span>BLACKPINK  <strong>ITZY</strong>  TWICE  <strong>REDVELVET</strong>  AESPA  <strong>IZ*ONE</strong>  WJSN  <strong>MOMOLAND</strong>  OHMYGIRL <strong>(G)I-DLE</strong> WEKIMEKI <strong>GFRIEND</strong> LOVELYZ <strong>LOONA</strong> APRIL <strong>MAMAMOO</strong> BLACKPINK  <strong>ITZY</strong>  TWICE  <strong>REDVELVET</strong> AESPA  <strong>IZ*ONE</strong>  WJSN  <strong>MOMOLAND</strong>  OHMYGIRL <strong>(G)I-DLE</strong> WEKIMEKI <strong>GFRIEND</strong> LOVELYZ <strong>LOONA</strong> APRIL <strong>MAMAMOO</strong></span>
             </motion.div>
           </div>
           <div className="footer__bottom">
-            <div className="footer__toGit">{view === "PC" ? "▶ ▶ to GIT ◀ ◀ ◀ ◀ ◀ ◀" : "▶ to GIT"}</div>
+            <div className="footer__toGit"><a href="https://github.com/9rganizedchaos/be_MBTIous-client" target="_blank" rel="noreferrer">{view === "PC" ? "▶ ▶ to GIT ◀ ◀ ◀ ◀ ◀ ◀" : "▶ to GIT"}</a></div>
             <div className="footer__share">
               <div className="shareSearchBox">
                 <div className="address"><span>https://be.mbtious.test</span></div>
-                <div className="copy" onClick={() => {
-                    console.log("clicked")
-                    copyToClipBoard()
-                  }}><span>Copy</span></div>
+                <div className="copy" onClick={(e) => {
+                    props.handleCopyBtn(e);
+                  }}>
+                <CopyToClipboard text={"https://be.mbtious.net"}>
+                  <span>Copy</span>
+                </CopyToClipboard>
+                </div>
               </div>
               <div className="shareLetter">& SHARE!</div>
             </div>

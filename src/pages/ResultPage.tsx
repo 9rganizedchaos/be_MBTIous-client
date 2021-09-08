@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faComment } from '@fortawesome/free-solid-svg-icons';
 import ResultAlbumCover from '../components/ResultAlbumCover';
 import ResultAlphabet from '../components/ResultAlphabet';
 import ResultGirlGroup from '../components/ResultGirlGroup';
@@ -22,6 +22,8 @@ import SettingBar from '../components/SettingBar';
 import ResultAlert from '../components/ResultAlert';
 import ResultHeader from '../components/ResultHeader';
 import ResultFooter from '../components/ResultFooter';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 
 interface ComponentTagProps {
   contain: any;
@@ -35,17 +37,22 @@ height: 100vh;
 background-color: ${theme.color.sub};
 border: 0.25rem solid ${theme.color.main};
 @media (${theme.size.tablet}) {
+  overflow-y: hidden;
+  .scrollDiv{
+    overflow-y: hidden;
+  }
 }
 @media (${theme.size.mobile}) {
   display: flex;
   flex-direction: column;
   .scrollDiv{
     overflow-y: scroll;
+    overflow-x: hidden;
   }
   .scrollDiv::-webkit-scrollbar{
     display: none;
   }
-}
+} 
 `
 }}
 `;
@@ -170,10 +177,11 @@ left: 20.25rem;
 
 function ResultPage({handleThemeChange}: any) {
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist } = testState;
+  const { favoriteArtist, result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { view } = viewState;
-  let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist)[0];
+  let myMBTI = result.mbti;
+  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
 
   const constraintsRef = useRef(null);
 
@@ -193,7 +201,6 @@ function ResultPage({handleThemeChange}: any) {
       let lastIndex = classNameArr.length - 1;
       clickedClassName = classNameArr[lastIndex];
     }
-  console.log(clickedClassName);
 
     let newComponentIndex = componentIndex.slice();
     let index = componentIndex.indexOf(clickedClassName);
@@ -240,7 +247,7 @@ function ResultPage({handleThemeChange}: any) {
   }
 
   const handlePlusTag = (e: any) => {
-    if(myKpopGroup.albumCover.length === albumCoverNum){
+    if(myKpopGroup.albumCover === albumCoverNum){
       setPageX(e.pageX);
       setPageY(e.pageY);
       setAlertMessage("더 이상 추가할 앨범커버가 없습니다.");
@@ -253,8 +260,18 @@ function ResultPage({handleThemeChange}: any) {
     }
   }
 
+  const handleCopyBtn = (e: any) => {
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+    setAlertMessage("링크가 클립보드에 복사되었습니다");
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1000);
+  }
+
   const handleMinusTag = (e: any) => {
-    if(albumCoverNum  === 0){
+    if(albumCoverNum === 0){
       setPageX(e.pageX);
       setPageY(e.pageY);
       setAlertMessage("더 이상 삭제할 앨범커버가 없습니다.");
@@ -265,6 +282,59 @@ function ResultPage({handleThemeChange}: any) {
     } else {
       setAlbumCoverNum(albumCoverNum - 1);
     }
+  }
+
+  const handleKakaoBtn = () => {
+    if(!window.Kakao.isInitialized()){
+      console.log("실행됨!")
+      window.Kakao.init(process.env.REACT_APP_KAKAO);
+    }
+    window.Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '남다 바보 ㅠㅠ',
+        description: '제발오류나지마라제발ㅠㅠ',
+        imageUrl:
+          'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+        link: {
+          webUrl: 'https://mbtious.net',
+          mobileWebUrl: 'https://mbtious.net',
+          androidExecutionParams: 'test',
+        },
+      },
+      social: {
+        likeCount: 10,
+        commentCount: 20,
+        sharedCount: 30,
+      },
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            webUrl: 'https://mbtious.net',
+            mobileWebUrl: 'https://mbtious.net',
+          },
+        },
+        {
+          title: '앱으로 이동',
+          link: {
+            webUrl: 'https://mbtious.net',
+            mobileWebUrl: 'https://mbtious.net',
+          },
+        },
+      ]
+    });
+  }
+
+  const handleTwitterBtn = () => {
+    let sendText = "안녕하세요";
+    let sendUrl = "be.mbtious.net/";
+    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+  }
+
+  const handleFacebookBtn = () => {
+    let sendUrl = "be.mbtious.net/";
+    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
   }
 
   return (
@@ -281,7 +351,7 @@ function ResultPage({handleThemeChange}: any) {
         <ResultMatching favoriteArtist={favoriteArtist} handleResultComponentClick={handleResultComponentClick}></ResultMatching>
         <ResultPercent handleResultComponentClick={handleResultComponentClick}></ResultPercent>
         <ResultMemberMbti handleResultComponentClick={handleResultComponentClick}></ResultMemberMbti>
-        <ResultFooter></ResultFooter>
+        <ResultFooter handleTwitterBtn={handleTwitterBtn} handleFacebookBtn={handleFacebookBtn} handleKakaoBtn={handleKakaoBtn} handleCopyBtn={handleCopyBtn}></ResultFooter>
         </div>
       </ResultPageContainer> :
       <ResultPageContainer>
@@ -309,18 +379,20 @@ function ResultPage({handleThemeChange}: any) {
         </ComponentBox>
         <Title>Your Test Result!</Title>
         <ButtonBox>
-          <button>
-            <FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon>
+          <button onClick={handleKakaoBtn}>
+            <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
           </button>
-          <button>
+          <button onClick={handleTwitterBtn}>
             <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
           </button>
-          <button>
+          <button onClick={handleFacebookBtn}>
             <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
           </button>
-          <button>
-            <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>
-          </button>
+          <CopyToClipboard text={"https://be.mbtious.net"}>
+            <button onClick={handleCopyBtn}>
+              <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>
+            </button>
+          </CopyToClipboard>
           <button onClick={handleCaptureBtnClick}>
             <FontAwesomeIcon icon={faCamera}></FontAwesomeIcon>
           </button>
@@ -328,11 +400,12 @@ function ResultPage({handleThemeChange}: any) {
       </ResultSidebar> }
       <ResultDragArea ref={constraintsRef}>
       </ResultDragArea>
-      {myKpopGroup.albumCover.map((item: any, index: number) => {
+      { new Array(myKpopGroup.albumCover).fill(0).map((item: any, index: number) => {
+        console.log(myKpopGroup.name);
         if(index > albumCoverNum - 1){
           return;
         }
-        return <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={item}></ResultAlbumCover>
+        return <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${index + 1}.jpg`}></ResultAlbumCover>
       })}
       {componentIndex.includes("fitMe") ? <ResultFitMe handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} fitMeIndex={componentIndex.indexOf("fitMe")} constraintsRef={constraintsRef}/> : null}
       {componentIndex.includes("matching") ? <ResultMatching handleCloseBtn={handleCloseBtn} favoriteArtist={favoriteArtist} handleResultComponentClick={handleResultComponentClick} matchingIndex={componentIndex.indexOf("matching")} constraintsRef={constraintsRef}></ResultMatching> : null}

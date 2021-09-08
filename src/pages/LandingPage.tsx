@@ -1,4 +1,4 @@
-import { useEffect, useRef, Fragment } from "react";
+import { useEffect, useRef, Fragment, useState } from "react";
 import { withRouter } from "react-router";
 import * as THREE from "three"; 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -6,6 +6,8 @@ import styled, { css } from "styled-components";
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
 import { motion } from "framer-motion";
+import groupsArr from '../assets/groups';
+import LandingAlert from '../components/LandingAlert';
 
 interface Edge {
   left: number;
@@ -97,21 +99,74 @@ font-size: 1.5rem;
 function LandingPage(props: any) {
   const landingPageContainer = useRef<HTMLDivElement | null>(null);
 
+  const [isAlertMessageOpen, setAlertOpen] = useState(false);
+  const [alertPageX, setPageX] = useState(0);
+  const [alertPageY, setPageY] = useState(0);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertIcon, setAlertIcon] = useState("");
+
+
   const handleStartClick = () => {
     props.history.push("/artists");
   }
 
+  const handleColorChange = (e: any) => {
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+    setAlertMessage("색상이 변경되었습니다.");
+    setAlertOpen(true);
+    setAlertIcon("info");
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1000);
+  }
+
+  const handleCopyBtn = (e: any) => {
+    console.log(e.pageX, e.pageY);
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+    setAlertMessage("링크가 복사되었습니다.");
+    setAlertOpen(true);
+    setAlertIcon("info");
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1000);
+  }
+
+  const handleLanguageChange = (e: any) => {
+    console.log(e.pageX, e.pageY);
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+    setAlertMessage("준비중인 서비스입니다.");
+    setAlertOpen(true);
+    setAlertIcon("alert");
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1000);
+  }
+
   useEffect(() => {
+    //ImageUrl 배열 만들기
+    let imageUrlArr: any = [];
+    groupsArr.forEach((item: any) => {
+      let randomNum = Math.floor(Math.random() * item.albumCover + 1);
+      imageUrlArr.push(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${item.code}${randomNum}.jpg`)
+    })
+    let pickedRandomNum1: number = Math.floor(Math.random() * imageUrlArr.length);
+    let pickedRandomNum2: number = Math.floor(Math.random() * imageUrlArr.length);
+    let pickedRandomArr = [pickedRandomNum1, pickedRandomNum2]; 
+
     //loader
-    const loader = new THREE.TextureLoader();
-    const material = new THREE.MeshBasicMaterial({
-      map: loader.load('https://i.imgur.com/1eHg1CG.jpg'),
-    }); 
     // Scene
     const scene = new THREE.Scene()
 
     // Object 
-    for(let i = 0; i < 200; i++){
+    for(let i = 0; i < 256; i++){
+      let randomNum = Math.floor(Math.random() * 2);
+      const loader = new THREE.TextureLoader();
+      const material = new THREE.MeshBasicMaterial({
+        map: loader.load(imageUrlArr[pickedRandomArr[randomNum]]),
+      }); 
       const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
       const cube = new THREE.Mesh(cubeGeometry, material)
       cube.position.x = (Math.random() - 0.5) * 20
@@ -172,13 +227,14 @@ function LandingPage(props: any) {
 
   return (
     <Fragment>
+      {isAlertMessageOpen ? <LandingAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage} alertIcon={alertIcon}/> : null}
       <div ref={landingPageContainer}></div>
-      <Nav handleThemeChange={props.handleThemeChange}/>
+      <Nav handleThemeChange={props.handleThemeChange} handleColorChange={handleColorChange} handleLanguageChange={handleLanguageChange}/>
       <Title>Be <strong>MBTI</strong>ous</Title>
       <StartButton onClick={handleStartClick}>CLICK TO START</StartButton>
       <SideEdge left={100} right={0}/>
       <SideEdge left={0} right={100}/>
-      <Footer/>
+      <Footer handleCopyBtn={handleCopyBtn}/>
     </Fragment>
   )
 }

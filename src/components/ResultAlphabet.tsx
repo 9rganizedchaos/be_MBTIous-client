@@ -42,6 +42,7 @@ div {
   top: 0;
   left: 0;
   width: 100%;
+  height: 200px;
   border: none;
   border-bottom: 3px solid ${theme.color.main};
 }
@@ -112,6 +113,8 @@ padding: 0 1rem;
 }
 @media (${theme.size.mobile}) {
   width: 90%;
+  position: relative;
+  top: -5.25rem;
 }
 `
 }}

@@ -19,7 +19,7 @@ ${( { theme, settingBar } ) => {
   bottom: ${settingBar ? 0 : "-3.75rem"};
   left: 75%;
   display: flex;
-  z-index: 10;
+  z-index: 200;
   width: 10rem;
   display: flex;
   justify-content: center;
@@ -40,6 +40,12 @@ ${( { theme, settingBar } ) => {
       justify-content: center;
       align-items: center;
       font-size: 1.75rem;
+      cursor: pointer;
+      transition: .5s;
+      &:hover{
+        background-color: ${theme.color.main};
+        color: ${theme.color.sub};
+      }
     }
   }
   .settingMain {
@@ -57,10 +63,57 @@ ${( { theme, settingBar } ) => {
       align-items: center;
     }
     span {
+      cursor: pointer;
       color: ${theme.color.main};
       font-style: italic;
       font-weight: 800;
       font-size: 1.25rem;
+      padding: 0.25rem;
+      transition: .5s;
+      &:hover{
+        background-color: ${theme.color.main};
+        color: ${theme.color.sub};
+      }
+    }
+  }
+  @media (${theme.size.tablet}) {
+    bottom: ${settingBar ? 0 : "-3.75rem"};
+    left: 70%;
+    .settingBtn {
+      width: 14rem;
+      div{
+        width: 2rem;
+        height: 1.25rem;
+        color: ${theme.color.main};
+        font-size: 1.25rem;
+      }
+    }
+    .settingMain {
+      width: 16rem;
+      height: 4rem;
+      span {
+        font-size: 1.125rem;
+      }
+    }
+  }
+  @media (${theme.size.mobile}) {
+    bottom: ${settingBar ? 0 : "-2.75rem"};
+    left: 45%;
+    .settingBtn {
+      width: 10rem;
+      div{
+        width: 2rem;
+        height: 1.25rem;
+        color: ${theme.color.main};
+        font-size: 1.25rem;
+      }
+    }
+    .settingMain {
+      width: 11rem;
+      height: 3rem;
+      span {
+        font-size: 0.75rem;
+      }
     }
   }
   `
@@ -99,7 +152,7 @@ function SettingBar({ handleThemeChange }: any) {
       </div>
       <div className="settingMain">
         <div className="colorSettingBar" onClick={handleThemeChange}>
-          <span>{color === "violet" ? "VioletMode" : "PinkMode" }</span>
+          <span>{color === "violet" ? "PinkMode" : "VioletMode" }</span>
         </div>
         <div className="languageSettingBar">
           <span>ENGLISH</span>

@@ -27,7 +27,13 @@ ${( { theme } ) => {
 width: 100%;
 height: 268px;
 border-bottom: 0.25rem solid ${theme.color.main};
-background-size: cover;
+.imageBox_image{
+  width: 100%;
+  height: 100%;
+  opacity: .5;
+  background-size: cover;
+  background-position: center;
+}
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
@@ -52,25 +58,30 @@ align-items: center;
 font-size: 1.125rem;
 transition: .1s;
 span {
-  width: 90%;
-  padding: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  margin: 0.125rem;
   background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.sub : theme.color.main};
   text-align: center;
   color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 0 ? theme.color.main : theme.color.sub};
 }
 .optionTitle{
-  width: 35%;
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-style: italic;
   margin-bottom: 0.5rem;
 }
 &:hover{
-  font-size: 1.175rem;
+  font-size: 1.15rem;
 }
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
+  .optionTitle{
+    font-size: 1.125rem;
+  }
   height: calc(100% - 188px);
   span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 }
 `
@@ -93,25 +104,30 @@ align-items: center;
 font-size: 1.125rem;
 transition: .1s;
 span {
-  width: 90%;
-  padding: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  margin: 0.125rem;
   background-color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.sub : theme.color.main};
   text-align: center;
   color: ${descriptionBoxObj.answered && descriptionBoxObj.answer === 1 ? theme.color.main : theme.color.sub};
 }
 .optionTitle{
-  width: 35%;
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-style: italic;
   margin-bottom: 0.5rem;
 }
 &:hover{
-  font-size: 1.175rem;
+  font-size: 1.15rem;
 }
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
   height: calc(100% - 188px);
+  .optionTitle{
+    font-size: 1.125rem;
+  }
   span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 }
 `
@@ -130,15 +146,20 @@ const OptionCard = function(props: any) {
 
   return (
     <OptionCardBox>
-      <ImageBox ref={imageBox}></ImageBox>
+      <ImageBox>
+        <div className="imageBox_image" ref={imageBox}></div>
+      </ImageBox>
       { props.num === 1 ? <DescriptionBox1 descriptionBoxObj={props.answers[props.currentTest - 1]} className={`${props.num -1}`} onClick={props.handleOptionClick}>
-        <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>        
-        <span className={`${props.num -1}`}>{props.option}</span>
+        <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>     
+        {props.option.map((item: string, index: number) => {
+          return <span className={`${props.num -1}`}>{item}</span>
+        })}
       </DescriptionBox1> : <DescriptionBox2 descriptionBoxObj={props.answers[props.currentTest - 1]} className={`${props.num -1}`} onClick={props.handleOptionClick}>
         <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>        
-        <span className={`${props.num -1}`}>{props.option}</span>
+        {props.option.map((item: string, index: number) => {
+          return <span className={`${props.num -1}`}>{item}</span>
+        })}
       </DescriptionBox2>
-
       }
     </OptionCardBox>
   )

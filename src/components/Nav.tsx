@@ -25,6 +25,12 @@ ${( { theme } ) => {
       margin: 0.7rem 0 0 0.7rem;
       display: flex;
       flex-direction: row;
+      .color {
+        width: 11rem;
+      }
+      .language {
+        width: 8rem;
+      }
       .settingBox {
         cursor: pointer;
         margin-right: 1rem;
@@ -41,9 +47,20 @@ ${( { theme } ) => {
           color: ${theme.color.main};
           font-size: 1.5rem;
         }
+        &:hover{
+          background-color: ${theme.color.sub};
+        }
+        &:active{
+          transform: scale(0.97);
+        }
       }
     }
     @media (${theme.size.tablet}) {
+      .nav__slogan {
+        font-size: 1.75rem;
+        display: flex;
+        align-items: center;
+      }
     }
     @media (${theme.size.mobile}) {
       justify-content: flex-end;
@@ -71,10 +88,15 @@ function Nav(props: any) {
       <NavContainer>
         <div className="nav__slogan">FIND YOUR KPOP GIRL GROUP EGO AND ...!</div>
         <div className="nav__setting">
-          <div onClick={props.handleThemeChange} className="settingBox">
-            <span>{color === "violet" ? "VIOLET MODE" : "PINK MODE"}</span>
+          <div onClick={(e) => {
+            props.handleThemeChange();
+            props.handleColorChange(e);
+          }} className="settingBox color">
+            <span>{color === "violet" ? "PINK MODE" : "VIOLET MODE"}</span>
           </div>
-          <div className="settingBox">
+          <div className="settingBox language" onClick={(e) => {
+            props.handleLanguageChange(e);
+          }}>
             <span>Language</span>
           </div>
         </div>

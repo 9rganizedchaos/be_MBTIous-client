@@ -1,6 +1,7 @@
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faCamera, faCopy, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faComment, faCopy, faShare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 
 const ResultFooterContainer = styled.div`
@@ -64,6 +65,10 @@ background-color: ${theme.color.main};
 color: ${theme.color.sub};
 width: 100%;
 padding: 2rem;
+.result-footer-again-btn {
+  text-decoration : none;
+  text-decoration-line : none;
+}
 `
 }}
 `;
@@ -77,6 +82,7 @@ ${( { theme } ) => {
   color: ${theme.color.sub};
   font-size: 1rem;
   text-align: right;
+  padding-bottom: 10rem;
   a {
     text-decoration: none;
     color: ${theme.color.sub};
@@ -101,21 +107,23 @@ const ResultFooter = function(props: any){
     <ResultFooterContainer>
       <TestAgainBox>
       <div className="result-footer-test-again">If you wanna get this test again,<br/> <strong>▼ Click! ▼</strong></div>
-      <div className="result-footer-again-btn">TEST AGAIN</div>
+      <Link to="/">
+        <div className="result-footer-again-btn">TEST AGAIN</div>
+      </Link>
       </TestAgainBox>
       <div className="result-footer-title">Share your test result!</div>
       <ButtonBox>
-          <button>
-            <FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon>
+          <button onClick={props.handleKakaoBtn}>
+            <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
           </button>
-          <button>
+          <button onClick={props.handleTwitterBtn}>
             <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
           </button>
-          <button>
+          <button onClick={props.handleFacebookBtn}>
             <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
           </button>
-          <button>
-            <FontAwesomeIcon icon={faShare}></FontAwesomeIcon>
+          <button onClick={props.handleCopyBtn}>
+            <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>
           </button>
       </ButtonBox>
       <GoodbyeBox>

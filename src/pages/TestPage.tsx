@@ -96,6 +96,7 @@ border: 0.25rem solid ${theme.color.main};
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
+  overflow: hidden;
   .test__border-box{
     width: 100%;
   }
@@ -242,7 +243,7 @@ function TestPage(props: any) {
       setAlertOpen(true);
       setTimeout(() => {
         setAlertOpen(false);
-      }, 4000);
+      }, 1500);
       setPageX(e.pageX);
       setPageY(e.pageY);
     } else {
@@ -301,7 +302,7 @@ function TestPage(props: any) {
 
         console.log(result, kpopGroup.name, favoriteArtist);
 
-        axios.post("http://localhost:3000/result", {
+        axios.post(`https://server.mbtious.net/result`, {
           mbti: result,
           girlGroupName: kpopGroup.name,
           favoriteGroup: favoriteArtist
@@ -333,7 +334,7 @@ function TestPage(props: any) {
       <div className="test__border-box">
         <AnimatePresence>
       {currentTest > 20 ? null : questionArr.filter((item, index) => index === currentTest - 1).map((question) => 
-      <Test currentTest={currentTest} answers={answers} question={question} handleOptionClick={handleOptionClick} handlePreviousButtonClick={handlePreviousButtonClick} handleSubmitButtonClick={handleSubmitButtonClick} key={question.question}/>
+      <Test currentTest={currentTest} answers={answers} question={question} handleOptionClick={handleOptionClick} handlePreviousButtonClick={handlePreviousButtonClick} handleSubmitButtonClick={handleSubmitButtonClick} key={question.number}/>
       )}</AnimatePresence>
       </div>
     </TestpageContainer>

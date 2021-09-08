@@ -39,9 +39,12 @@ display: flex;
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
+  position: relative;
+  top: -2rem;
   height: 550px;
+  margin-bottom: 50%; 
   .option-flex-container{
-    height: calc(100% - 10rem);
+    height: calc(100% - 9rem);
   }
 }
 `
@@ -63,7 +66,9 @@ height: 5rem;
 }
 @media (${theme.size.mobile}) {
   width: 100%;
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
   padding: 0.25rem 0.5rem;
   height: 3.5rem;
 }
@@ -88,8 +93,8 @@ padding-top: 1rem;
 }
 @media (${theme.size.mobile}) {
   padding: 0.5rem 0;
-  font-size: 1.125rem;
-  height: 2.5rem;
+  font-size: 1rem;
+  height: 2.25rem;
 }
 `
 }}
@@ -114,7 +119,8 @@ border-bottom: 0.25rem solid ${theme.color.main};
 }
 .test__question{
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   font-weight: 400;
   width: calc(100%);
   background-color: ${theme.color.sub};
@@ -127,13 +133,14 @@ border-bottom: 0.25rem solid ${theme.color.main};
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
-  height: 4rem;
+  height: 3.25rem;
+  width: calc(100vw - 2.125rem);
   .test__question-number {
     width: 7.5rem;
     font-size: 2.25rem;
   }
   .test__question{
-    font-size: 1.125rem;
+    font-size: 1rem;
     div {
       margin-left: 1rem;
     }
@@ -225,10 +232,10 @@ div {
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
-  width: 26px;
+  width: 22px;
   height: 2.9rem;
   div{
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 }
 `
@@ -251,9 +258,9 @@ div {
 @media (${theme.size.tablet}) {
 }
 @media (${theme.size.mobile}) {
-  width: 26px;
+  width: 22px;
   div{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 `
@@ -312,24 +319,26 @@ function Test({answers, question, currentTest, handleOptionClick, handlePrevious
     <TestContainer variants={containerVariants} initial="hidden" animate="visible" exit="exit">
       <div className="test__main">
       <TestMainGuide>Now then, <br/> answer the twenty questions below, plz :)</TestMainGuide>
-      <TestGuide>Choose one option which describes you better</TestGuide>
+      <TestGuide>{view === "mobile" ? "Choose an option which describes you better" : "Choose one option which describes you better"}</TestGuide>
       <Question>
         <div className="test__question-number">Q{question.number}</div>
         <div className="test__question">
-          <div>{question.question}</div>
+          {question.question.map((item: string) => {
+            return <div>{item}</div>
+          })}
         </div>
       </Question>
       <div className="option-flex-container">
         <OptionCardContainer optionId={0}>
         <div className="backBtn" onClick={handlePreviousButtonClick}>
-          <div>◀ Previous Question</div>
+          <div>{view === "mobile" ? "Previous Question" : "◀ Previous Question"}</div>
           </div>
           <OptionCard currentTest={currentTest} answers={answers} num={1} pic={question.pic1} option={question.option1} handleOptionClick={handleOptionClick}/>
         </OptionCardContainer>
         <OptionCardContainer optionId={1}>
           <OptionCard currentTest={currentTest} answers={answers} num={2} pic={question.pic2} option={question.option2} handleOptionClick={handleOptionClick}/>
           <div className="submitBtn" onClick={handleSubmitButtonClick}>
-            <div>{currentTest === 20 ? "▶ SUBMIT" : "▶ NEXT"}</div>
+            <div>{view === "mobile" ? "NEXT" : currentTest === 20 ? "▶ SUBMIT" : "▶ NEXT"}</div>
           </div>
         </OptionCardContainer>
       </div>

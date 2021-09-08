@@ -10,17 +10,17 @@ import axios from "axios";
 interface GirlGroupContainerProps {
   girlGroupIndex?: any;
   view?: any;
-  girGroupPicUrl?: any;
+  girlGroupPicUrl?: any;
 }
 
 const ResultGirlGroupContainer = styled(motion.div)<GirlGroupContainerProps>`
-${( { theme, girlGroupIndex, girGroupPicUrl, view } ) => {
+${( { theme, girlGroupIndex, girlGroupPicUrl, view } ) => {
   return css`
 background: ${theme.color.sub};
 border: 3px solid ${theme.color.main};
 border-right: none;
 width: 400px;
-height: 500px;
+height: 600px;
 position: absolute;
 top: 250px;
 left: 1020px;
@@ -66,7 +66,7 @@ z-index: ${girlGroupIndex};
     border: 2px solid ${theme.color.main};
     width: 60%;
     height: 60%;
-    background-image: url(${girGroupPicUrl});
+    background-image: url(${girlGroupPicUrl});
     background-size: cover;
     background-position: center;
   }
@@ -89,6 +89,17 @@ z-index: ${girlGroupIndex};
     font-weight: 800;
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
+  }
+  .description-text-container {
+    display: flex;
+    flex-direction: column;
+    .result-girlGroup-description-text{
+      margin: 0.5rem 0;
+      font-weight: 400;
+    }
+    strong {
+      font-weight: 800;
+    }
   }
 }
 ::-webkit-scrollbar {
@@ -131,9 +142,10 @@ const ResultGirlGroup = function(props: any){
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
 
   useEffect(() => {
-    axios.all([axios.get("http://localhost:3000/result"), axios.get(`http://localhost:3000/result/${myMBTI}`)])
+    axios.all([axios.get(`https://server.mbtious.net/result`), axios.get(`https://server.mbtious.net/result/${myMBTI}`)])
     .then(
       axios.spread((res1, res2) => {
+        console.log(res1, res2)
         let wholeResults = res1.data.results.length;
         let specificResults = res2.data.results.length;
         setPercent(specificResults / wholeResults * 100);
@@ -145,7 +157,7 @@ const ResultGirlGroup = function(props: any){
   return (
     <>{
       view === "mobile" ?     
-      <ResultGirlGroupContainer girGroupPicUrl={myKpopGroup.albumCover[0]} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup">
+      <ResultGirlGroupContainer girlGroupPicUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${Math.floor(Math.random() * myKpopGroup.albumCover) + 1}.jpg`} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup">
       <div className="result-scroll-container girlGroup">
         <div className="result-girlGroup-title girlGroup">
           <span className="title1 girlGroup">Your Kpop Girl Group Ego is</span>
@@ -158,14 +170,16 @@ const ResultGirlGroup = function(props: any){
         </div>
         <div className="result-girlGroup-description girlGroup">
         <div className="result-girlGroup-description-title girlGroup">description</div>
-          <div className="result-girlGroup-description-text girlGroup">
-            {myKpopGroup.description}
-          </div>
+        <div className="description-text-container girlGroup">
+        {myKpopGroup.description.map((item: string) => {
+          return <div className="result-girlGroup-description-text girlGroup">{item}</div>
+        })}
+        </div>
         </div>
       </div>
     </ResultGirlGroupContainer> 
       :     
-    <ResultGirlGroupContainer girGroupPicUrl={myKpopGroup.albumCover[0]} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup" onClick={props.handleResultComponentClick} girlGroupIndex={props.girlGroupIndex} drag dragConstraints={props.constraintsRef}>
+    <ResultGirlGroupContainer girlGroupPicUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${Math.floor(Math.random() * myKpopGroup.albumCover) + 1}.jpg`} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup" onClick={props.handleResultComponentClick} girlGroupIndex={props.girlGroupIndex} drag dragConstraints={props.constraintsRef}>
       {mouseIn ? <ResultCloseBtn closeId={"girlGroup"} handleCloseBtn={props.handleCloseBtn}/> : null}
       <div className="result-scroll-container girlGroup">
         <div className="result-girlGroup-title girlGroup">
@@ -179,9 +193,20 @@ const ResultGirlGroup = function(props: any){
         </div>
         <div className="result-girlGroup-description girlGroup">
         <div className="result-girlGroup-description-title girlGroup">description</div>
-          <div className="result-girlGroup-description-text girlGroup">
-            {myKpopGroup.description}
-          </div>
+        <div className="description-text-container girlGroup">
+        {myKpopGroup.description.map((item: string) => {
+          let textArr = item.split(`"`);
+          return <div className="result-girlGroup-description-text girlGroup">{
+            textArr.map((miniItem: any, index: number) => {
+              if(index % 2 === 1){
+                return <strong>{miniItem}</strong>
+              } else {
+                return miniItem
+              }
+            })
+          }</div>
+        })}
+        </div>
         </div>
       </div>
     </ResultGirlGroupContainer> 
