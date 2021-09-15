@@ -146,52 +146,52 @@ function ArtistsPage({ history }: any) {
     //loader
     const loader = new THREE.TextureLoader();
     const cubeMaterial1 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[0].code}6.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[0].code}6.jpeg`),
     }); 
     const cubeMaterial2 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[1].code}5.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[1].code}5.jpeg`),
     }); 
     const cubeMaterial3 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[2].code}2.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[2].code}2.jpeg`),
     }); 
     const cubeMaterial4 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[3].code}4.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[3].code}4.jpeg`),
     }); 
     const cubeMaterial5 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[4].code}3.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[4].code}3.jpeg`),
     }); 
     const cubeMaterial6 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[5].code}1.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[5].code}1.jpeg`),
     }); 
     const cubeMaterial7 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[6].code}4.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[6].code}4.jpeg`),
     }); 
     const cubeMaterial8 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[7].code}2.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[7].code}2.jpeg`),
     });
     const cubeMaterial9 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[8].code}7.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[8].code}7.jpeg`),
     }); 
     const cubeMaterial10 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[9].code}1.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[9].code}1.jpeg`),
     }); 
     const cubeMaterial11 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[10].code}5.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[10].code}5.jpeg`),
     }); 
     const cubeMaterial12 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[11].code}8.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[11].code}8.jpeg`),
     }); 
     const cubeMaterial13 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[12].code}1.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[12].code}1.jpeg`),
     }); 
     const cubeMaterial14 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[13].code}5.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[13].code}5.jpeg`),
     }); 
     const cubeMaterial15 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[14].code}5.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[14].code}5.jpeg`),
     }); 
     const cubeMaterial16 = new THREE.MeshBasicMaterial({
-      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[15].code}1.jpg`),
+      map: loader.load(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${groupsArr[15].code}1.jpeg`),
     }); 
 
     // Scene

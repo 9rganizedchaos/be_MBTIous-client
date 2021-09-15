@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 interface LandingAlertContainerProps {
   alertPageX: any;
@@ -32,6 +32,17 @@ ${( { theme, alertPageX, alertPageY } ) => {
     margin: 0.5rem;
     margin-left: 0;
   }
+  @media (${theme.size.tablet}) {
+  }
+  @media (${theme.size.mobile}) {
+    font-size: 0.75rem;
+    width: 8rem;
+    height: 3rem;
+    svg {
+      font-size: 1.25rem;
+      margin: 0.5rem;
+    }
+  }
   `
 }}
 `
@@ -46,7 +57,7 @@ const alertVariants: any = {
 function LandingAlert({alertPageX, alertPageY, alertMessage, alertIcon}: any) {
   return (
     <LandingAlertContainer variants={alertVariants} exit="exit" alertPageX={alertPageX} alertPageY={alertPageY}>
-      <FontAwesomeIcon icon={alertIcon === "info"? faInfo :faExclamationTriangle}></FontAwesomeIcon>
+      <FontAwesomeIcon icon={alertIcon === "info"? faInfoCircle :faExclamationTriangle}></FontAwesomeIcon>
       <span>{alertMessage}</span>
     </LandingAlertContainer>
   )

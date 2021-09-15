@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { motion } from 'framer-motion';
 import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faCamera, faComment } from '@fortawesome/free-solid-svg-icons';
 import ResultAlbumCover from '../components/ResultAlbumCover';
@@ -17,7 +17,6 @@ import ResultPercent from '../components/ResultPercent';
 import ResultMatching from '../components/ResultMatching';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import groupsArr from '../assets/groups';
 import SettingBar from '../components/SettingBar';
 import ResultAlert from '../components/ResultAlert';
 import ResultHeader from '../components/ResultHeader';
@@ -100,6 +99,9 @@ ${( { theme, contain } ) => {
   &:hover {
     font-size: 1.05rem;
   }
+  &:active {
+    transform: scale(.95);
+  }
   `
 }}
 `;
@@ -152,8 +154,16 @@ button{
   color: ${theme.color.sub};
   background-color: ${theme.color.main};
   margin-top: 0.6rem;
+  transition: .5s;
   svg {
     font-size: 1.4rem;
+  }
+  &:hover {
+    color: ${theme.color.sub2};
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(0.8);
   }
 }
 `
@@ -165,7 +175,7 @@ ${( { theme } ) => {
   return css`
 background: ${theme.color.main};
 opacity: 0.2;
-background: ${theme.color.main};
+background: ${theme.color.main}; 
 position: absolute;
 width: calc(100% - 20.5rem);
 height: calc(100% - 0.5rem);
@@ -175,13 +185,11 @@ left: 20.25rem;
 }}
 `;
 
-function ResultPage({handleThemeChange}: any) {
+function ResultPage({handleThemeChange, myKpopGroup}: any) {
   const testState = useSelector((state: RootState) => state.testReducer);
   const { favoriteArtist, result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { view } = viewState;
-  let myMBTI = result.mbti;
-  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
 
   const constraintsRef = useRef(null);
 
@@ -190,7 +198,30 @@ function ResultPage({handleThemeChange}: any) {
   const [isAlertMessageOpen, setAlertOpen] = useState(false);
   const [alertPageX, setPageX] = useState(0);
   const [alertPageY, setPageY] = useState(0);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertContent, setAlertContent] = useState("");
+
+  const [labels, setLabels] = useState(['Loading...']);
+  const [dataArr, setDataArr] = useState([1]); 
+
+  const handleLangClick = (e: any) => {
+    setAlertContent("lang");
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1500);
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+  }
+
+  const handleColorClick = (e: any) => {
+    setAlertContent("color");
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1500);
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+  }
 
   const handleResultComponentClick = (e: any) => {
     let clickedClassName;
@@ -233,24 +264,25 @@ function ResultPage({handleThemeChange}: any) {
     let index = componentIndex.indexOf(closeId);
     let tempArr = componentIndex.slice();
     tempArr.splice(index, 1);
-    console.log(tempArr);
     setComponentIndex(tempArr);
   }
 
   const handleTagClick = (openId: any) => {
     if(componentIndex.includes(openId)){
-      return;
+      let tempArr = componentIndex.filter(item => item !== openId);
+      setComponentIndex(tempArr);
+    } else {
+      let tempArr = componentIndex.slice();
+      tempArr.push(openId);
+      setComponentIndex(tempArr);
     }
-    let tempArr = componentIndex.slice();
-    tempArr.push(openId);
-    setComponentIndex(tempArr);
   }
 
   const handlePlusTag = (e: any) => {
     if(myKpopGroup.albumCover === albumCoverNum){
       setPageX(e.pageX);
       setPageY(e.pageY);
-      setAlertMessage("더 이상 추가할 앨범커버가 없습니다.");
+      setAlertContent("add");
       setAlertOpen(true);
       setTimeout(() => {
         setAlertOpen(false);
@@ -263,7 +295,7 @@ function ResultPage({handleThemeChange}: any) {
   const handleCopyBtn = (e: any) => {
     setPageX(e.pageX);
     setPageY(e.pageY);
-    setAlertMessage("링크가 클립보드에 복사되었습니다");
+    setAlertContent("copy");
     setAlertOpen(true);
     setTimeout(() => {
       setAlertOpen(false);
@@ -274,7 +306,7 @@ function ResultPage({handleThemeChange}: any) {
     if(albumCoverNum === 0){
       setPageX(e.pageX);
       setPageY(e.pageY);
-      setAlertMessage("더 이상 삭제할 앨범커버가 없습니다.");
+      setAlertContent("distract");
       setAlertOpen(true);
       setTimeout(() => {
         setAlertOpen(false);
@@ -286,40 +318,27 @@ function ResultPage({handleThemeChange}: any) {
 
   const handleKakaoBtn = () => {
     if(!window.Kakao.isInitialized()){
-      console.log("실행됨!")
       window.Kakao.init(process.env.REACT_APP_KAKAO);
     }
     window.Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
-        title: '남다 바보 ㅠㅠ',
-        description: '제발오류나지마라제발ㅠㅠ',
+        title: `나의 걸그룹 자아는 ${myKpopGroup.name} 타입!`,
+        description: `${myKpopGroup.slogan}`,
         imageUrl:
-          'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+          `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/image/kakao_${myKpopGroup.code}.png`,
         link: {
-          webUrl: 'https://mbtious.net',
-          mobileWebUrl: 'https://mbtious.net',
+          webUrl: 'https://be.mbtious.net',
+          mobileWebUrl: 'https://be.mbtious.net',
           androidExecutionParams: 'test',
         },
       },
-      social: {
-        likeCount: 10,
-        commentCount: 20,
-        sharedCount: 30,
-      },
       buttons: [
         {
-          title: '웹으로 이동',
+          title: '나의 걸그룹 자아 찾기',
           link: {
-            webUrl: 'https://mbtious.net',
-            mobileWebUrl: 'https://mbtious.net',
-          },
-        },
-        {
-          title: '앱으로 이동',
-          link: {
-            webUrl: 'https://mbtious.net',
-            mobileWebUrl: 'https://mbtious.net',
+            webUrl: 'https://be.mbtious.net',
+            mobileWebUrl: 'https://be.mbtious.net',
           },
         },
       ]
@@ -327,7 +346,7 @@ function ResultPage({handleThemeChange}: any) {
   }
 
   const handleTwitterBtn = () => {
-    let sendText = "안녕하세요";
+    let sendText = `나의 걸그룹 자아는 ... ${myKpopGroup.name} 타입!`;
     let sendUrl = "be.mbtious.net/";
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
   }
@@ -342,21 +361,21 @@ function ResultPage({handleThemeChange}: any) {
     {view === "mobile" ? 
         <ResultPageContainer>
         <div className="scrollDiv">
-        {isAlertMessageOpen ? <ResultAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage}/> : null}
-        <SettingBar handleThemeChange={handleThemeChange}/>
+        {isAlertMessageOpen ? <ResultAlert alertContent={alertContent} alertPageX={alertPageX} alertPageY={alertPageY} /> : null}
+        <SettingBar handleColorClick={handleColorClick} handleLangClick={handleLangClick} handleThemeChange={handleThemeChange}/>
         <ResultHeader/>
-        <ResultGirlGroup handleResultComponentClick={handleResultComponentClick}/>
-        <ResultFitMe handleResultComponentClick={handleResultComponentClick}></ResultFitMe>
+        <ResultGirlGroup myKpopGroup={myKpopGroup} handleResultComponentClick={handleResultComponentClick}/>
+        <ResultFitMe handleResultComponentClick={handleResultComponentClick}/> 
         <ResultAlphabet handleResultComponentClick={handleResultComponentClick}></ResultAlphabet>
         <ResultMatching favoriteArtist={favoriteArtist} handleResultComponentClick={handleResultComponentClick}></ResultMatching>
-        <ResultPercent handleResultComponentClick={handleResultComponentClick}></ResultPercent>
+        <ResultPercent labels={labels} dataArr={dataArr} setLabels={setLabels} setDataArr={setDataArr} handleResultComponentClick={handleResultComponentClick}></ResultPercent>
         <ResultMemberMbti handleResultComponentClick={handleResultComponentClick}></ResultMemberMbti>
         <ResultFooter handleTwitterBtn={handleTwitterBtn} handleFacebookBtn={handleFacebookBtn} handleKakaoBtn={handleKakaoBtn} handleCopyBtn={handleCopyBtn}></ResultFooter>
         </div>
       </ResultPageContainer> :
       <ResultPageContainer>
-      {isAlertMessageOpen ? <ResultAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage}/> : null}
-      <SettingBar handleThemeChange={handleThemeChange}/>
+      {isAlertMessageOpen ? <ResultAlert alertContent={alertContent} alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
+      <SettingBar handleColorClick={handleColorClick} handleLangClick={handleLangClick} handleThemeChange={handleThemeChange}/>
       {view === "mobile" ? null : <ResultSidebar>
         <Link to="/">
         <Logo>Be_MBTIous</Logo>
@@ -401,18 +420,17 @@ function ResultPage({handleThemeChange}: any) {
       <ResultDragArea ref={constraintsRef}>
       </ResultDragArea>
       { new Array(myKpopGroup.albumCover).fill(0).map((item: any, index: number) => {
-        console.log(myKpopGroup.name);
         if(index > albumCoverNum - 1){
           return;
         }
-        return <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${index + 1}.jpg`}></ResultAlbumCover>
+        return <ResultAlbumCover constraintsRef={constraintsRef} albumCoverUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${index + 1}.jpeg`}></ResultAlbumCover>
       })}
       {componentIndex.includes("fitMe") ? <ResultFitMe handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} fitMeIndex={componentIndex.indexOf("fitMe")} constraintsRef={constraintsRef}/> : null}
       {componentIndex.includes("matching") ? <ResultMatching handleCloseBtn={handleCloseBtn} favoriteArtist={favoriteArtist} handleResultComponentClick={handleResultComponentClick} matchingIndex={componentIndex.indexOf("matching")} constraintsRef={constraintsRef}></ResultMatching> : null}
-      {componentIndex.includes("girlGroup") ? <ResultGirlGroup handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} girlGroupIndex={componentIndex.indexOf("girlGroup")} constraintsRef={constraintsRef}/> : null}
+      {componentIndex.includes("girlGroup") ? <ResultGirlGroup myKpopGroup={myKpopGroup} handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} girlGroupIndex={componentIndex.indexOf("girlGroup")} constraintsRef={constraintsRef}/> : null}
       {componentIndex.includes("alphabet") ? <ResultAlphabet handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} alphabetIndex={componentIndex.indexOf("alphabet")} constraintsRef={constraintsRef}></ResultAlphabet> : null }
       {componentIndex.includes("member") ? <ResultMemberMbti handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} memberIndex={componentIndex.indexOf("member")} constraintsRef={constraintsRef}></ResultMemberMbti> : null }
-      {componentIndex.includes("percent") ? <ResultPercent handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} percentIndex={componentIndex.indexOf("percent")} constraintsRef={constraintsRef}></ResultPercent> : null }
+      {componentIndex.includes("percent") ? <ResultPercent labels={labels} dataArr={dataArr} setLabels={setLabels} setDataArr={setDataArr} handleCloseBtn={handleCloseBtn} handleResultComponentClick={handleResultComponentClick} percentIndex={componentIndex.indexOf("percent")} constraintsRef={constraintsRef}></ResultPercent> : null }
     </ResultPageContainer>
   }
     </>

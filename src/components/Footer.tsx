@@ -57,6 +57,10 @@ display: flex;
       a {
         text-decoration: none;
         color: ${theme.color.sub2};
+        transition: .5s;
+        &:hover {
+          color: ${theme.color.sub};
+        }
       }
       cursor: pointer;
       color: ${theme.color.sub2};
@@ -99,11 +103,15 @@ display: flex;
           display: flex;
           justify-content: center;
           align-items: center;
+          transition: .5s;
           span {
             font-weight: 800;
             font-style: italic;
             color: ${theme.color.main};
             font-size: 1.5rem;
+          }
+          &:hover{
+            background-color: ${theme.color.sub};
           }
         }
       }
@@ -114,7 +122,7 @@ display: flex;
   height: 100%;
   width: 8.75rem;
   background-color: ${theme.color.sub};
-  background-image: ${color === "violet" ? `url("https://s3.ap-northeast-2.amazonaws.com/mbtious.net/qrcode/qrcode_violet.jpg")`: `url("https://s3.ap-northeast-2.amazonaws.com/mbtious.net/qrcode/qrcode_pink.jpg")`};
+  background-image: ${color === "violet" ? `url("https://s3.ap-northeast-2.amazonaws.com/mbtious.net/image/qrcode_violet.jpg")`: `url("https://s3.ap-northeast-2.amazonaws.com/mbtious.net/image/qrcode_pink.jpg")`};
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -179,10 +187,6 @@ function Footer(props: any) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color, view } = viewState;
   const textInput = useRef(null);
-
-  useEffect(() => {
-    console.log(color);
-  }, [])
 
   return (
     <Fragment>

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import ResultCloseBtn from './ResultCloseBtn';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
@@ -75,6 +75,7 @@ z-index: ${girlGroupIndex};
     color: ${theme.color.sub};
     padding: 0.5rem 1rem;
     margin-top: 1rem;
+    text-align:center;
   }
   .result-girlGroup-percent {
     margin-top: 1rem;
@@ -129,27 +130,29 @@ z-index: ${girlGroupIndex};
 }}
 `;
 
+const getProfilePic = (group: any) => {
+  let randomNum = Math.floor(Math.random() * group.albumCover) + 1;
+  return `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${group.code}${randomNum}.jpeg`;
+}
+
 const ResultGirlGroup = function(props: any){
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { result } = testState;
   const { view } = viewState;
-
   const [mouseIn, setMouseIn] = useState(false);
   const [percent, setPercent] = useState(0);
 
-  let myMBTI = result.mbti;
-  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
+  const girlGroupProfilePic = useMemo(() => getProfilePic(props.myKpopGroup), [props.myKpopGroup]);
 
   useEffect(() => {
-    axios.all([axios.get(`https://server.mbtious.net/result`), axios.get(`https://server.mbtious.net/result/${myMBTI}`)])
+    console.log(props.myMBTI)
+    axios.all([axios.get(`https://server.mbtious.net/result`), axios.get(`https://server.mbtious.net/result/${props.myKpopGroup.mbti}`)])
     .then(
       axios.spread((res1, res2) => {
-        console.log(res1, res2)
         let wholeResults = res1.data.results.length;
         let specificResults = res2.data.results.length;
-        setPercent(specificResults / wholeResults * 100);
-        console.log(specificResults / wholeResults * 100);
+        setPercent(Math.floor(specificResults / wholeResults * 100));
       })
     )
   }, [])
@@ -157,21 +160,21 @@ const ResultGirlGroup = function(props: any){
   return (
     <>{
       view === "mobile" ?     
-      <ResultGirlGroupContainer girlGroupPicUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${Math.floor(Math.random() * myKpopGroup.albumCover) + 1}.jpg`} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup">
+      <ResultGirlGroupContainer girlGroupPicUrl={girlGroupProfilePic} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup">
       <div className="result-scroll-container girlGroup">
         <div className="result-girlGroup-title girlGroup">
           <span className="title1 girlGroup">Your Kpop Girl Group Ego is</span>
-          <div className="title2 girlGroup"><span className="girlgroup-span1 girlGroup">{myKpopGroup.name}</span> <span className="girlgroup-span2 girlGroup">type!</span></div>          
+          <div className="title2 girlGroup"><span className="girlgroup-span1 girlGroup">{props.myKpopGroup.name}</span> <span className="girlgroup-span2 girlGroup">type!</span></div>          
         </div>
         <div className="result-girlGroup-mid girlGroup">
           <div className="result-girlGroup-pic girlGroup"></div>
-          <div className="result-girlGroup-slogan girlGroup">{myKpopGroup.slogan}</div>
-          <div className="result-girlGroup-percent girlGroup">테스트 참여 유저 중 총 {percent}%</div>
+          <div className="result-girlGroup-slogan girlGroup">{props.myKpopGroup.slogan}</div>
+          <div className="result-girlGroup-percent girlGroup">테스트 참여 유저 중 총 약 {percent}%</div>
         </div>
         <div className="result-girlGroup-description girlGroup">
         <div className="result-girlGroup-description-title girlGroup">description</div>
         <div className="description-text-container girlGroup">
-        {myKpopGroup.description.map((item: string) => {
+        {props.myKpopGroup.description.map((item: string) => {
           return <div className="result-girlGroup-description-text girlGroup">{item}</div>
         })}
         </div>
@@ -179,22 +182,22 @@ const ResultGirlGroup = function(props: any){
       </div>
     </ResultGirlGroupContainer> 
       :     
-    <ResultGirlGroupContainer girlGroupPicUrl={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${myKpopGroup.code}${Math.floor(Math.random() * myKpopGroup.albumCover) + 1}.jpg`} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup" onClick={props.handleResultComponentClick} girlGroupIndex={props.girlGroupIndex} drag dragConstraints={props.constraintsRef}>
+    <ResultGirlGroupContainer girlGroupPicUrl={girlGroupProfilePic} view={view} onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="girlGroup" onClick={props.handleResultComponentClick} girlGroupIndex={props.girlGroupIndex} drag dragConstraints={props.constraintsRef}>
       {mouseIn ? <ResultCloseBtn closeId={"girlGroup"} handleCloseBtn={props.handleCloseBtn}/> : null}
       <div className="result-scroll-container girlGroup">
         <div className="result-girlGroup-title girlGroup">
           <span className="title1 girlGroup">Your Kpop Girl Group Ego is</span>
-          <div className="title2 girlGroup"><span className="girlgroup-span1 girlGroup">{myKpopGroup.name}</span> <span className="girlgroup-span2 girlGroup">type!</span></div>          
+          <div className="title2 girlGroup"><span className="girlgroup-span1 girlGroup">{props.myKpopGroup.name}</span> <span className="girlgroup-span2 girlGroup">type!</span></div>          
         </div>
         <div className="result-girlGroup-mid girlGroup">
           <div className="result-girlGroup-pic girlGroup"></div>
-          <div className="result-girlGroup-slogan girlGroup">{myKpopGroup.slogan}</div>
-          <div className="result-girlGroup-percent girlGroup">테스트 참여 유저 중 총 {percent}%</div>
+          <div className="result-girlGroup-slogan girlGroup">{props.myKpopGroup.slogan}</div>
+          <div className="result-girlGroup-percent girlGroup">테스트 참여 유저 중 총 약 {percent}%</div>
         </div>
         <div className="result-girlGroup-description girlGroup">
         <div className="result-girlGroup-description-title girlGroup">description</div>
         <div className="description-text-container girlGroup">
-        {myKpopGroup.description.map((item: string) => {
+        {props.myKpopGroup.description.map((item: string) => {
           let textArr = item.split(`"`);
           return <div className="result-girlGroup-description-text girlGroup">{
             textArr.map((miniItem: any, index: number) => {

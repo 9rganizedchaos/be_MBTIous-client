@@ -11,7 +11,7 @@ ${( { theme} ) => {
   font-style: italic;
   font-size: 3rem;
   padding: 1rem;
-  padding-bottom: 0rem;
+  padding-bottom: 1rem;
   color: ${theme.color.main};
   div{
     display: flex;
@@ -42,7 +42,7 @@ const ResultHeader = function(props: any){
         <div className="result-header-triangle">▼</div>
         <div className="result-header-triangle">▼</div>
       </div>
-      <div className="result-header-scroll">Scroll Down, plz :)</div>
+      {/* <div className="result-header-scroll">Scroll Down, plz :)</div> */}
     </ResultHeaderContainer>
   )
 }

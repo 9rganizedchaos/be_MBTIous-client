@@ -5,7 +5,6 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import { updateSettingBar } from '../action/actions';
-import { calculateBorderBoxPath } from 'html2canvas/dist/types/render/bound-curves';
 
 interface SettingBarContainerProps {
   settingBar: any;
@@ -19,7 +18,7 @@ ${( { theme, settingBar } ) => {
   bottom: ${settingBar ? 0 : "-3.75rem"};
   left: 75%;
   display: flex;
-  z-index: 200;
+  z-index: 50;
   width: 10rem;
   display: flex;
   justify-content: center;
@@ -134,7 +133,7 @@ const settingVariants: any = {
   },
 }
 
-function SettingBar({ handleThemeChange }: any) {
+function SettingBar({ handleThemeChange, handleColorClick, handleLangClick }: any) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { settingBar, color } = viewState;
   const dispatch = useDispatch();
@@ -151,10 +150,13 @@ function SettingBar({ handleThemeChange }: any) {
         </div>
       </div>
       <div className="settingMain">
-        <div className="colorSettingBar" onClick={handleThemeChange}>
+        <div className="colorSettingBar" onClick={(e) => {
+          handleColorClick(e)
+          handleThemeChange()
+          }}>
           <span>{color === "violet" ? "PinkMode" : "VioletMode" }</span>
         </div>
-        <div className="languageSettingBar">
+        <div className="languageSettingBar" onClick={handleLangClick}>
           <span>ENGLISH</span>
         </div>
       </div>     

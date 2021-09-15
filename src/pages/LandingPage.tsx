@@ -122,7 +122,6 @@ function LandingPage(props: any) {
   }
 
   const handleCopyBtn = (e: any) => {
-    console.log(e.pageX, e.pageY);
     setPageX(e.pageX);
     setPageY(e.pageY);
     setAlertMessage("링크가 복사되었습니다.");
@@ -134,7 +133,6 @@ function LandingPage(props: any) {
   }
 
   const handleLanguageChange = (e: any) => {
-    console.log(e.pageX, e.pageY);
     setPageX(e.pageX);
     setPageY(e.pageY);
     setAlertMessage("준비중인 서비스입니다.");
@@ -147,11 +145,15 @@ function LandingPage(props: any) {
 
   useEffect(() => {
     //ImageUrl 배열 만들기
-    let imageUrlArr: any = [];
-    groupsArr.forEach((item: any) => {
-      let randomNum = Math.floor(Math.random() * item.albumCover + 1);
-      imageUrlArr.push(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${item.code}${randomNum}.jpg`)
-    })
+    let imageUrlArr: any = [
+      `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/LN5.jpeg`,
+      `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/AE3.jpeg`
+    ];
+    // let imageUrlArr: any = [];
+    // groupsArr.forEach((item: any) => {
+    //   let randomNum = Math.floor(Math.random() * item.albumCover + 1);
+    //   imageUrlArr.push(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${item.code}${randomNum}.jpeg`)
+    // })
     let pickedRandomNum1: number = Math.floor(Math.random() * imageUrlArr.length);
     let pickedRandomNum2: number = Math.floor(Math.random() * imageUrlArr.length);
     let pickedRandomArr = [pickedRandomNum1, pickedRandomNum2]; 
@@ -177,7 +179,7 @@ function LandingPage(props: any) {
     
     // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
-    camera.position.z = 3
+    camera.position.z = 4
     scene.add(camera)
     
     // Renderer

@@ -40,9 +40,8 @@ display: flex;
 }
 @media (${theme.size.mobile}) {
   position: relative;
-  top: -2rem;
   height: 550px;
-  margin-bottom: 50%; 
+  margin-bottom: 40%; 
   .option-flex-container{
     height: calc(100% - 9rem);
   }

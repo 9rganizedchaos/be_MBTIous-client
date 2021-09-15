@@ -1,24 +1,32 @@
 import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
-const ResultAlbumCoverContainer = styled(motion.div) `
-${( { theme } ) => {
-  return css`
-width: 150px;
-height: 150px;
-position: absolute;
-top: calc(50% - 150px / 2);
-left: calc(50% - 150px / 2);
-border: 3px solid ${theme.color.main};
-background-position: center;
-background-size: cover;
-`
-}}`;
+interface ComponentTagProps {
+  top: number;
+  left: number;
+}
+
+const ResultAlbumCoverContainer = styled(motion.div)<ComponentTagProps>`
+  ${( { theme, top, left } ) => {
+    return css`
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: ${top}px;
+  left: ${left}px;
+  border: 3px solid ${theme.color.main};
+  background-position: center;
+  background-size: cover;
+  `
+  }}
+`;
 
 const ResultAlbumCover = function(props: any){
   const albumCover = useRef<HTMLDivElement>(null);
+  const [top, setTop] = useState(Math.floor(Math.random() * (window.innerHeight - 150)));
+  const [left, setLeft] = useState(Math.floor(Math.random() * (window.innerWidth - 320 - 150)) + 320);
 
   useEffect(() => {
     if(albumCover.current){
@@ -27,7 +35,7 @@ const ResultAlbumCover = function(props: any){
   }, [])
   
   return (
-    <ResultAlbumCoverContainer drag dragConstraints={props.constraintsRef} ref={albumCover}>
+    <ResultAlbumCoverContainer drag dragConstraints={props.constraintsRef} ref={albumCover} top={top} left={left}>
     </ResultAlbumCoverContainer>    
   )
 }

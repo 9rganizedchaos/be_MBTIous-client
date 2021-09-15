@@ -9,7 +9,6 @@ import { RootState } from '../reducers';
 import { updateResult } from "../action/actions";
 import { Link } from 'react-router-dom';
 import TestAlert from '../components/TestAlert';
-import PreviousAlert from '../components/PreviousAlert';
 import SettingBar from '../components/SettingBar';
 import axios from "axios";
 import groupsArr from '../assets/groups';
@@ -92,6 +91,7 @@ border: 0.25rem solid ${theme.color.main};
   align-items: center;
   border-left: 0.25rem solid ${theme.color.main};
   border-right: 0.25rem solid ${theme.color.main};
+  padding-bottom: 1rem;
 }
 @media (${theme.size.tablet}) {
 }
@@ -115,6 +115,7 @@ function TestPage(props: any) {
   const [isPreAlertMessageOpen, setPreAlertOpen] = useState(false);
   const [alertPageX, setPageX] = useState(0);
   const [alertPageY, setPageY] = useState(0);
+  const [alertContent, setAlertContent] = useState("");
 
 
   const [currentTest, setCurrentTest] = useState(1);
@@ -201,11 +202,32 @@ function TestPage(props: any) {
     },
   ])
 
+  const handleLangClick = (e: any) => {
+    setAlertContent("lang");
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1500);
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+  }
+
+  const handleColorClick = (e: any) => {
+    setAlertContent("color");
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 1500);
+    setPageX(e.pageX);
+    setPageY(e.pageY);
+  }
+
   const handlePreviousButtonClick = (e: any) => {
     if(currentTest === 1){
-      setPreAlertOpen(true);
+      setAlertContent("pre");
+      setAlertOpen(true);
       setTimeout(() => {
-        setPreAlertOpen(false);
+        setAlertOpen(false);
       }, 1500);
       setPageX(e.pageX);
       setPageY(e.pageY);
@@ -214,6 +236,7 @@ function TestPage(props: any) {
       setCurrentTest (currentTest - 1);
     }
   }
+
 
   const handleOptionClick = (e: any) => {
     let classNameArr = e.target.className.split(" ")
@@ -240,6 +263,7 @@ function TestPage(props: any) {
 
   const handleSubmitButtonClick = (e: any) => {
     if(!answers[currentTest - 1].answered) {
+      setAlertContent("submit");
       setAlertOpen(true);
       setTimeout(() => {
         setAlertOpen(false);
@@ -299,9 +323,6 @@ function TestPage(props: any) {
 
         let kpopGroup = groupsArr.filter((item: any) => item.mbti === result)[0];
 
-
-        console.log(result, kpopGroup.name, favoriteArtist);
-
         axios.post(`https://server.mbtious.net/result`, {
           mbti: result,
           girlGroupName: kpopGroup.name,
@@ -319,10 +340,9 @@ function TestPage(props: any) {
 
   return (
     <TestpageContainer>
-      <SettingBar handleThemeChange={props.handleThemeChange}/>
+      <SettingBar handleColorClick={handleColorClick} handleLangClick={handleLangClick} handleThemeChange={props.handleThemeChange}/>
       <AnimatePresence>
-      {isPreAlertMessageOpen ? <PreviousAlert alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
-      {isAlertMessageOpen ? <TestAlert alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
+      {isAlertMessageOpen ? <TestAlert alertContent={alertContent} alertPageX={alertPageX} alertPageY={alertPageY}/> : null}
       </AnimatePresence>
       <Link to="/">
         <Logo>Be_MBTIous</Logo>

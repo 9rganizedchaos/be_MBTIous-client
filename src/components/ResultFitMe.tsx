@@ -80,9 +80,16 @@ ${( { theme, pic } ) => {
   grid-column: 1 / 2;
   grid-row: 1 / 3;
   border: 3px solid ${theme.color.main};
-  .pic1Span {
-    font-size: 2rem;
+  .pic1Box {
+    display: flex;
+    flex-direction: column;
     position: absolute;
+  }
+  .pic1SpanName {
+    font-size: 2rem;
+  }
+  .pic1SpanMBTI {
+    font-size: 1.125rem;
   }
   .pic1Div {
     width: calc(250px - 0.25rem);
@@ -117,9 +124,16 @@ ${( { theme, pic } ) => {
   grid-row: 2 / 4;
   border: 3px solid ${theme.color.main};
   border-left: none;
-  .pic2Span {
-    font-size: 2rem;
+  .pic2Box {
+    display: flex;
+    flex-direction: column;
     position: absolute;
+  }
+  .pic2SpanName {
+    font-size: 2rem;
+  }
+  .pic2SpanMBTI {
+    font-size: 1.125rem;
   }
   .pic2Div {
     width: calc(250px);
@@ -155,8 +169,10 @@ ${( { theme } ) => {
   justify-content: space-between; 
   z-index: 10;
   svg{
+    transition: .5s;
     &:hover{
       cursor: pointer;
+      color: ${theme.color.sub2};
     }
     font-size: 3rem;
   }
@@ -228,7 +244,7 @@ const ResultFitMe = function(props: any){
     <>{
       view === "mobile" ?
       <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex}>
-      <FitMeArtistPic1 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${fitMeGroup.code}1.jpg`}>
+      <FitMeArtistPic1 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${fitMeGroup.code}1.jpeg`}>
         <FitMeBtnBox>
           <span onClick={() => {
             if(fitMeNum === 0){
@@ -242,11 +258,14 @@ const ResultFitMe = function(props: any){
           </span>
         </FitMeBtnBox>
         <div className="pic1Div fitMe"></div>
-        <span className="pic1Span fitMe">{fitMeGroup.name}</span>
+          <div className="pic1Box fitMe">
+            <span className="pic1SpanName fitMe">{fitMeGroup.name}</span>
+            <span className="pic1SpanMBTI fitMe">{fitMeGroup.mbti}</span>
+          </div>
       </FitMeArtistPic1>
       <div className="notFitMeTitle fitMe">나와 잘 맞지 않는 유형</div>
       <div className="fitMeTitle fitMe">나와 잘 맞는 유형</div>
-      <FitMeArtistPic2 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${notFitMeGroup.code}1.jpg`}>
+      <FitMeArtistPic2 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${notFitMeGroup.code}1.jpeg`}>
         <FitMeBtnBox>
           <span onClick={() => {
             if(notFitMeNum === 0){
@@ -262,12 +281,15 @@ const ResultFitMe = function(props: any){
           </span>
         </FitMeBtnBox>
         <div className="pic2Div fitMe"></div>
-        <span className="pic2Span fitMe">{notFitMeGroup.name}</span>
+          <div className="pic2Box fitMe">
+            <span className="pic2SpanName fitMe">{notFitMeGroup.name}</span>
+            <span className="pic2SpanMBTI fitMe">{notFitMeGroup.mbti}</span>
+          </div>
       </FitMeArtistPic2>
     </ResultFitMeContainer> :
         <ResultFitMeContainer onMouseOver={()=>{setMouseIn(true)}} onMouseLeave={() => setMouseIn(false)} className="fitMe" onClick={props.handleResultComponentClick} fitMeIndex={props.fitMeIndex} drag dragConstraints={props.constraintsRef}>
         {mouseIn ? <ResultCloseBtn closeId={"fitMe"} handleCloseBtn={props.handleCloseBtn} /> : null}
-        <FitMeArtistPic1 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${fitMeGroup.code}1.jpg`}>
+        <FitMeArtistPic1 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${fitMeGroup.code}1.jpeg`}>
           <FitMeBtnBox>
             <span onClick={() => {
               if(fitMeNum === 0){
@@ -281,11 +303,14 @@ const ResultFitMe = function(props: any){
             </span>
           </FitMeBtnBox>
           <div className="pic1Div fitMe"></div>
-          <span className="pic1Span fitMe">{fitMeGroup.name}</span>
+          <div className="pic1Box fitMe">
+            <span className="pic1SpanName fitMe">{fitMeGroup.name}</span>
+            <span className="pic1SpanMBTI fitMe">{fitMeGroup.mbti}</span>
+          </div>
         </FitMeArtistPic1>
         <div className="notFitMeTitle fitMe">나와 잘 맞지 않는 유형</div>
         <div className="fitMeTitle fitMe">나와 잘 맞는 유형</div>
-        <FitMeArtistPic2 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${notFitMeGroup.code}1.jpg`}>
+        <FitMeArtistPic2 className="fitMe" pic={`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${notFitMeGroup.code}1.jpeg`}>
           <FitMeBtnBox>
             <span onClick={() => {
               if(notFitMeNum === 0){
@@ -301,7 +326,10 @@ const ResultFitMe = function(props: any){
             </span>
           </FitMeBtnBox>
           <div className="pic2Div fitMe"></div>
-          <span className="pic2Span fitMe">{notFitMeGroup.name}</span>
+          <div className="pic2Box fitMe">
+            <span className="pic2SpanName fitMe">{notFitMeGroup.name}</span>
+            <span className="pic2SpanMBTI fitMe">{notFitMeGroup.mbti}</span>
+          </div>
         </FitMeArtistPic2>
       </ResultFitMeContainer>
     }

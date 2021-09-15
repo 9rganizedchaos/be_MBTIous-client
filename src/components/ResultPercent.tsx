@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Pie } from "react-chartjs-2";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
@@ -51,19 +51,8 @@ z-index: ${percentIndex};
 }}
 `;
 
-const ResultPercent = function(props: any){
-  const testState = useSelector((state: RootState) => state.testReducer);
-  const { result } = testState;
-  const viewState = useSelector((state: RootState) => state.viewReducer);
-  const { view } = viewState;
-  const [mouseIn, setMouseIn] = useState(false);
-  const [labels, setLabels] = useState(['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']);
-  const [dataArr, setDataArr] = useState([12, 19, 3, 5, 2, 3]); 
-
-  let myMBTI = result.mbti;
-  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
-
-  const data = {
+const updateData = (labels: any, dataArr: any) => {
+  let result = {
     labels: labels,
     datasets: [
       {
@@ -88,12 +77,29 @@ const ResultPercent = function(props: any){
         borderWidth: 1,
       },
     ],
-  };
+  }
+  return result;
+}
+
+const ResultPercent = function(props: any){
+  const testState = useSelector((state: RootState) => state.testReducer);
+  const { result } = testState;
+  const viewState = useSelector((state: RootState) => state.viewReducer);
+  const { view } = viewState;
+  const [mouseIn, setMouseIn] = useState(false);
+  const [labels, setLabels] = useState(['Loading...']);
+  const [dataArr, setDataArr] = useState([1]); 
+
+  let myMBTI = result.mbti;
+  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
+
+  const data = useMemo(() => {
+    return updateData(props.labels, props.dataArr)
+  }, [props.labels, props.dataArr])
 
   useEffect(() => {
     axios.get('https://server.mbtious.net/result')
     .then(res => {
-      console.log(res);
       let dataArr = [];
       let labels = [];
       let tempArr = [];
@@ -111,14 +117,12 @@ const ResultPercent = function(props: any){
       }
       tempArr.sort((a, b) => a[1] - b[1]);
 
-      console.log(tempArr)
-
       for(let item of tempArr){
         dataArr.push(item[1]);
         labels.push(item[0]);
       }
-      setLabels(labels);
-      setDataArr(dataArr);
+      props.setLabels(labels);
+      props.setDataArr(dataArr);
     })
     .catch(err => {
       console.log(err)
