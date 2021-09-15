@@ -12,16 +12,16 @@
 - MBTI와 Kpop 걸그룹을 매칭한 MBTI 테스트 서비스  
   MBTI test service matching each MBTI types and Kpop girl groups
 
-- 나를 더 잘 묘사하는 K팝 노래가사를 골라 나의 MBTI를 테스트하세요!
+- 나를 더 잘 묘사하는 K팝 노래가사를 골라 나의 MBTI를 테스트하세요!  
   Find out your MBTI type by choosing a K-pop song that describes you better!
 
-- 나의 최애 아이돌의 MBTI 궁합은?
+- 나의 최애 아이돌의 MBTI 궁합은?  
   What is the compatibility between my favorite idol and my MBTI?
 
-- K팝 걸그룹 MBTI 유형 분석, 걸그룹 멤버들의 MBTI정보 등, 다양한 분석결과를 확인하세요!
+- K팝 걸그룹 MBTI 유형 분석, 걸그룹 멤버들의 MBTI정보 등, 다양한 분석결과를 확인하세요!  
   Check out various analysis results, such as K-pop girl group MBTI type analysis and MBTI information of girl group members!
 
-- 나의 테스트 결과를 SNS로 공유하세요!
+- 나의 테스트 결과를 SNS로 공유하세요!  
   Share your test results on social media!
 
 # 👨🏻‍💻 Development
