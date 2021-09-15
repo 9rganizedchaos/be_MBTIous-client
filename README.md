@@ -1,7 +1,9 @@
 # 🔮 Be_MBTIous
 
-> find your kpop girl group ego and ...!  
-> Be MBTIous
+```
+Find your kpop girl group ego and ...!
+Be MBTIous
+```
 
 <p align="center">
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133390834-20db2e50-bcf2-4b0e-a211-bcd78a71df76.gif">
@@ -51,7 +53,25 @@
 
 <img src="https://img.shields.io/badge/amazon%20AWS-232F3E?style=for-the-badge&logo=amazon%20AWS&logoColor=white"> <img src="https://img.shields.io/badge/mongodb%20atlas-32CD32?style=for-the-badge&logo=mongodb&logoColor=white">
 
-###
+# System Architecture
+
+<p align="center">
+<img width="700" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133395822-94f30387-0e3e-46b3-b964-69c1bb1251a1.png">
+</p>
+
+# Workflow
+
+### client workflow
+
+<p align="center">
+<img width="700" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133396034-fa5b08b6-0edc-4480-9bf8-4424fca373f9.jpg">
+</p>
+
+### server workflow
+
+<p align="center">
+<img width="700" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133396140-bba130a8-ab23-459e-9992-02e09041527c.jpg">
+</p>
 
 <br>
 <br>
