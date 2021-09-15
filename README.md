@@ -17,10 +17,21 @@ Be MBTIous
 <a href="https://be.mbtious.net/" target="_blank">🧚🏻‍♂️ <span> Visit MBTIous</span> 🧚🏻‍♂️</a>
 </p>
 
-# 💁🏻‍♂️ Our Service
+# 💁🏻‍♂️ 서비스 소개
 
 - MBTI와 Kpop 걸그룹을 매칭한 MBTI 테스트 서비스  
   MBTI test service matching each MBTI types and Kpop girl groups
+
+<details>
+<summary>Landing Page App View</summary>
+<div markdown="1">
+
+<p align="center">
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133390834-20db2e50-bcf2-4b0e-a211-bcd78a71df76.gif">
+</p>
+
+</div>
+</details>
 
 - 나를 더 잘 묘사하는 K팝 노래가사를 골라 나의 MBTI를 테스트하세요!  
   Find out your MBTI type by choosing a K-pop song that describes you better!
@@ -63,7 +74,7 @@ Be MBTIous
 <img width="700" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133395822-94f30387-0e3e-46b3-b964-69c1bb1251a1.png">
 </p>
 
-# 🌊🏄🏻‍♂️ Workflow
+# 🏄🏻‍♂️ Workflow
 
 ### client workflow
 
