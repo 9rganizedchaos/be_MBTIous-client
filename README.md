@@ -7,7 +7,9 @@
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133390834-20db2e50-bcf2-4b0e-a211-bcd78a71df76.gif">
 </p>
 
-<a href="https://be.mbtious.net/" target="_blank">🧚🏻‍♂️ <span> Visit MBTIous</span></a>
+<p align="center">
+<a href="https://be.mbtious.net/" target="_blank">🧚🏻‍♂️ <span> Visit MBTIous</span> 🧚🏻‍♂️</a>
+</p>
 
 # 💁🏻‍♂️ Our Service
 
