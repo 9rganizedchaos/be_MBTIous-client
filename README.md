@@ -57,13 +57,13 @@ Be MBTIous
 
 <img src="https://img.shields.io/badge/amazon%20AWS-232F3E?style=for-the-badge&logo=amazon%20AWS&logoColor=white"> <img src="https://img.shields.io/badge/mongodb%20atlas-32CD32?style=for-the-badge&logo=mongodb&logoColor=white">
 
-# System Architecture
+# 🔧 System Architecture
 
 <p align="center">
 <img width="700" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133395822-94f30387-0e3e-46b3-b964-69c1bb1251a1.png">
 </p>
 
-# Workflow
+# 🌊🏄🏻‍♂️ Workflow
 
 ### client workflow
 
