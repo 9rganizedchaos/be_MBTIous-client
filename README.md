@@ -1,9 +1,13 @@
 # 🔮 Be_MBTIous
 
+### 🧪 kpopGirlGroup + MBTI
+
 ```
 Find your kpop girl group ego and ...!
 Be MBTIous
 ```
+
+<br>
 
 <p align="center">
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133390834-20db2e50-bcf2-4b0e-a211-bcd78a71df76.gif">
@@ -64,7 +68,7 @@ Be MBTIous
 ### client workflow
 
 <p align="center">
-<img width="700" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133396034-fa5b08b6-0edc-4480-9bf8-4424fca373f9.jpg">
+<img width="800" alt="시스템 아키텍쳐" src="https://user-images.githubusercontent.com/75521675/133396034-fa5b08b6-0edc-4480-9bf8-4424fca373f9.jpg">
 </p>
 
 ### server workflow
