@@ -1,9 +1,9 @@
 # 🔮 Be_MBTIous
 
-> find your kpop girl group ego and ...!
+> find your kpop girl group ego and ...!  
 > Be MBTIous
 
-![main_land](https://i.imgur.com/7Oov5ys.gif)
+![LandingPageBasic3](https://user-images.githubusercontent.com/75521675/133390834-20db2e50-bcf2-4b0e-a211-bcd78a71df76.gif)
 
 <a href="https://be.mbtious.net/" target="_blank">🧚🏻‍♂️ <span> Visit MBTIous</span></a>
 
@@ -47,6 +47,7 @@
 
 <img src="https://img.shields.io/badge/amazon%20AWS-232F3E?style=for-the-badge&logo=amazon%20AWS&logoColor=white"> <img src="https://img.shields.io/badge/mongodb%20atlas-32CD32?style=for-the-badge&logo=mongodb&logoColor=white">
 
+###
+
 <br>
 <br>
-<h4><a href="https://github.com/9rganizedchaos/wiki" target="_blank">📄 More Information..</a></h4>
