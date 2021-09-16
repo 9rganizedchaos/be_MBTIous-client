@@ -40,7 +40,9 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <summary>🍉 랜딩페이지</summary>
 <div markdown="1">
 <p align="center">
+<br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532723-788ac2fc-ac8e-461e-95d9-59009660dbe2.gif">
+<br>
 </p>
 </div>
 </details>
@@ -49,9 +51,11 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <summary>🍍 아티스트페이지</summary>
 <div markdown="1">
 <p align="center">
+<br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532770-b7d2dd76-280d-47f0-8ec9-8bcce650cffc.png">
 <br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532788-d0165f84-3eca-4abd-b730-e842ba6924a5.gif">
+<br>
 </p>
 </div>
 </details>
@@ -71,7 +75,9 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <summary>🥝 결과페이지</summary>
 <div markdown="1">
 <p align="center">
+<br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532857-0250b4ec-5143-4344-a758-692afb3985a8.gif">
+<br>
 </p>
 </div>
 </details>
@@ -80,9 +86,11 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <summary>🍇 반응형 / 모바일 뷰</summary>
 <div markdown="1">
 <p align="center">
+<br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532877-0632d7ab-7553-441f-bce1-01078344e5db.png">
 <br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532883-993c77e1-10bd-4db6-9218-c65b358f3d03.png">
+<br>
 </p>
 </div>
 </details>
