@@ -59,9 +59,10 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <details>
 <summary>🍊 테스트페이지</summary>
 <div markdown="1">
-<br>
 <p align="center">
+<br>
 <img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532803-87423106-32dc-4241-a767-6a74437183d8.gif">
+<br>
 </p>
 </div>
 </details>
