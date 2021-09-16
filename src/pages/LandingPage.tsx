@@ -145,15 +145,15 @@ function LandingPage(props: any) {
 
   useEffect(() => {
     //ImageUrl 배열 만들기
-    let imageUrlArr: any = [
-      `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/LN5.jpeg`,
-      `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/AE3.jpeg`
-    ];
-    // let imageUrlArr: any = [];
-    // groupsArr.forEach((item: any) => {
-    //   let randomNum = Math.floor(Math.random() * item.albumCover + 1);
-    //   imageUrlArr.push(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${item.code}${randomNum}.jpeg`)
-    // })
+    // let imageUrlArr: any = [
+    //   `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/LN5.jpeg`,
+    //   `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/AE3.jpeg`
+    // ];
+    let imageUrlArr: any = [];
+    groupsArr.forEach((item: any) => {
+      let randomNum = Math.floor(Math.random() * item.albumCover + 1);
+      imageUrlArr.push(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${item.code}${randomNum}.jpeg`)
+    })
     let pickedRandomNum1: number = Math.floor(Math.random() * imageUrlArr.length);
     let pickedRandomNum2: number = Math.floor(Math.random() * imageUrlArr.length);
     let pickedRandomArr = [pickedRandomNum1, pickedRandomNum2]; 

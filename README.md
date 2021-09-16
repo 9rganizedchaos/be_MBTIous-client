@@ -5,6 +5,9 @@
 ```
 Find your kpop girl group ego and ...!
 Be MBTIous
+
+MBTI와 Kpop 걸그룹을 매칭한 MBTI 테스트 서비스, Be MBTIous
+MBTI test service matching each MBTI types and Kpop girl groups
 ```
 
 <br>
@@ -19,20 +22,6 @@ Be MBTIous
 
 # 💁🏻‍♂️ 서비스 소개
 
-- MBTI와 Kpop 걸그룹을 매칭한 MBTI 테스트 서비스  
-  MBTI test service matching each MBTI types and Kpop girl groups
-
-<details>
-<summary>Landing Page App View</summary>
-<div markdown="1">
-
-<p align="center">
-<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133390834-20db2e50-bcf2-4b0e-a211-bcd78a71df76.gif">
-</p>
-
-</div>
-</details>
-
 - 나를 더 잘 묘사하는 K팝 노래가사를 골라 나의 MBTI를 테스트하세요!  
   Find out your MBTI type by choosing a K-pop song that describes you better!
 
@@ -44,6 +33,57 @@ Be MBTIous
 
 - 나의 테스트 결과를 SNS로 공유하세요!  
   Share your test results on social media!
+
+# 🕵🏻‍♂️ Final View
+
+<details>
+<summary>🍉 랜딩페이지</summary>
+<div markdown="1">
+<p align="center">
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532723-788ac2fc-ac8e-461e-95d9-59009660dbe2.gif">
+</p>
+</div>
+</details>
+
+<details>
+<summary>🍍 아티스트페이지</summary>
+<div markdown="1">
+<p align="center">
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532770-b7d2dd76-280d-47f0-8ec9-8bcce650cffc.png">
+<br>
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532788-d0165f84-3eca-4abd-b730-e842ba6924a5.gif">
+</p>
+</div>
+</details>
+
+<details>
+<summary>🍊 테스트페이지</summary>
+<div markdown="1">
+<p align="center">
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532803-87423106-32dc-4241-a767-6a74437183d8.gif">
+</p>
+</div>
+</details>
+
+<details>
+<summary>🥝 결과페이지</summary>
+<div markdown="1">
+<p align="center">
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532857-0250b4ec-5143-4344-a758-692afb3985a8.gif">
+</p>
+</div>
+</details>
+
+<details>
+<summary>🍇 반응형 / 모바일 뷰</summary>
+<div markdown="1">
+<p align="center">
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532877-0632d7ab-7553-441f-bce1-01078344e5db.png">
+<br>
+<img width="700" alt="랜딩페이지" src="https://user-images.githubusercontent.com/75521675/133532883-993c77e1-10bd-4db6-9218-c65b358f3d03.png">
+</p>
+</div>
+</details>
 
 # 👨🏻‍💻 Development
 
