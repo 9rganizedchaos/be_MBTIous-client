@@ -3,11 +3,13 @@
 ### 🗝 Overview
 
 👉🏻 프로젝트 유형: 솔로 프로젝트 / 사이드 프로젝트
+
 👉🏻 기간: 21.07.21 - 21.09.16 (4주 기획 및 내용 구성 4주 개발)
 
 <br>
 
 👉🏻 Github Repository (Client): https://github.com/9rganizedchaos/be_MBTIous-client
+
 👉🏻 Github Repository (Server): https://github.com/9rganizedchaos/be_MBTIous-server
 
 ### 🧪 kpopGirlGroup + MBTI
