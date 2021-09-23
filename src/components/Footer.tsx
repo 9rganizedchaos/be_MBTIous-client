@@ -1,11 +1,9 @@
 import { Fragment } from "react";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion"
-import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useEffect } from 'react';
 
 const FooterContainer = styled.div`
 ${( { theme, color } ) => {
@@ -186,7 +184,6 @@ const marqueeVariants = {
 function Footer(props: any) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color, view } = viewState;
-  const textInput = useRef(null);
 
   return (
     <Fragment>

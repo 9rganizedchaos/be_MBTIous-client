@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion"; 
 import OptionCard from './OptionCard';
-import TestAlert from './TestAlert';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 
@@ -309,7 +308,7 @@ function SidebarCounterChecked() {
 
 function Test({answers, question, currentTest, handleOptionClick, handlePreviousButtonClick, handleSubmitButtonClick}: TestProps) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
-  const { view, color } = viewState;
+  const { view } = viewState;
 
   let arrForCounter = new Array(20 - currentTest).fill(0); 
   let arrForCounterChecked = new Array(currentTest).fill(0);
@@ -322,8 +321,8 @@ function Test({answers, question, currentTest, handleOptionClick, handlePrevious
       <Question>
         <div className="test__question-number">Q{question.number}</div>
         <div className="test__question">
-          {question.question.map((item: string) => {
-            return <div>{item}</div>
+          {question.question.map((item: string, index: number) => {
+            return <div key={index}>{item}</div>
           })}
         </div>
       </Question>
@@ -343,8 +342,8 @@ function Test({answers, question, currentTest, handleOptionClick, handlePrevious
       </div>
       </div>
       <div className="test__sidebar">
-        {arrForCounterChecked.map((item) => <SidebarCounterChecked/>)}
-        {arrForCounter.map((item) => <SidebarCounter/>)}
+        {arrForCounterChecked.map((item, index) => <SidebarCounterChecked key={index}/>)}
+        {arrForCounter.map((item, index) => <SidebarCounter key={index}/>)}
       </div>
     </TestContainer>
   )

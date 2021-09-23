@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 interface LandingAlertContainerProps {
   alertPageX: any;

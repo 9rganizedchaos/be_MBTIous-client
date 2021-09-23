@@ -8,6 +8,7 @@ import Footer from "../components/Footer"
 import { motion } from "framer-motion";
 import groupsArr from '../assets/groups';
 import LandingAlert from '../components/LandingAlert';
+import axios from 'axios';
 
 interface Edge {
   left: number;
@@ -40,6 +41,30 @@ ${( { theme } ) => {
     @media (${theme.size.mobile}) {
       font-size: 3.5rem;
       top: 32%;
+    }
+  `
+}}
+`;
+
+const Visit = styled.span`
+${( { theme } ) => {
+  return css`
+    padding: 0.125rem;
+    text-align: center;
+    background-color: ${theme.color.main};
+    color: ${theme.color.sub};
+    font-weight: 800;
+    font-style: italic;
+    font-size: 1rem;
+    position: absolute;
+    left: 1.25rem;
+    top: 4.5rem;
+    z-index: 10;
+    strong {
+    }
+    @media (${theme.size.tablet}) {
+    }
+    @media (${theme.size.mobile}) {
     }
   `
 }}
@@ -99,6 +124,9 @@ font-size: 1.5rem;
 function LandingPage(props: any) {
   const landingPageContainer = useRef<HTMLDivElement | null>(null);
 
+  const [today, setToday] = useState(0);
+  const [total, setTotal] = useState(0);
+
   const [isAlertMessageOpen, setAlertOpen] = useState(false);
   const [alertPageX, setPageX] = useState(0);
   const [alertPageY, setPageY] = useState(0);
@@ -149,6 +177,24 @@ function LandingPage(props: any) {
     //   `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/LN5.jpeg`,
     //   `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/AE3.jpeg`
     // ];
+    axios.get('https://server.mbtious.net/result').then((res: any) => {
+      setTotal(res.data.results.length);
+      let today = res.data.results.filter((item: any) => {
+        let thisYear = new Date().getFullYear().toString();
+        let thisMonth: any = new Date().getMonth() + 1;
+        thisMonth = thisMonth.toString();
+        if(thisMonth.length === 1){
+          thisMonth = "0" + thisMonth;
+        }
+        let today = new Date().getDate().toString();
+        let date = item.createdAt.split("-");
+        if(date[0] === thisYear && date[1] === thisMonth && date[2].substring(0, 2) === today){
+          return item;
+        }
+      })
+      setToday(today.length)
+    })
+
     let imageUrlArr: any = [];
     groupsArr.forEach((item: any) => {
       let randomNum = Math.floor(Math.random() * item.albumCover + 1);
@@ -232,6 +278,7 @@ function LandingPage(props: any) {
       {isAlertMessageOpen ? <LandingAlert alertPageX={alertPageX} alertPageY={alertPageY} alertMessage={alertMessage} alertIcon={alertIcon}/> : null}
       <div ref={landingPageContainer}></div>
       <Nav handleThemeChange={props.handleThemeChange} handleColorChange={handleColorChange} handleLanguageChange={handleLanguageChange}/>
+      <Visit>{`Today ${today} Total ${total}`}</Visit>
       <Title>Be <strong>MBTI</strong>ous</Title>
       <StartButton onClick={handleStartClick}>CLICK TO START</StartButton>
       <SideEdge left={100} right={0}/>

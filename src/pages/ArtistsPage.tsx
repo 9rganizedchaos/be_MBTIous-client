@@ -108,7 +108,7 @@ const tutorialBoxVariants: any = {
 
 function ArtistsPage({ history }: any) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
-  const { color, view } = viewState;
+  const { view } = viewState;
 
   const dispatch = useDispatch();
 

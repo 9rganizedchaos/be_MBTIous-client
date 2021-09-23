@@ -25,8 +25,8 @@ const ResultAlbumCoverContainer = styled(motion.div)<ComponentTagProps>`
 
 const ResultAlbumCover = function(props: any){
   const albumCover = useRef<HTMLDivElement>(null);
-  const [top, setTop] = useState(Math.floor(Math.random() * (window.innerHeight - 150)));
-  const [left, setLeft] = useState(Math.floor(Math.random() * (window.innerWidth - 320 - 150)) + 320);
+  const [top] = useState(Math.floor(Math.random() * (window.innerHeight - 150)));
+  const [left] = useState(Math.floor(Math.random() * (window.innerWidth - 320 - 150)) + 320);
 
   useEffect(() => {
     if(albumCover.current){

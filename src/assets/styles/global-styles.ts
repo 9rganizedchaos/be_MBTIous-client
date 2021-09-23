@@ -13,6 +13,9 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
   }
+  div, span {
+    user-select: none;
+  }
 
   * {
     box-sizing: border-box;

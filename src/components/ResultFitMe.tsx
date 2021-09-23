@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import groupsArr from "../assets/groups"
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import ResultCloseBtn from './ResultCloseBtn';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';

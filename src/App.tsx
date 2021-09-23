@@ -14,11 +14,11 @@ import groupsArr from './assets/groups';
 
 function App() {
   const viewState = useSelector((state: RootState) => state.viewReducer);
-  const { color, view } = viewState;
+  const { color } = viewState;
   const dispatch = useDispatch();
   const [theme, setTheme] = useState(violetTheme);
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { result } = testState;
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
 

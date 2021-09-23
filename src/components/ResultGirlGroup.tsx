@@ -73,7 +73,7 @@ z-index: ${girlGroupIndex};
   .result-girlGroup-slogan {
     background-color: ${theme.color.main};
     color: ${theme.color.sub};
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 0.5rem;
     margin-top: 1rem;
     text-align:center;
   }
@@ -146,7 +146,6 @@ const ResultGirlGroup = function(props: any){
   const girlGroupProfilePic = useMemo(() => getProfilePic(props.myKpopGroup), [props.myKpopGroup]);
 
   useEffect(() => {
-    console.log(props.myMBTI)
     axios.all([axios.get(`https://server.mbtious.net/result`), axios.get(`https://server.mbtious.net/result/${props.myKpopGroup.mbti}`)])
     .then(
       axios.spread((res1, res2) => {
@@ -174,8 +173,8 @@ const ResultGirlGroup = function(props: any){
         <div className="result-girlGroup-description girlGroup">
         <div className="result-girlGroup-description-title girlGroup">description</div>
         <div className="description-text-container girlGroup">
-        {props.myKpopGroup.description.map((item: string) => {
-          return <div className="result-girlGroup-description-text girlGroup">{item}</div>
+        {props.myKpopGroup.description.map((item: string, index: number) => {
+          return <div className="result-girlGroup-description-text girlGroup" key={index}>{item}</div>
         })}
         </div>
         </div>

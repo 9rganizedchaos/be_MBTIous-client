@@ -112,7 +112,6 @@ function TestPage(props: any) {
   const dispatch = useDispatch();
   
   const [isAlertMessageOpen, setAlertOpen] = useState(false);
-  const [isPreAlertMessageOpen, setPreAlertOpen] = useState(false);
   const [alertPageX, setPageX] = useState(0);
   const [alertPageY, setPageY] = useState(0);
   const [alertContent, setAlertContent] = useState("");
@@ -328,7 +327,7 @@ function TestPage(props: any) {
           girlGroupName: kpopGroup.name,
           favoriteGroup: favoriteArtist
         }).then(res => {
-          console.log(res);
+          console.log("posted");
         }).catch(err => {
           console.log(err);
         })

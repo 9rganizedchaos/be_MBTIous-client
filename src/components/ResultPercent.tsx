@@ -87,8 +87,6 @@ const ResultPercent = function(props: any){
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { view } = viewState;
   const [mouseIn, setMouseIn] = useState(false);
-  const [labels, setLabels] = useState(['Loading...']);
-  const [dataArr, setDataArr] = useState([1]); 
 
   let myMBTI = result.mbti;
   let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];

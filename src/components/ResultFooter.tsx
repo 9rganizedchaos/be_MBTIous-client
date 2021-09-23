@@ -1,5 +1,5 @@
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faCamera, faComment, faCopy, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faComment, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components'

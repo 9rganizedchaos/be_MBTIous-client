@@ -152,12 +152,12 @@ const OptionCard = function(props: any) {
       { props.num === 1 ? <DescriptionBox1 descriptionBoxObj={props.answers[props.currentTest - 1]} className={`${props.num -1}`} onClick={props.handleOptionClick}>
         <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>     
         {props.option.map((item: string, index: number) => {
-          return <span className={`${props.num -1}`}>{item}</span>
+          return <span key={index} className={`${props.num -1}`}>{item}</span>
         })}
       </DescriptionBox1> : <DescriptionBox2 descriptionBoxObj={props.answers[props.currentTest - 1]} className={`${props.num -1}`} onClick={props.handleOptionClick}>
         <span className={`optionTitle ${props.num -1}`}>{`option${props.num}`}</span>        
         {props.option.map((item: string, index: number) => {
-          return <span className={`${props.num -1}`}>{item}</span>
+          return <span key={index} className={`${props.num -1}`}>{item}</span>
         })}
       </DescriptionBox2>
       }

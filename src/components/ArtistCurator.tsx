@@ -102,7 +102,7 @@ const artistCuratorVariants: any = {
 
 function ArtistCurator(props: any) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
-  const { color, view } = viewState;
+  const { view } = viewState;
 
   return (
     <CuratorContainer variants={artistCuratorVariants} initial="hidden" animate="visible">

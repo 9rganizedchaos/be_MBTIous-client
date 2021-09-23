@@ -187,7 +187,7 @@ left: 20.25rem;
 
 function ResultPage({handleThemeChange, myKpopGroup}: any) {
   const testState = useSelector((state: RootState) => state.testReducer);
-  const { favoriteArtist, result } = testState;
+  const { favoriteArtist } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { view } = viewState;
 
