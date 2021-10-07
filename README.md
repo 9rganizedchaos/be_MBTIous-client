@@ -120,6 +120,8 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <img src="https://img.shields.io/badge/framer-0055FF?style=for-the-badge&logo=framer&logoColor=white">
 <img src="https://img.shields.io/badge/chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white">
 
+<img src="https://img.shields.io/badge/react-CCAA2F?style=for-the-badge&logo=react&logoColor=black">
+
 ### Backend Stack
 
 <img src="https://img.shields.io/badge/node.js-228B22?style=for-the-badge&logo=node.js&logoColor=white"> <img src="https://img.shields.io/badge/express-006400?style=for-the-badge&logo=express&logoColor=white">
