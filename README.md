@@ -127,7 +127,7 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <img src="https://img.shields.io/badge/node.js-CCAA2F?style=for-the-badge&logo=node.js&logoColor=white">
 
 <img src="https://img.shields.io/badge/typescript-EAEAE9?style=for-the-badge&logo=typescript&logoColor=CCAA2F">
-<img src="https://img.shields.io/badge/amazon%20AWS-EAEAE9?style=for-the-badge&logo=amazon%20AWS&logoColor=CCAA2F">
+<img src="https://img.shields.io/badge/AWS-EAEAE9?style=for-the-badge&logo=amazon%20AWS&logoColor=CCAA2F">
 <img src="https://img.shields.io/badge/styled%20components-EAEAE9?style=for-the-badge&logo=styledcomponents&logoColor=CCAA2F">
 <img src="https://img.shields.io/badge/scss-EAEAE9?style=for-the-badge&logo=sass&logoColor=CCAA2F">
 <img src="https://img.shields.io/badge/mysql-EAEAE9?style=for-the-badge&logo=mysql&logoColor=CCAA2F">
