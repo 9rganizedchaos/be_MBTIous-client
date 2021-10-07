@@ -121,6 +121,18 @@ MBTI test service matching each MBTI types and Kpop girl groups
 <img src="https://img.shields.io/badge/chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white">
 
 <img src="https://img.shields.io/badge/react-CCAA2F?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/node.js-228B22?style=for-the-badge&logo=node.js&logoColor=white">
+
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=black">
+<img src="https://img.shields.io/badge/amazon%20AWS-232F3E?style=for-the-badge&logo=amazon%20AWS&logoColor=white">
+<img src="https://img.shields.io/badge/styled%20components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/scss-DB7093?style=for-the-badge&logo=scss&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-DB7093?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/mongodb-32CD32?style=for-the-badge&logo=mongodb&logoColor=white">
+
 
 ### Backend Stack
 
