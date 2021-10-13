@@ -1,4 +1,4 @@
-import { useEffect, Fragment, useRef, useState } from 'react';
+import React, { useEffect, Fragment, useRef, useState } from 'react';
 import {withRouter} from "react-router";
 import * as THREE from "three";
 import styled, { css } from "styled-components";
@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../reducers';
 import ArtistAlert from '../components/ArtistAlert';
 import groupsArr from '../assets/groups';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface Edge {
   left: number;
@@ -100,13 +101,19 @@ z-index: 10;
 }}
 `;
 
-const tutorialBoxVariants: any = {
+type tutorialObj = {
+  exit: {
+    opacity: number;
+  }
+};
+
+const tutorialBoxVariants: tutorialObj = {
   exit: {
     opacity: 0
   },
 }
 
-function ArtistsPage({ history }: any) {
+function ArtistsPage(props: RouteComponentProps) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { view } = viewState;
 
@@ -121,7 +128,7 @@ function ArtistsPage({ history }: any) {
 
   const artistsPageContainer = useRef<HTMLDivElement | null>(null);
 
-  const handleNextClick = (e: any) => {
+  const handleNextClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if(favoriteArtist === ""){
       setArtistAlert(true);
       setTimeout(() => {
@@ -130,7 +137,7 @@ function ArtistsPage({ history }: any) {
       setPageX(e.pageX);
       setPageY(e.pageY);
     } else {
-      history.push("/test");
+      props.history.push("/test");
     }
   }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, Fragment, useState } from "react";
+import React, { useEffect, useRef, Fragment, useState } from "react";
 import { withRouter } from "react-router";
 import * as THREE from "three"; 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import groupsArr from '../assets/groups';
 import LandingAlert from '../components/LandingAlert';
 import axios from 'axios';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface Edge {
   left: number;
@@ -121,7 +122,44 @@ font-size: 1.5rem;
 `}}
 `;
 
-function LandingPage(props: any) {
+interface landingPageInterface extends RouteComponentProps {
+  handleThemeChange: Function;
+}
+
+type result = {
+  createdAt: string;
+  favoriteGroup: string;
+  girlGroupName: string;
+  mbti: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+}
+
+interface resultResp {
+  data: {
+    results: result[]
+  }
+}
+
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
+function LandingPage(props: landingPageInterface) {
   const landingPageContainer = useRef<HTMLDivElement | null>(null);
 
   const [today, setToday] = useState(0);
@@ -138,7 +176,7 @@ function LandingPage(props: any) {
     props.history.push("/artists");
   }
 
-  const handleColorChange = (e: any) => {
+  const handleColorChange = (e: React.MouseEvent<HTMLDivElement>) => {
     setPageX(e.pageX);
     setPageY(e.pageY);
     setAlertMessage("색상이 변경되었습니다.");
@@ -149,7 +187,7 @@ function LandingPage(props: any) {
     }, 1000);
   }
 
-  const handleCopyBtn = (e: any) => {
+  const handleCopyBtn = (e: React.MouseEvent<HTMLDivElement>) => {
     setPageX(e.pageX);
     setPageY(e.pageY);
     setAlertMessage("링크가 복사되었습니다.");
@@ -160,7 +198,7 @@ function LandingPage(props: any) {
     }, 1000);
   }
 
-  const handleLanguageChange = (e: any) => {
+  const handleLanguageChange = (e: React.MouseEvent<HTMLDivElement>) => {
     setPageX(e.pageX);
     setPageY(e.pageY);
     setAlertMessage("준비중인 서비스입니다.");
@@ -177,11 +215,12 @@ function LandingPage(props: any) {
     //   `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/LN5.jpeg`,
     //   `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/AE3.jpeg`
     // ];
-    axios.get('https://server.mbtious.net/result').then((res: any) => {
+    axios.get('https://server.mbtious.net/result').then((res: resultResp) => {
+      console.log(res);
       setTotal(res.data.results.length);
-      let today = res.data.results.filter((item: any) => {
+      let today = res.data.results.filter((item: result) => {
         let thisYear = new Date().getFullYear().toString();
-        let thisMonth: any = new Date().getMonth() + 1;
+        let thisMonth: number | string = new Date().getMonth() + 1;
         thisMonth = thisMonth.toString();
         if(thisMonth.length === 1){
           thisMonth = "0" + thisMonth;
@@ -195,8 +234,8 @@ function LandingPage(props: any) {
       setToday(today.length)
     })
 
-    let imageUrlArr: any = [];
-    groupsArr.forEach((item: any) => {
+    let imageUrlArr: string[] = [];
+    groupsArr.forEach((item: Group) => {
       let randomNum = Math.floor(Math.random() * item.albumCover + 1);
       imageUrlArr.push(`https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${item.code}${randomNum}.jpeg`)
     })

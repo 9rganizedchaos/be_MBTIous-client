@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {BrowserRouter as Switch, Route} from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import ArtistsPage from "./pages/ArtistsPage";
@@ -12,6 +12,23 @@ import { updateColor, updateSize } from './action/actions';
 import { useEffect } from 'react';
 import groupsArr from './assets/groups';
 
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
 function App() {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color } = viewState;
@@ -20,7 +37,7 @@ function App() {
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
   let myMBTI = result.mbti;
-  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
+  let myKpopGroup = groupsArr.filter((item: Group) => item.mbti === myMBTI)[0];
 
   const handleThemeChange = () => {
     setTheme(theme === violetTheme ? pinkTheme : violetTheme);
