@@ -2,7 +2,7 @@ import {withRouter} from "react-router";
 import Test from "../components/Test";
 import styled, { css } from "styled-components";
 import questionArr from "../assets/questions"
-import { useState } from 'react';
+import React, { HTMLAttributeAnchorTarget, HTMLAttributes, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers';
@@ -12,6 +12,46 @@ import TestAlert from '../components/TestAlert';
 import SettingBar from '../components/SettingBar';
 import axios from "axios";
 import groupsArr from '../assets/groups';
+import { RouteComponentProps } from 'react-router-dom';
+
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
+interface answer {
+  answer: number;
+  answered: boolean;
+}
+
+interface ResultObjProp {
+  E?: number;
+  I?: number;
+  S?: number;
+  N?: number;
+  F?: number;
+  T?: number;
+  J?: number;
+  P?: number;
+  answers?: answer[];
+  mbti?: string;
+}
+
+interface TestPageProps extends RouteComponentProps {
+  handleThemeChange: Function;
+}
 
 interface Edge {
   left: number;
@@ -105,7 +145,7 @@ border: 0.25rem solid ${theme.color.main};
 }}
 `;
 
-function TestPage(props: any) {
+function TestPage(props: TestPageProps) {
   const testState = useSelector((state: RootState) => state.testReducer);
   const { favoriteArtist } = testState;
 
@@ -201,7 +241,7 @@ function TestPage(props: any) {
     },
   ])
 
-  const handleLangClick = (e: any) => {
+  const handleLangClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setAlertContent("lang");
     setAlertOpen(true);
     setTimeout(() => {
@@ -211,7 +251,7 @@ function TestPage(props: any) {
     setPageY(e.pageY);
   }
 
-  const handleColorClick = (e: any) => {
+  const handleColorClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setAlertContent("color");
     setAlertOpen(true);
     setTimeout(() => {
@@ -221,7 +261,7 @@ function TestPage(props: any) {
     setPageY(e.pageY);
   }
 
-  const handlePreviousButtonClick = (e: any) => {
+  const handlePreviousButtonClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if(currentTest === 1){
       setAlertContent("pre");
       setAlertOpen(true);
@@ -260,7 +300,7 @@ function TestPage(props: any) {
     }
   }
 
-  const handleSubmitButtonClick = (e: any) => {
+  const handleSubmitButtonClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if(!answers[currentTest - 1].answered) {
       setAlertContent("submit");
       setAlertOpen(true);
@@ -273,12 +313,13 @@ function TestPage(props: any) {
       if(currentTest < 20){
         setCurrentTest(currentTest + 1);
       } else if (currentTest === 20){
-        let resultObj: any = {}
+        console.log(answers);
+        let resultObj: ResultObjProp = {}
         let result = "";
-        let EI = answers.filter((item, index) => index % 4 === 0).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
-        let NS = answers.filter((item, index) => index % 4 === 1).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
-        let TF = answers.filter((item, index) => index % 4 === 2).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
-        let JP = answers.filter((item, index) => index % 4 === 3).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
+        let EI = answers.filter((_, index) => index % 4 === 0).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
+        let NS = answers.filter((_, index) => index % 4 === 1).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
+        let TF = answers.filter((_, index) => index % 4 === 2).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
+        let JP = answers.filter((_, index) => index % 4 === 3).map(item => item.answer).reduce((acc, cur) => {return acc + cur}, 0)
         if(EI > 2){
           result = result + "E"
           resultObj.E = EI;
@@ -320,7 +361,7 @@ function TestPage(props: any) {
 
         dispatch(updateResult(resultObj, favoriteArtist));
 
-        let kpopGroup = groupsArr.filter((item: any) => item.mbti === result)[0];
+        let kpopGroup = groupsArr.filter((item: Group) => item.mbti === result)[0];
 
         axios.post(`https://server.mbtious.net/result`, {
           mbti: result,

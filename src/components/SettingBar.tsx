@@ -6,10 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import { updateSettingBar } from '../action/actions';
 
-interface SettingBarContainerProps {
-  settingBar: any;
+interface SettingBarProps {
+  handleThemeChange: Function;
+  handleColorClick: React.MouseEventHandler;
+  handleLangClick: React.MouseEventHandler;
 }
 
+interface SettingBarContainerProps {
+  settingBar: boolean;
+}
 
 const SettingBarContainer = styled(motion.div)<SettingBarContainerProps>`
 ${( { theme, settingBar } ) => {
@@ -133,7 +138,7 @@ const settingVariants: any = {
   },
 }
 
-function SettingBar({ handleThemeChange, handleColorClick, handleLangClick }: any) {
+function SettingBar({ handleThemeChange, handleColorClick, handleLangClick }: SettingBarProps) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { settingBar, color } = viewState;
   const dispatch = useDispatch();
@@ -152,7 +157,7 @@ function SettingBar({ handleThemeChange, handleColorClick, handleLangClick }: an
       <div className="settingMain">
         <div className="colorSettingBar" onClick={(e) => {
           handleColorClick(e)
-          handleThemeChange()
+          handleThemeChange(e)
           }}>
           <span>{color === "violet" ? "PinkMode" : "VioletMode" }</span>
         </div>

@@ -1,6 +1,20 @@
 import { useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 
+interface answer {
+  answer: number;
+  answered: boolean;
+}
+
+interface OptionCardProps {
+  pic: string;
+  num: number;
+  answers: answer[];
+  currentTest: number;
+  handleOptionClick: any;
+  option: any;
+
+}
 
 interface DescriptionBoxProps {
   descriptionBoxObj: any;
@@ -134,7 +148,7 @@ span {
 }}
 `
 
-const OptionCard = function(props: any) {
+const OptionCard = function(props: OptionCardProps) {
 
   const imageBox = useRef<HTMLDivElement>(null);
 

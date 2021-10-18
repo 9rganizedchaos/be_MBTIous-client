@@ -4,8 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 interface ResultAlertContainerProps {
-  alertPageX: any;
-  alertPageY: any;
+  alertPageX: number;
+  alertPageY: number;
+}
+
+interface ResultAlertProps extends ResultAlertContainerProps {
+  alertContent: string;
 }
 
 const ResultAlertContainer = styled(motion.div)<ResultAlertContainerProps>`
@@ -55,7 +59,7 @@ const alertVariants: any = {
   },
 }
 
-function ResultAlert({alertPageX, alertPageY, alertMessage, alertContent}: any) {
+function ResultAlert({alertPageX, alertPageY, alertContent}: ResultAlertProps) {
   return (
     <ResultAlertContainer variants={alertVariants} exit="exit" alertPageX={alertPageX} alertPageY={alertPageY}>
       <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>

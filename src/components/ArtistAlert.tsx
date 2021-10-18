@@ -4,9 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 interface ArtistAlertContainerProps {
-  alertPageX: any;
-  alertPageY: any;
+  alertPageX: number;
+  alertPageY: number;
 }
+
+type tutorialObj = {
+  exit: {
+    opacity: number;
+    transition?: Object;
+  }
+};
 
 const ArtistAlertContainer = styled(motion.div)<ArtistAlertContainerProps>`
 ${( { theme, alertPageX, alertPageY } ) => {
@@ -36,14 +43,14 @@ ${( { theme, alertPageX, alertPageY } ) => {
 }}
 `
 
-const alertVariants: any = {
+const alertVariants: tutorialObj = {
   exit: {
     opacity: 0,
     transition: { ease: "easeInOut" },
   },
 }
 
-function ArtistAlert({alertPageX, alertPageY}: any) {
+function ArtistAlert({alertPageX, alertPageY}: ArtistAlertContainerProps) {
   return (
     <ArtistAlertContainer variants={alertVariants} exit="exit" alertPageX={alertPageX} alertPageY={alertPageY}>
       <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>

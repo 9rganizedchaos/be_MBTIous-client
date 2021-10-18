@@ -1,16 +1,40 @@
 import styled, { css } from 'styled-components';
 import { motion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { MutableRefObject, useEffect, useMemo, useState } from 'react';
 import ResultCloseBtn from './ResultCloseBtn';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import groupsArr from '../assets/groups';
 import axios from "axios";
 
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
+interface ResultGirlGroupProps {
+  myKpopGroup: Group;
+  handleResultComponentClick: React.MouseEventHandler;
+  girlGroupIndex?: number;
+  constraintsRef?: MutableRefObject<null>;
+  handleCloseBtn?: Function;
+}
+
 interface GirlGroupContainerProps {
-  girlGroupIndex?: any;
-  view?: any;
-  girlGroupPicUrl?: any;
+  girlGroupIndex?: number;
+  view?: string;
+  girlGroupPicUrl?: string;
 }
 
 const ResultGirlGroupContainer = styled(motion.div)<GirlGroupContainerProps>`
@@ -130,12 +154,12 @@ z-index: ${girlGroupIndex};
 }}
 `;
 
-const getProfilePic = (group: any) => {
+const getProfilePic = (group: Group) => {
   let randomNum = Math.floor(Math.random() * group.albumCover) + 1;
   return `https://s3.ap-northeast-2.amazonaws.com/mbtious.net/resizeAlbumCover/${group.code}${randomNum}.jpeg`;
 }
 
-const ResultGirlGroup = function(props: any){
+const ResultGirlGroup = function(props: ResultGirlGroupProps){
   const testState = useSelector((state: RootState) => state.testReducer);
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { result } = testState;
@@ -199,7 +223,7 @@ const ResultGirlGroup = function(props: any){
         {props.myKpopGroup.description.map((item: string) => {
           let textArr = item.split(`"`);
           return <div className="result-girlGroup-description-text girlGroup">{
-            textArr.map((miniItem: any, index: number) => {
+            textArr.map((miniItem: string, index: number) => {
               if(index % 2 === 1){
                 return <strong>{miniItem}</strong>
               } else {

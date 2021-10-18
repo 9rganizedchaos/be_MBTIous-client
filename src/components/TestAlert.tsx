@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 interface TestAlertContainerProps {
-  alertPageX: any;
-  alertPageY: any;
+  alertPageX: number;
+  alertPageY: number;
   alertContent: string;
 }
 
@@ -55,7 +55,7 @@ const alertVariants: any = {
   },
 }
 
-function TestAlert({alertPageX, alertPageY, alertContent}: any) {
+function TestAlert({alertPageX, alertPageY, alertContent}: TestAlertContainerProps) {
   return (
     <TestAlertContainer variants={alertVariants} alertContent={alertContent} exit="exit" alertPageX={alertPageX} alertPageY={alertPageY}>
       <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>

@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 
+interface AritistCuratorProps {
+  favoriteArtist: string;
+  handleNextClick: any;
+}
+
 const CuratorContainer = styled(motion.div)`
 ${( { theme } ) => {
   return css`
@@ -100,7 +105,7 @@ const artistCuratorVariants: any = {
   },
 } 
 
-function ArtistCurator(props: any) {
+function ArtistCurator(props: AritistCuratorProps) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { view } = viewState;
 

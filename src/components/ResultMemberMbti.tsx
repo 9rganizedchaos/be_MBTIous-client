@@ -4,10 +4,23 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import groupsArr from '../assets/groups';
 import ResultCloseBtn from './ResultCloseBtn';
-import { useState } from 'react';
+import { MutableRefObject, useState } from 'react';
+
+interface ResultMemberMbti {
+  handleResultComponentClick: React.MouseEventHandler;
+  memberIndex?: number;
+  constraintsRef?: MutableRefObject<null>;
+  handleCloseBtn?: any;
+}
+
+interface MemberCardProps {
+  className: string;
+  name: string;
+  mbti: string;
+}
 
 interface MemberContainerProps {
-  memberIndex?: any;
+  memberIndex?: number;
 }
 
 const GroupMemberWholeContainer = styled(motion.div)<MemberContainerProps>`
@@ -129,7 +142,7 @@ border-right: 3px solid ${theme.color.main};
 }}
 `;
 
-const MemberCard = function(props: any): any {
+const MemberCard = function(props: MemberCardProps) {
   return (
     <MemberCardContainer className="member">
       <div className="memberCardName member">
@@ -142,7 +155,7 @@ const MemberCard = function(props: any): any {
   )
 }
 
-const ResultMemberMbti = function(props: any){
+const ResultMemberMbti = function(props: ResultMemberMbti){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);

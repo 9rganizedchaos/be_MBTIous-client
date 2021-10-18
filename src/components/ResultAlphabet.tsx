@@ -3,7 +3,14 @@ import { motion } from "framer-motion";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import ResultCloseBtn from './ResultCloseBtn';
-import { useState } from 'react';
+import { MutableRefObject, useState } from 'react';
+
+interface ResultAlphabetProps {
+  handleResultComponentClick: any;
+  alphabetIndex?: number;
+  constraintsRef?: MutableRefObject<null>;
+  handleCloseBtn?: Function;
+}
 
 interface AlphabetContainerProps {
   animationNum: number;
@@ -120,7 +127,7 @@ padding: 0 1rem;
 }}
 `;
 
-const ResultAlphabet = function(props: any){
+const ResultAlphabet = function(props: ResultAlphabetProps){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);

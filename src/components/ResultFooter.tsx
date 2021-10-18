@@ -4,6 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 
+interface ResultFooterProps {
+  handleKakaoBtn: React.MouseEventHandler<HTMLButtonElement>;
+  handleTwitterBtn: React.MouseEventHandler<HTMLButtonElement>;
+  handleFacebookBtn: React.MouseEventHandler<HTMLButtonElement>;
+  handleCopyBtn: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 const ResultFooterContainer = styled.div`
 ${( { theme} ) => {
   return css`
@@ -102,7 +109,7 @@ ${( { theme } ) => {
 `;
 
 
-const ResultFooter = function(props: any){
+const ResultFooter = function(props: ResultFooterProps){
   return(
     <ResultFooterContainer>
       <TestAgainBox>

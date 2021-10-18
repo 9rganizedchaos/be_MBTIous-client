@@ -3,13 +3,41 @@ import { motion } from "framer-motion";
 import groupsArr from "../assets/groups"
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
-import { useState } from 'react';
+import { MutableRefObject, useState } from 'react';
 import ResultCloseBtn from './ResultCloseBtn';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface FitMeType {
+  [key: string]: number;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
+interface ResultFitMeProps {
+  handleResultComponentClick: any;
+  fitMeIndex?: any;
+  constraintsRef?: MutableRefObject<null>;
+  handleCloseBtn?: Function;
+}
+
 interface fitMeContainerProps {
-  fitMeIndex: any
+  fitMeIndex: number
 }
 
 interface fitMeProps {
@@ -188,7 +216,7 @@ ${( { theme } ) => {
 `
 
 
-const ResultFitMe = function(props: any){
+const ResultFitMe = function(props: ResultFitMeProps){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
@@ -197,16 +225,16 @@ const ResultFitMe = function(props: any){
   const [fitMeNum, setFitMeNum] = useState(0);
   const [notFitMeNum, setNotFitMeNum] = useState(0);
 
-  let fitMeGroups: any = [];
-  let notFitMeGroups: any = [];
-  let fitMeGroup: any;
-  let notFitMeGroup: any;
+  let fitMeGroups: string[] = [];
+  let notFitMeGroups: string[] = [];
+  let fitMeGroup: Group;
+  let notFitMeGroup: Group;
 
     let myMBTI = result.mbti;
-    let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI);
+    let myKpopGroup = groupsArr.filter((item: Group) => item.mbti === myMBTI);
     let myObj = myKpopGroup[0].fitMe
   
-    let findNotFitMe = (obj : any, num: number) => {
+    let findNotFitMe = (obj: FitMeType, num: number) => {
       for (let key in obj){
         if (obj[key] === 5 - num){
           notFitMeGroups.push(key);
@@ -219,7 +247,7 @@ const ResultFitMe = function(props: any){
       }
     }
   
-    let findFitMe = (obj: any) => {
+    let findFitMe = (obj: FitMeType) => {
       for (let key in obj){
         if (obj[key] === 1){
           fitMeGroups.push(key);
@@ -236,8 +264,8 @@ const ResultFitMe = function(props: any){
     let fitMeMbti = fitMeGroups[fitMeNum % fitMeLength];
     let notFitMeMbti = notFitMeGroups[notFitMeNum % notFitMeLength];
 
-    fitMeGroup = groupsArr.filter((item: any) => item.mbti === fitMeMbti)[0];
-    notFitMeGroup = groupsArr.filter((item: any) => item.mbti === notFitMeMbti)[0];
+    fitMeGroup = groupsArr.filter((item: Group) => item.mbti === fitMeMbti)[0];
+    notFitMeGroup = groupsArr.filter((item: Group) => item.mbti === notFitMeMbti)[0];
 
   return (
     <>{

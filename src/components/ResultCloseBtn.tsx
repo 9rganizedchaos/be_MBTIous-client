@@ -2,6 +2,11 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled, { css } from "styled-components";
 
+interface ResultCloseBtnProps {
+  handleCloseBtn: any;
+  closeId: string;
+}
+
 const CloseBtnContainer = styled.div`
 ${( { theme } ) => {
   return css`
@@ -22,7 +27,7 @@ ${( { theme } ) => {
 }}
 `;
 
-function ResultCloseBtn(props: any){
+function ResultCloseBtn(props: ResultCloseBtnProps){
   return(
     <CloseBtnContainer onClick={(e) => props.handleCloseBtn(props.closeId, e)}>
       <FontAwesomeIcon icon={faTimes}/>

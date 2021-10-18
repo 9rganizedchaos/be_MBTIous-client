@@ -5,11 +5,36 @@ import { faBomb, faCrown, faGhost, faMugHot, faViruses } from '@fortawesome/free
 import { RootState } from '../reducers';
 import { useSelector } from 'react-redux';
 import groupsArr from '../assets/groups';
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useState } from 'react';
 import ResultCloseBtn from './ResultCloseBtn';
 
+interface ResultMatchingProps {
+  handleResultComponentClick: React.MouseEventHandler;
+  matchingIndex?: number;
+  constraintsRef?: MutableRefObject<null>;
+  handleCloseBtn?: any;
+  favoriteArtist?: string;
+}
+
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
 interface MatchingContainerProps {
-  matchingIndex?: any;
+  matchingIndex?: number;
 }
 
 const ResultMatchingContainer = styled(motion.div)<MatchingContainerProps>`
@@ -90,7 +115,7 @@ const compabilityArr = [
   }
 ]
 
-const ResultMatching = function(props: any){
+const ResultMatching = function(props: ResultMatchingProps){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result, favoriteArtist } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
@@ -99,7 +124,7 @@ const ResultMatching = function(props: any){
   const [mouseIn, setMouseIn] = useState(false);
 
   let myMBTI = result.mbti;
-  let myKpopGroup = groupsArr.filter((item: any) => item.name === favoriteArtist);
+  let myKpopGroup = groupsArr.filter((item: Group) => item.name === favoriteArtist);
   let index = myKpopGroup[0].fitMe[myMBTI] - 1
 
   return (

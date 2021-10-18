@@ -4,9 +4,31 @@ import OptionCard from './OptionCard';
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 
+interface Question {
+  number: number;
+  option1: string[];
+  option2: string[];
+  pic1: string;
+  pic2: string;
+  question: string[];
+}
+
+interface Answer {
+  answer: number;
+  answered: boolean;
+}
 
 interface OptionContainer {
   optionId: number;
+}
+
+interface TestProps {
+  question: Question;
+  handleOptionClick: React.MouseEventHandler;
+  handlePreviousButtonClick: React.MouseEventHandler;
+  handleSubmitButtonClick: React.MouseEventHandler;
+  currentTest: number;
+  answers: Answer[];
 }
 
 const TestContainer = styled(motion.div)`
@@ -281,15 +303,6 @@ const containerVariants: any = {
   },
 }
 
-interface TestProps {
-  question: any;
-  handleOptionClick: (e: any) => any;
-  handlePreviousButtonClick: (e: any) => any;
-  handleSubmitButtonClick: (e: any) => any;
-  currentTest: number;
-  answers: any;
-}
-
 function SidebarCounter() {
   return (
     <SideCounterContainer>
@@ -312,6 +325,8 @@ function Test({answers, question, currentTest, handleOptionClick, handlePrevious
 
   let arrForCounter = new Array(20 - currentTest).fill(0); 
   let arrForCounterChecked = new Array(currentTest).fill(0);
+
+  console.log(question);
 
   return (
     <TestContainer variants={containerVariants} initial="hidden" animate="visible" exit="exit">

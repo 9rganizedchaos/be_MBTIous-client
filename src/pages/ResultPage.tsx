@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {withRouter} from "react-router";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -22,10 +22,33 @@ import ResultAlert from '../components/ResultAlert';
 import ResultHeader from '../components/ResultHeader';
 import ResultFooter from '../components/ResultFooter';
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { RouteComponentProps } from 'react-router-dom';
 
 
 interface ComponentTagProps {
   contain: any;
+}
+
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
+interface ResultPageProps extends RouteComponentProps {
+  handleThemeChange: Function;
+  myKpopGroup: Group;
 }
 
 const ResultPageContainer = styled.div`
@@ -185,7 +208,7 @@ left: 20.25rem;
 }}
 `;
 
-function ResultPage({handleThemeChange, myKpopGroup}: any) {
+function ResultPage({handleThemeChange, myKpopGroup}: ResultPageProps) {
   const testState = useSelector((state: RootState) => state.testReducer);
   const { favoriteArtist } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
@@ -203,7 +226,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
   const [labels, setLabels] = useState(['Loading...']);
   const [dataArr, setDataArr] = useState([1]); 
 
-  const handleLangClick = (e: any) => {
+  const handleLangClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setAlertContent("lang");
     setAlertOpen(true);
     setTimeout(() => {
@@ -213,7 +236,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     setPageY(e.pageY);
   }
 
-  const handleColorClick = (e: any) => {
+  const handleColorClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setAlertContent("color");
     setAlertOpen(true);
     setTimeout(() => {
@@ -246,7 +269,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     });
   }
 
-  const saveAs = (uri: any, filename: any) => {
+  const saveAs = (uri: string, filename: string) => {
     var link = document.createElement('a');
     if (typeof link.download === 'string') {
     link.href = uri;
@@ -259,7 +282,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     }
   }
 
-  const handleCloseBtn = (closeId: any, e: any) => {
+  const handleCloseBtn = (closeId: string, e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     let index = componentIndex.indexOf(closeId);
     let tempArr = componentIndex.slice();
@@ -267,7 +290,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     setComponentIndex(tempArr);
   }
 
-  const handleTagClick = (openId: any) => {
+  const handleTagClick = (openId: string) => {
     if(componentIndex.includes(openId)){
       let tempArr = componentIndex.filter(item => item !== openId);
       setComponentIndex(tempArr);
@@ -278,7 +301,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     }
   }
 
-  const handlePlusTag = (e: any) => {
+  const handlePlusTag = (e: React.MouseEvent<HTMLDivElement>) => {
     if(myKpopGroup.albumCover === albumCoverNum){
       setPageX(e.pageX);
       setPageY(e.pageY);
@@ -292,7 +315,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     }
   }
 
-  const handleCopyBtn = (e: any) => {
+  const handleCopyBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     setPageX(e.pageX);
     setPageY(e.pageY);
     setAlertContent("copy");
@@ -302,7 +325,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
     }, 1000);
   }
 
-  const handleMinusTag = (e: any) => {
+  const handleMinusTag = (e: React.MouseEvent<HTMLDivElement>) => {
     if(albumCoverNum === 0){
       setPageX(e.pageX);
       setPageY(e.pageY);
@@ -419,7 +442,7 @@ function ResultPage({handleThemeChange, myKpopGroup}: any) {
       </ResultSidebar> }
       <ResultDragArea ref={constraintsRef}>
       </ResultDragArea>
-      { new Array(myKpopGroup.albumCover).fill(0).map((item: any, index: number) => {
+      { new Array(myKpopGroup.albumCover).fill(0).map((item: number, index: number) => {
         if(index > albumCoverNum - 1){
           return;
         }

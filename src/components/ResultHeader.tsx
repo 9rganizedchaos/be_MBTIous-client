@@ -34,7 +34,7 @@ ${( { theme} ) => {
 }}
 `;
 
-const ResultHeader = function(props: any){
+const ResultHeader = function(){
   return(
     <ResultHeaderContainer>
       <div>

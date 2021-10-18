@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
-import { useEffect, useMemo } from 'react';
+import { MutableRefObject, useEffect, useMemo } from 'react';
 import { Pie } from "react-chartjs-2";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
@@ -9,8 +9,50 @@ import ResultCloseBtn from "./ResultCloseBtn";
 import { useState } from 'react';
 import axios from "axios";
 
+interface Member {
+  name: string;
+  mbti: string;
+}
+
+interface Group {
+  name: string;
+  code: string;
+  mbti: string;
+  fitMe: object;
+  memeber: Member[];
+  albumCover: number;
+  slogan: string;
+  percent: number;
+  description: string[];
+}
+
+interface ResultResponse {
+    _id: string,
+    mbti: string,
+    girlGroupName: string,
+    favoriteGroup: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: number
+}
+
+interface mbtiObjProps {
+  [key: string]: number;
+}
+
+interface ResultPercentProps {
+  labels: string[];
+  dataArr: number[];
+  setLabels: React.Dispatch<React.SetStateAction<string[]>>;
+  setDataArr: React.Dispatch<React.SetStateAction<number[]>>;
+  handleResultComponentClick: React.MouseEventHandler;
+  percentIndex?: number;
+  constraintsRef?: MutableRefObject<null>;
+  handleCloseBtn?: any;
+}
+
 interface PercentContainerProps {
-  percentIndex?: any;
+  percentIndex?: number;
 }
 
 const ResultPercentContainer = styled(motion.div)<PercentContainerProps>`
@@ -51,7 +93,7 @@ z-index: ${percentIndex};
 }}
 `;
 
-const updateData = (labels: any, dataArr: any) => {
+const updateData = (labels: string[], dataArr: number[]) => {
   let result = {
     labels: labels,
     datasets: [
@@ -81,7 +123,7 @@ const updateData = (labels: any, dataArr: any) => {
   return result;
 }
 
-const ResultPercent = function(props: any){
+const ResultPercent = function(props: ResultPercentProps){
   const testState = useSelector((state: RootState) => state.testReducer);
   const { result } = testState;
   const viewState = useSelector((state: RootState) => state.viewReducer);
@@ -89,7 +131,7 @@ const ResultPercent = function(props: any){
   const [mouseIn, setMouseIn] = useState(false);
 
   let myMBTI = result.mbti;
-  let myKpopGroup = groupsArr.filter((item: any) => item.mbti === myMBTI)[0];
+  let myKpopGroup = groupsArr.filter((item: Group) => item.mbti === myMBTI)[0];
 
   const data = useMemo(() => {
     return updateData(props.labels, props.dataArr)
@@ -98,12 +140,12 @@ const ResultPercent = function(props: any){
   useEffect(() => {
     axios.get('https://server.mbtious.net/result')
     .then(res => {
-      let dataArr = [];
-      let labels = [];
-      let tempArr = [];
-      let mbtiObj: any = {};
-      let filteredResults = res.data.results.filter((item: any) => item.favoriteGroup === myKpopGroup.name);
-      filteredResults.forEach((item: any) => {
+      let dataArr: number[] = [];
+      let labels: string[] = [];
+      let tempArr: [string, number][] = [];
+      let mbtiObj: mbtiObjProps = {};
+      let filteredResults = res.data.results.filter((item: ResultResponse) => item.favoriteGroup === myKpopGroup.name);
+      filteredResults.forEach((item: ResultResponse) => {
         if(mbtiObj[item.mbti]){
           mbtiObj[item.mbti]++;
         } else {
@@ -113,7 +155,8 @@ const ResultPercent = function(props: any){
       for(let key in mbtiObj) {
         tempArr.push([key, mbtiObj[key]])
       }
-      tempArr.sort((a, b) => a[1] - b[1]);
+      tempArr.sort((a: [string, number], b: [string, number]) => a[1] - b[1]);
+      console.log(tempArr);
 
       for(let item of tempArr){
         dataArr.push(item[1]);

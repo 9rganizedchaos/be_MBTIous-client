@@ -3,6 +3,12 @@ import styled, { css } from "styled-components";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 
+interface NavProps { 
+  handleThemeChange: Function;
+  handleColorChange: Function;
+  handleLanguageChange: Function;
+}
+
 const NavContainer = styled.div`
 ${( { theme } ) => {
   return css`
@@ -79,7 +85,7 @@ ${( { theme } ) => {
 }}
 `;
 
-function Nav(props: any) {
+function Nav(props: NavProps) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color } = viewState;
 

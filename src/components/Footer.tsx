@@ -5,6 +5,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../reducers';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+interface FooterProps {
+  handleCopyBtn: Function;
+
+}
+
 const FooterContainer = styled.div`
 ${( { theme, color } ) => {
   return css`
@@ -181,7 +186,7 @@ const marqueeVariants = {
   },
 };
 
-function Footer(props: any) {
+function Footer(props: FooterProps) {
   const viewState = useSelector((state: RootState) => state.viewReducer);
   const { color, view } = viewState;
 

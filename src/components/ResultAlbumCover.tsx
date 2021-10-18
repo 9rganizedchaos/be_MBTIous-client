@@ -1,11 +1,16 @@
 import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { useRef } from 'react';
 
 interface ComponentTagProps {
   top: number;
   left: number;
+}
+
+interface ResultAlbumCoverProps {
+  constraintsRef: MutableRefObject<null>;
+  albumCoverUrl: string;
 }
 
 const ResultAlbumCoverContainer = styled(motion.div)<ComponentTagProps>`
@@ -23,7 +28,7 @@ const ResultAlbumCoverContainer = styled(motion.div)<ComponentTagProps>`
   }}
 `;
 
-const ResultAlbumCover = function(props: any){
+const ResultAlbumCover = function(props: ResultAlbumCoverProps){
   const albumCover = useRef<HTMLDivElement>(null);
   const [top] = useState(Math.floor(Math.random() * (window.innerHeight - 150)));
   const [left] = useState(Math.floor(Math.random() * (window.innerWidth - 320 - 150)) + 320);
